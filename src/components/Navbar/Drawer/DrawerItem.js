@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, ImageBackground } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../../actions/AuthAction";
+import { ProfileAction } from "../../../actions/ProfileAction";
 import {
-  NativeBaseProvider,
   Button,
   Box,
-  HamburgerIcon,
   Pressable,
-  Heading,
   VStack,
   Text,
-  Center,
   Avatar,
   HStack,
   Divider,
@@ -39,6 +37,12 @@ const getIcon = (screenName) => {
 };
 
 const DrawerItem = (props) => {
+  const profile = useSelector((state) => state.profile.profile);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(ProfileAction());
+  }, []);
   return (
     <ImageBackground
       source={{
@@ -59,8 +63,12 @@ const DrawerItem = (props) => {
             >
               <Avatar.Badge bg={"green.500"} />
             </Avatar>
-            <Text style={styles.title}>Hailee Steinfeld</Text>
-            <Text style={styles.subtitle}>Steinfeld@gmail.com</Text>
+            <Text style={styles.title}>
+              {profile?.myprofile?.ProfileBy?.name}
+            </Text>
+            <Text style={styles.subtitle}>
+              {profile?.myprofile?.ProfileBy?.email}
+            </Text>
           </Box>
           <VStack space={6}>
             {props.state.routeNames.map((name, index) => (
@@ -94,6 +102,23 @@ const DrawerItem = (props) => {
           </VStack>
         </VStack>
       </DrawerContentScrollView>
+      <VStack my={4} mx={12} style={{ marginBottom: 20 }}>
+        <Button
+          size="md"
+          backgroundColor="#E03B8B"
+          startIcon={<Ionicons name={"exit-outline"} color="#fff" size={28} />}
+          onPress={() => dispatch(logout(props.navigation))}
+        >
+          <Text
+            fontWeight={"500"}
+            color="#fff"
+            textTransform="uppercase"
+            fontSize={17}
+          >
+            Logout
+          </Text>
+        </Button>
+      </VStack>
     </ImageBackground>
   );
 };
