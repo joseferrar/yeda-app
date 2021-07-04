@@ -10,9 +10,8 @@ import MainNavbar from "./src/components/Navbar/MainNavbar";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
-    // "Ubuntu-Regular": require("./assets/fonts/Ubuntu-Regular.ttf"),
-    // "KoHo-ExtraLight": require("./assets/fonts/KoHo-ExtraLight.ttf"),
-    // "KoHo-MediumItalic": require("./assets/fonts/KoHo-MediumItalic.ttf"),
+    "NunitoSans-Black": require("./assets/fonts/NunitoSans-Black.ttf"),
+    "NunitoSans-Regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
   });
   if (!fontsLoaded) {
     return <AppLoading />;
