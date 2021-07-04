@@ -1,14 +1,16 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const ProductDetails = () => {
+const Details = (props) => {
+    const { data } = props.route.params;
+    console.log(data)
     return (
         <View>
-            <Text>ProductDetails</Text>
+            <Text>Details</Text>
         </View>
     )
 }
 
-export default ProductDetails
+export default Details
 
 const styles = StyleSheet.create({})
