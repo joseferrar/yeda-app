@@ -12,7 +12,7 @@ const Home = (props) => {
   React.useEffect(() => {
     dispatch(ProfileAction());
   }, []);
-  console.log(profile);
+
 
   return (
     <View>

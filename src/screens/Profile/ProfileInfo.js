@@ -12,7 +12,7 @@ const Profile = (props) => {
   React.useEffect(() => {
     dispatch(ProfileAction());
   }, []);
-  console.log(profile);
+  // console.log(profile);
   return (
     <View style={{marginTop: 22, flex:1}}>
       <Text
