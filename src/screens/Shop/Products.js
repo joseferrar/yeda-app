@@ -12,7 +12,7 @@ const Products = (props) => {
 
   useEffect(() => {
     dispatch(FoodAction());
-  }, []);
+  }, [dispatch]);
   return (
     <View>
       <ScrollView>
