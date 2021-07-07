@@ -27,13 +27,11 @@ const Products = (props) => {
             }}
           >
             <Box
-              shadow={4}
-              rounded="lg"
               maxWidth="94%"
               left={3}
               top={4}
               flexDirection="row"
-              height={158}
+              height={165}
             >
               <Avatar
                 size="2xl"

@@ -3,4 +3,5 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const PROFILE = "PROFILE";
 export const PRODUCT = "PRODUCT";
-export const CART = "CART";
+export const ADDCART = "ADDCART";
+export const GETCART = "GETCART";

@@ -8,6 +8,7 @@ import TabNavbar from "./Tab/TabNavbar";
 import DrawerNavbar from "./Drawer/DrawerNavbar";
 import Search from "../../screens/Search/Search";
 import Details from "../../screens/Details/Details";
+import Cart from "../../screens/Cart/Cart";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,17 @@ export default function MainNavbar() {
           component={DrawerNavbar}
           options={{
             headerShown: false,
+          }}
+        />
+        <Stack.Screen name="Search" component={Search} />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{
+            headerStyle: {
+              backgroundColor: "#8D3DAF",
+            },
+            headerTintColor: "#fff",
           }}
         />
         <Stack.Screen name="Details" component={Details} />

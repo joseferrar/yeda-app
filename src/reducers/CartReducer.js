@@ -1,15 +1,19 @@
-import { CART } from "../constants";
+import { ADDCART, GETCART } from "../constants";
 
 const initialState = {
-  food: [],
+  cart: [],
 };
 
 const CartReducer = (state = initialState, action) => {
   switch (action.type) {
-    case CART:
+    case ADDCART:
       return {
         ...state,
-        food: action.payload,
+        cart: action.payload,
+      };
+    case GETCART:
+      return {
+        cart: action.payload,
       };
     default:
       return state;

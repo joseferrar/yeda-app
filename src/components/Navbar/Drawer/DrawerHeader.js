@@ -22,7 +22,7 @@ export const ShopStackScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#000"
+            color="#fff"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -33,24 +33,24 @@ export const ShopStackScreen = ({ navigation }) => (
             <Ionicons
               name="search-outline"
               size={35}
-              color="#000"
+              color="#fff"
               style={{ marginRight: 25 }}
               lineBreakMode="head"
-              onPress={() => navigation.navigate('Search')}
+              onPress={() => navigation.navigate("Search")}
             />
             <Ionicons
               name="cart-outline"
               size={35}
-              color="#000"
+              color="#fff"
               style={{ marginRight: 15 }}
               lineBreakMode="head"
-              onPress={() => navigation.openDrawer()}
+              onPress={() => navigation.navigate("Cart")}
             />
           </View>
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#8D3DAF",
           elevation: 0,
         },
       }}
@@ -69,7 +69,7 @@ export const ProfileScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#000"
+            color="#fff"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -80,15 +80,15 @@ export const ProfileScreen = ({ navigation }) => (
             <Ionicons
               name="search-outline"
               size={35}
-              color="#000"
+              color="#fff"
               style={{ marginRight: 25 }}
               lineBreakMode="head"
-              onPress={() => navigation.navigate('Search')}
+              onPress={() => navigation.navigate("Search")}
             />
             <Ionicons
               name="cart-outline"
               size={35}
-              color="#000"
+              color="#fff"
               style={{ marginRight: 15 }}
               lineBreakMode="head"
               onPress={() => navigation.openDrawer()}
@@ -97,7 +97,7 @@ export const ProfileScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#8D3DAF",
           elevation: 0,
         },
       }}
@@ -116,7 +116,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#000"
+            color="#fff"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -127,15 +127,15 @@ export const FavoriteStackScreen = ({ navigation }) => (
             <Ionicons
               name="search-outline"
               size={35}
-              color="#000"
+              color="#fff"
               style={{ marginRight: 25 }}
               lineBreakMode="head"
-              onPress={() => navigation.navigate('Search')}
+              onPress={() => navigation.navigate("Search")}
             />
             <Ionicons
               name="cart-outline"
               size={35}
-              color="#000"
+              color="#fff"
               style={{ marginRight: 15 }}
               lineBreakMode="head"
               onPress={() => navigation.openDrawer()}
@@ -144,7 +144,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#8D3DAF",
           elevation: 0,
         },
       }}
@@ -157,6 +157,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "left",
-    color: "#000",
+    color: "#fff",
   },
 });
