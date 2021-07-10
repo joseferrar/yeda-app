@@ -1,6 +1,7 @@
 import { ADDCART, GETCART } from "../constants";
 
 const initialState = {
+  loading: true,
   cart: [],
 };
 
@@ -13,6 +14,8 @@ const CartReducer = (state = initialState, action) => {
       };
     case GETCART:
       return {
+        ...state,
+        loading: false,
         cart: action.payload,
       };
     default:

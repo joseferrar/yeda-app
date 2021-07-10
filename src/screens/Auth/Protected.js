@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Loading } from "../../components/Spinner/Spinner";
 
 const Protected = (props) => {
   const { navigation } = props;
@@ -16,19 +17,8 @@ const Protected = (props) => {
     detectLogin();
   }, []);
 
-  return (
-    <View style={styles.loading}>
-      <ActivityIndicator size="large" color="blue" />
-    </View>
-  );
+  return <View>{Loading()}</View>;
 };
 
-const styles = StyleSheet.create({
-  loading: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
 
 export default Protected;

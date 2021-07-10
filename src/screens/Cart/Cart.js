@@ -4,10 +4,11 @@ import { Avatar, Text, Box, Stack } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GetCartAction } from "../../actions/CartAction";
+import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
+  const { loading, cart } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(GetCartAction());
@@ -18,6 +19,7 @@ const Cart = (props) => {
       {/* {cart.map((item) =>
         item.food.map((item) => <Text>{item?.recipe?.label}</Text>)
       )} */}
+      {loading && Loading()}
       <ScrollView>
         {cart.map((item) =>
           item.food.map((item) => (

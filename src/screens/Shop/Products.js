@@ -4,17 +4,19 @@ import { Avatar, Text, Box, Stack } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { FoodAction } from "../../actions/FoodAction";
+import { Loading } from "../../components/Spinner/Spinner";
 
 const Products = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.food.data);
+  const { loading, data } = useSelector((state) => state.food);
 
   useEffect(() => {
     dispatch(FoodAction());
   }, [dispatch]);
   return (
     <View>
+      {loading && Loading()}
       <ScrollView>
         {data?.hits?.map((item) => (
           <TouchableOpacity
