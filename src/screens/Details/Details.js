@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Icon, Text, Box, Stack, Button } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { showToast } from "../../components/Toast/toast";
-import { CartAction } from "../../actions/CartAction";
+import { AddCartAction } from "../../actions/CartAction";
 
 const Details = (props) => {
   const { navigation } = props;
@@ -65,7 +65,7 @@ const Details = (props) => {
           </Text>
           <Button
             onPress={() => {
-              dispatch(CartAction({ food: data }));
+              dispatch(AddCartAction({ food: data }));
               showToast(data?.recipe?.label);
             }}
             bg={"#E8BD0D"}
