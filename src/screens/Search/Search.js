@@ -6,7 +6,8 @@ const {navigation}= props;
 
   return (
     <View style={styles.container}>
-      <Text>Search</Text>
+      <Text onPress={() => navigation.navigate('Cart')}>Search</Text>
+
     </View>
   );
 };
