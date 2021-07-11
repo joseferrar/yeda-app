@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity, ScrollView, Button } from "react-native";
 import { Avatar, Text, Box, Stack } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetCartAction } from "../../actions/CartAction";
+import { GetCartAction, DeleteCartAction } from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
@@ -21,8 +21,8 @@ const Cart = (props) => {
       )} */}
       {loading && Loading()}
       <ScrollView>
-        {cart.map((item) =>
-          item.food.map((item) => (
+        {cart.map((cartItem) =>
+          cartItem.food.map((item) => (
             <TouchableOpacity
               activeOpacity={10}
               key={item?.recipe?.label}
@@ -94,6 +94,12 @@ const Cart = (props) => {
                   </Text>
                 </Stack>
               </Box>
+              <Button
+                title="delete"
+                onPress={() => {
+                  dispatch(DeleteCartAction(cartItem._id));
+                }}
+              />
             </TouchableOpacity>
           ))
         )}
