@@ -1,4 +1,4 @@
-import { ADDCART, GETCART } from "../constants";
+import { ADDCART, GETCART, DELETECART } from "../constants";
 
 const initialState = {
   loading: true,
@@ -10,13 +10,19 @@ const CartReducer = (state = initialState, action) => {
     case ADDCART:
       return {
         ...state,
-        cart: action.payload,
+        // cart: action.payload,
       };
     case GETCART:
       return {
         ...state,
         loading: false,
         cart: action.payload,
+      };
+    case DELETECART:
+      return {
+        ...state,
+        loading: false,
+        cart: state.cart.filter((item) => item._id !== action.payload),
       };
     default:
       return state;
