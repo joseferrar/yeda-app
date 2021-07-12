@@ -52,6 +52,7 @@ const Products = (props) => {
                 left={7}
                 top={1.5}
                 p={1}
+                color="primary.50"
                 // borderRadius={4}
                 style={{ transform: [{ rotate: "-18deg" }] }}
                 borderRightRadius={5}
@@ -68,6 +69,7 @@ const Products = (props) => {
                 <Text
                   left={3}
                   fontFamily="NunitoSans-Black"
+                  color="primary.50"
                   fontSize={18}
                   w={200}
                   noOfLines={2}
@@ -85,7 +87,7 @@ const Products = (props) => {
                 >
                   {item.recipe.source}
                 </Text>
-                <Text left={3} noOfLines={1} bold w={75}>
+                <Text left={3} noOfLines={1} bold w={75} color="primary.50">
                   {item?.recipe?.totalWeight}
                 </Text>
               </Stack>
