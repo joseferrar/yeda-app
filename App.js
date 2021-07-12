@@ -5,6 +5,7 @@ import { NativeBaseProvider } from "native-base";
 import { Provider } from "react-redux";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
+import { theme } from "./src/theme/default";
 import store from "./src/store/store";
 import MainNavbar from "./src/components/Navbar/MainNavbar";
 
@@ -17,7 +18,7 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <NativeBaseProvider>
+      <NativeBaseProvider theme={theme}>
         <Provider store={store}>
           <View style={styles.container}>
             <StatusBar style="dark" />

@@ -46,7 +46,7 @@ const DrawerItem = (props) => {
   return (
     <ImageBackground
       source={{
-        uri: "https://wallpaperaccess.com/full/1558955.jpg",
+        uri: "https://wallpapercave.com/wp/yFk2QjB.png",
       }}
       style={styles.container}
     >
@@ -61,7 +61,7 @@ const DrawerItem = (props) => {
                 uri: "https://coolwallpapers.me/picsup/5771328-hailee-steinfeld-wallpapers.jpg",
               }}
             >
-              <Avatar.Badge bg={"green.500"} />
+              <Avatar.Badge bg={"green.500"} borderColor="default.50" />
             </Avatar>
             <Text style={styles.title}>
               {profile?.myprofile?.ProfileBy?.name}
@@ -105,7 +105,7 @@ const DrawerItem = (props) => {
       <VStack my={4} mx={12} style={{ marginBottom: 20 }}>
         <Button
           size="md"
-          backgroundColor="#E03B8B"
+          backgroundColor="#8D3DAF"
           startIcon={<Ionicons name={"exit-outline"} color="#fff" size={28} />}
           onPress={() => dispatch(logout(props.navigation))}
         >

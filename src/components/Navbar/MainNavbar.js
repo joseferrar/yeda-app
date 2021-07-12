@@ -36,7 +36,7 @@ export default function MainNavbar() {
           component={Cart}
           options={{
             headerStyle: {
-              backgroundColor: "#8D3DAF",
+              backgroundColor: "#E03B8B",
             },
             headerTintColor: "#fff",
           }}

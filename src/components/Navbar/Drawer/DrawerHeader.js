@@ -50,7 +50,7 @@ export const ShopStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#8D3DAF",
+          backgroundColor: "#E03B8B",
           elevation: 0,
         },
       }}
@@ -97,7 +97,7 @@ export const ProfileScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#8D3DAF",
+          backgroundColor: "#E03B8B",
           elevation: 0,
         },
       }}
@@ -144,7 +144,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#8D3DAF",
+          backgroundColor: "#E03B8B",
           elevation: 0,
         },
       }}
