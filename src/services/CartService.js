@@ -11,6 +11,13 @@ export const GetCart = async () => {
   return api;
 };
 
+export const UpdateCart = async (id, updatecart) => {
+  const api = REACT_URL.put(`/upcart/${id}`, updatecart, {
+    headers: await authHeader(),
+  });
+  return api;
+};
+
 export const DeleteCart = async (id) => {
   const api = REACT_URL.delete(`/delcart/${id}`, {
     headers: await authHeader(),

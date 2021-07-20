@@ -25,8 +25,8 @@ const getIcon = (screenName) => {
       return "person-outline";
     case "Favorite":
       return "heart-outline";
-    case "archive":
-      return "archive";
+    case `Cart`:
+      return "cart-outline";
     case "Trash":
       return "trash-can";
     case "Spam":

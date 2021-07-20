@@ -1,19 +1,24 @@
 import React, { useEffect } from "react";
 import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack } from "native-base";
+import { Avatar, Text, Box, Stack, Input } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetCartAction, DeleteCartAction } from "../../actions/CartAction";
+import {
+  GetCartAction,
+  DeleteCartAction,
+  UpdateCartAction,
+} from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const { loading, cart } = useSelector((state) => state.cart);
-
+  const [username, setUsername] = React.useState(1);
   useEffect(() => {
     dispatch(GetCartAction());
   }, [dispatch]);
   console.log(cart);
+
   return (
     <View>
       {/* {cart.map((item) =>
@@ -22,13 +27,14 @@ const Cart = (props) => {
       {loading && Loading()}
       <ScrollView>
         {cart.map((cartItem) =>
-          cartItem.food.map((item) => (
+          cartItem.food.map((item, index) => (
             <TouchableOpacity
               activeOpacity={10}
               key={item?.recipe?.label}
               onPress={() => {
-                navigation.navigate("Details", {
+                navigation.navigate("CartDetails", {
                   data: item,
+                  id: cartItem._id
                 });
               }}
             >
@@ -92,10 +98,28 @@ const Cart = (props) => {
                     {item.recipe.source}
                   </Text>
                   <Text left={3} noOfLines={1} bold w={75} color="primary.50">
-                    {item?.recipe?.totalWeight}
+                    {cartItem.no_of_items}
                   </Text>
                 </Stack>
               </Box>
+              <Input
+                w="100%"
+                mx={3}
+                keyboardType="number-pad"
+                value={index}
+                onChangeText={(username) => setUsername(username)}
+              />
+              <Button
+                title="sdfdsf"
+                onPress={() => {
+                  dispatch(
+                    UpdateCartAction(cartItem._id, {
+                      food: item,
+                      no_of_items: username,
+                    })
+                  );
+                }}
+              />
               <Button
                 title="delete"
                 onPress={() => {

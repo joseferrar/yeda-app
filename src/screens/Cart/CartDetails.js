@@ -4,18 +4,21 @@ import { Ionicons } from "@expo/vector-icons";
 import { Icon, Text, Box, Stack, Button, Badge } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { showToast } from "../../components/Toast/toast";
-import { AddCartAction, GetCartAction } from "../../actions/CartAction";
+import {
+  AddCartAction,
+  GetCartAction,
+  DeleteCartAction,
+} from "../../actions/CartAction";
 
-const Details = (props) => {
+const CartDetails = (props) => {
   const { navigation } = props;
-  const { data } = props.route.params;
-  const { cart } = useSelector((state) => state.cart);
+  const { data, id } = props.route.params;
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(GetCartAction());
   }, []);
-
+  console.log(id);
   navigation.setOptions(
     {
       headerStyle: {
@@ -23,36 +26,6 @@ const Details = (props) => {
       },
       headerTitle: <Text color="#fff">{data.recipe.label}</Text>,
       headerTintColor: "#fff",
-      headerRight: () => (
-        <View style={{ flexDirection: "row" }}>
-          <Ionicons
-            name="cart-outline"
-            size={32}
-            color="#fff"
-            style={{ marginRight: 30 }}
-            onPress={() => navigation.navigate("Cart")}
-          />
-          <Badge
-            colorScheme="dark"
-            style={{
-              position: "absolute",
-              top: -2,
-              right: 20,
-              borderRadius: 15,
-              backgroundColor: "#E8BD0D",
-            }}
-          >
-            <Text
-              color="#fff"
-              fontWeight="bold"
-              fontSize={12}
-              textAlign="center"
-            >
-              {cart?.length}
-            </Text>
-          </Badge>
-        </View>
-      ),
     },
     [navigation]
   );
@@ -91,12 +64,13 @@ const Details = (props) => {
           </Text>
           <Button
             onPress={() => {
-              dispatch(AddCartAction({ food: data, no_of_items: 1 }));
+              dispatch(DeleteCartAction(id));
+              navigation.goBack();
               showToast(data?.recipe?.label);
             }}
             bg={"#E8BD0D"}
             colorScheme="secondary"
-            w={200}
+            w={240}
             ml={75}
             mt={75}
             my={20}
@@ -113,7 +87,7 @@ const Details = (props) => {
               color="#fff"
               isTruncated={true}
             >
-              Add to Cart
+              Remove to Cart
             </Text>
           </Button>
         </Stack>
@@ -122,7 +96,7 @@ const Details = (props) => {
   );
 };
 
-export default Details;
+export default CartDetails;
 
 /* <Button
         title="cart"

@@ -6,10 +6,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Shop/Products";
 import Profile from "../../../screens/Profile/ProfileInfo";
 import Favorite from "../../../screens/Favorite/Favorite";
+import Cart from "../../../screens/Cart/Cart";
+import CartDetails from "../../../screens/Cart/CartDetails";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
+const CartStack = createStackNavigator();
 
 export const ShopStackScreen = ({ navigation }) => (
   <ShopStack.Navigator>
@@ -29,24 +32,14 @@ export const ShopStackScreen = ({ navigation }) => (
           />
         ),
         headerRight: () => (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons
-              name="search-outline"
-              size={35}
-              color="#fff"
-              style={{ marginRight: 25 }}
-              lineBreakMode="head"
-              onPress={() => navigation.navigate("Search")}
-            />
-            <Ionicons
-              name="cart-outline"
-              size={35}
-              color="#fff"
-              style={{ marginRight: 15 }}
-              lineBreakMode="head"
-              onPress={() => navigation.navigate("Cart")}
-            />
-          </View>
+          <Ionicons
+            name="search-outline"
+            size={35}
+            color="#fff"
+            style={{ marginRight: 25 }}
+            lineBreakMode="head"
+            onPress={() => navigation.navigate("Search")}
+          />
         ),
         headerTitleAlign: "left",
         headerStyle: {
@@ -76,24 +69,14 @@ export const ProfileScreen = ({ navigation }) => (
           />
         ),
         headerRight: () => (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons
-              name="search-outline"
-              size={35}
-              color="#fff"
-              style={{ marginRight: 25 }}
-              lineBreakMode="head"
-              onPress={() => navigation.navigate("Search")}
-            />
-            <Ionicons
-              name="cart-outline"
-              size={35}
-              color="#fff"
-              style={{ marginRight: 15 }}
-              lineBreakMode="head"
-              onPress={() => navigation.openDrawer()}
-            />
-          </View>
+          <Ionicons
+            name="search-outline"
+            size={35}
+            color="#fff"
+            style={{ marginRight: 25 }}
+            lineBreakMode="head"
+            onPress={() => navigation.navigate("Search")}
+          />
         ),
         headerTitleAlign: "left",
         headerStyle: {
@@ -123,24 +106,14 @@ export const FavoriteStackScreen = ({ navigation }) => (
           />
         ),
         headerRight: () => (
-          <View style={{ flexDirection: "row" }}>
-            <Ionicons
-              name="search-outline"
-              size={35}
-              color="#fff"
-              style={{ marginRight: 25 }}
-              lineBreakMode="head"
-              onPress={() => navigation.navigate("Search")}
-            />
-            <Ionicons
-              name="cart-outline"
-              size={35}
-              color="#fff"
-              style={{ marginRight: 15 }}
-              lineBreakMode="head"
-              onPress={() => navigation.openDrawer()}
-            />
-          </View>
+          <Ionicons
+            name="search-outline"
+            size={35}
+            color="#fff"
+            style={{ marginRight: 25 }}
+            lineBreakMode="head"
+            onPress={() => navigation.navigate("Search")}
+          />
         ),
         headerTitleAlign: "left",
         headerStyle: {
@@ -152,6 +125,43 @@ export const FavoriteStackScreen = ({ navigation }) => (
   </FavoriteStack.Navigator>
 );
 
+export const CartStackScreen = ({ navigation }) => (
+  <CartStack.Navigator>
+    <CartStack.Screen
+      name="Cart"
+      component={Cart}
+      options={{
+        headerTitle: () => <Text style={styles.title}>Cart</Text>,
+        headerLeft: () => (
+          <Ionicons
+            name="menu-outline"
+            size={35}
+            color="#fff"
+            style={{ marginLeft: 10 }}
+            lineBreakMode="head"
+            onPress={() => navigation.openDrawer()}
+          />
+        ),
+        headerRight: () => (
+          <Ionicons
+            name="search-outline"
+            size={35}
+            color="#fff"
+            style={{ marginRight: 25 }}
+            lineBreakMode="head"
+            onPress={() => navigation.navigate("Search")}
+          />
+        ),
+        headerTitleAlign: "left",
+        headerStyle: {
+          backgroundColor: "#E03B8B",
+          elevation: 0,
+        },
+      }}
+    />
+    <CartStack.Screen name="CartDetails" component={CartDetails} />
+  </CartStack.Navigator>
+);
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
