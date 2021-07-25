@@ -1,24 +1,29 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Icon, Text, Box, Stack, Button, Badge } from "native-base";
+import { Icon, Text, Box, Stack, Button, Input } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { showToast } from "../../components/Toast/toast";
 import {
-  AddCartAction,
+  UpdateCartAction,
   GetCartAction,
   DeleteCartAction,
 } from "../../actions/CartAction";
 
 const CartDetails = (props) => {
   const { navigation } = props;
-  const { data, id } = props.route.params;
+  const { data, id, quantity } = props.route.params;
   const dispatch = useDispatch();
+  const [item, Setitem] = useState(`${quantity}`);
+
+  const updateChange = (event) => {
+    Setitem(event);
+  };
 
   useEffect(() => {
     dispatch(GetCartAction());
   }, []);
-  console.log(id);
+
   navigation.setOptions(
     {
       headerStyle: {
@@ -62,6 +67,25 @@ const CartDetails = (props) => {
           <Text left={3} noOfLines={1} bold color="primary.50">
             {data?.recipe?.totalWeight}
           </Text>
+          <Input
+            w="100%"
+            mx={3}
+            key={item}
+            keyboardType="number-pad"
+            value={item}
+            onChangeText={updateChange}
+          />
+          <Button
+            title="sdfdsf"
+            onPress={() => {
+              dispatch(
+                UpdateCartAction(id, {
+                  food: data,
+                  no_of_items: item,
+                })
+              );
+            }}
+          />
           <Button
             onPress={() => {
               dispatch(DeleteCartAction(id));

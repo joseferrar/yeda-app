@@ -6,14 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   GetCartAction,
   DeleteCartAction,
-  UpdateCartAction,
 } from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const { loading, cart } = useSelector((state) => state.cart);
-  const [username, setUsername] = React.useState(1);
+
   useEffect(() => {
     dispatch(GetCartAction());
   }, [dispatch]);
@@ -27,14 +26,16 @@ const Cart = (props) => {
       {loading && Loading()}
       <ScrollView>
         {cart.map((cartItem) =>
-          cartItem.food.map((item, index) => (
+          cartItem?.food?.map((item, index) => (
+            
             <TouchableOpacity
               activeOpacity={10}
               key={item?.recipe?.label}
               onPress={() => {
                 navigation.navigate("CartDetails", {
                   data: item,
-                  id: cartItem._id
+                  id: cartItem?._id,
+                  quantity: cartItem?.no_of_items
                 });
               }}
             >
@@ -95,31 +96,13 @@ const Cart = (props) => {
                     fontFamily="NunitoSans-Regular"
                     fontSize={14}
                   >
-                    {item.recipe.source}
+                    {item?.recipe?.source}
                   </Text>
                   <Text left={3} noOfLines={1} bold w={75} color="primary.50">
-                    {cartItem.no_of_items}
+                  {cartItem?.no_of_items}
                   </Text>
                 </Stack>
               </Box>
-              <Input
-                w="100%"
-                mx={3}
-                keyboardType="number-pad"
-                value={index}
-                onChangeText={(username) => setUsername(username)}
-              />
-              <Button
-                title="sdfdsf"
-                onPress={() => {
-                  dispatch(
-                    UpdateCartAction(cartItem._id, {
-                      food: item,
-                      no_of_items: username,
-                    })
-                  );
-                }}
-              />
               <Button
                 title="delete"
                 onPress={() => {
