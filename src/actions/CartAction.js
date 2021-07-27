@@ -1,5 +1,10 @@
-import { ADDCART, GETCART, DELETECART } from "../constants";
-import { AddCart, GetCart, DeleteCart } from "../services/CartService";
+import { ADDCART, GETCART, DELETECART, UPDATECART } from "../constants";
+import {
+  AddCart,
+  GetCart,
+  DeleteCart,
+  UpdateCart,
+} from "../services/CartService";
 import { showToast } from "../components/Toast/toast";
 
 export const AddCartAction = (Add) => async (dispatch) => {
@@ -17,6 +22,15 @@ export const GetCartAction = () => async (dispatch) => {
     dispatch({ type: GETCART, payload: data });
   } catch (err) {
     showToast(err.response.data);
+  }
+};
+
+export const UpdateCartAction = (id, updatecart) => async (dispatch) => {
+  try {
+    const { data } = await UpdateCart(id, updatecart);
+    dispatch({ type: UPDATECART, payload: data });
+  } catch (error) {
+    console.log(error.message);
   }
 };
 

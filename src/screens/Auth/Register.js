@@ -53,6 +53,7 @@ const RegisterPage = (props) => {
       <FormControl>
         <FormControl.Label>Username</FormControl.Label>
         <Input
+          color="#000"
           value={formik.values.name}
           onChangeText={formik.handleChange("name")}
           onBlur={formik.handleBlur("name")}
@@ -61,6 +62,7 @@ const RegisterPage = (props) => {
 
         <FormControl.Label>Email</FormControl.Label>
         <Input
+          color="#000"
           value={formik.values.email}
           onChangeText={formik.handleChange("email")}
           onBlur={formik.handleBlur("email")}
@@ -69,6 +71,7 @@ const RegisterPage = (props) => {
 
         <FormControl.Label>Password</FormControl.Label>
         <Input
+          color="#000"
           value={formik.values.password}
           onChangeText={formik.handleChange("password")}
           onBlur={formik.handleBlur("password")}

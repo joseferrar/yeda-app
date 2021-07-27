@@ -7,10 +7,14 @@ const Protected = (props) => {
   const { navigation } = props;
   const detectLogin = async () => {
     const token = await AsyncStorage.getItem("token");
-    if (token) {
-      navigation.replace("Home");
+    const data = JSON.parse(token);
+    console.log(data);
+    if (data?.user?.role === "user") {
+      await navigation.replace("Home");
+    } else if (data?.user?.role === "admin") {
+      await navigation.replace("Admin");
     } else {
-      navigation.replace("Login");
+      await navigation.replace("Login");
     }
   };
   useEffect(() => {
@@ -19,6 +23,5 @@ const Protected = (props) => {
 
   return <View>{Loading()}</View>;
 };
-
 
 export default Protected;

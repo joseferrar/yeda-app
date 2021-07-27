@@ -15,6 +15,7 @@ const Details = (props) => {
   useEffect(() => {
     dispatch(GetCartAction());
   }, []);
+
   navigation.setOptions(
     {
       headerStyle: {
@@ -90,7 +91,7 @@ const Details = (props) => {
           </Text>
           <Button
             onPress={() => {
-              dispatch(AddCartAction({ food: data }));
+              dispatch(AddCartAction({ food: data, no_of_items: 1 }));
               showToast(data?.recipe?.label);
             }}
             bg={"#E8BD0D"}

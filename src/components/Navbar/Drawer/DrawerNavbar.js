@@ -5,6 +5,7 @@ import {
   ShopStackScreen,
   ProfileScreen,
   FavoriteStackScreen,
+  CartStackScreen,
 } from "./DrawerHeader";
 import TabNavbar from "../Tab/TabNavbar";
 import DrawerItem from "./DrawerItem";
@@ -19,6 +20,7 @@ const DrawerNavbar = () => {
       <Drawer.Screen name="Shop" component={ShopStackScreen} />
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="Favorite" component={FavoriteStackScreen} />
+      <Drawer.Screen name="Cart" component={CartStackScreen} />
     </Drawer.Navigator>
   );
 };

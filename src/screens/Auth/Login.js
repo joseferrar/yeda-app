@@ -52,6 +52,7 @@ const LoginPage = (props) => {
       <FormControl>
         <FormControl.Label>Email</FormControl.Label>
         <Input
+        color={"#000"}
           value={formik.values.email}
           onChangeText={formik.handleChange("email")}
           onBlur={formik.handleBlur("email")}
@@ -60,6 +61,7 @@ const LoginPage = (props) => {
 
         <FormControl.Label>Password</FormControl.Label>
         <Input
+         color={"#000"}
           value={formik.values.password}
           onChangeText={formik.handleChange("password")}
           onBlur={formik.handleBlur("password")}

@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
 import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack } from "native-base";
+import { Avatar, Text, Box, Stack, Input } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetCartAction, DeleteCartAction } from "../../actions/CartAction";
+import {
+  GetCartAction,
+  DeleteCartAction,
+} from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
@@ -12,8 +15,9 @@ const Cart = (props) => {
 
   useEffect(() => {
     dispatch(GetCartAction());
-  }, [dispatch]);
+  }, []);
   console.log(cart);
+
   return (
     <View>
       {/* {cart.map((item) =>
@@ -21,14 +25,17 @@ const Cart = (props) => {
       )} */}
       {loading && Loading()}
       <ScrollView>
-        {cart.map((cartItem) =>
-          cartItem.food.map((item) => (
+        {cart?.map((cartItem) =>
+          cartItem?.food?.map((item, index) => (
+            
             <TouchableOpacity
               activeOpacity={10}
               key={item?.recipe?.label}
               onPress={() => {
-                navigation.navigate("Details", {
+                navigation.navigate("CartDetails", {
                   data: item,
+                  id: cartItem?._id,
+                  quantity: cartItem?.no_of_items
                 });
               }}
             >
@@ -89,19 +96,19 @@ const Cart = (props) => {
                     fontFamily="NunitoSans-Regular"
                     fontSize={14}
                   >
-                    {item.recipe.source}
+                    {item?.recipe?.source}
                   </Text>
-                  <Text left={3} noOfLines={1} bold w={75} color="primary.50">
-                    {item?.recipe?.totalWeight}
+                  <Text left={3} noOfLines={1} bold  color="primary.50">
+                  No of Items: {cartItem?.no_of_items}
                   </Text>
                 </Stack>
               </Box>
-              <Button
+              {/* <Button
                 title="delete"
                 onPress={() => {
                   dispatch(DeleteCartAction(cartItem._id));
                 }}
-              />
+              /> */}
             </TouchableOpacity>
           ))
         )}
