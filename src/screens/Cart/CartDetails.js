@@ -9,6 +9,8 @@ import {
   GetCartAction,
   DeleteCartAction,
 } from "../../actions/CartAction";
+import { FormikConsumer, useFormik } from "formik";
+import * as yup from "yup";
 
 const CartDetails = (props) => {
   const { navigation } = props;
@@ -16,9 +18,26 @@ const CartDetails = (props) => {
   const dispatch = useDispatch();
   const [item, Setitem] = useState(`${quantity}`);
 
-  const updateChange = (event) => {
-    Setitem(event);
-  };
+  const formik = useFormik({
+    initialValues: {
+      no_of_items: `${quantity}`,
+    },
+
+    onSubmit: (Data) => {
+      dispatch(
+        UpdateCartAction(id, {
+          food: data,
+          no_of_items: Data.no_of_items,
+        })
+      );
+      dispatch(
+        UpdateCartAction(id, {
+          food: data,
+          no_of_items: Data.no_of_items,
+        })
+      );
+    },
+  });
 
   useEffect(() => {
     dispatch(GetCartAction());
@@ -64,40 +83,37 @@ const CartDetails = (props) => {
           >
             {data?.recipe?.source}
           </Text>
-          <Text left={3} noOfLines={1} bold color="primary.50">
-            {data?.recipe?.totalWeight}
-          </Text>
-          <Input
-            w="100%"
-            mx={3}
-            key={item}
-            keyboardType="number-pad"
-            value={item}
-            onChangeText={updateChange}
-          />
-          <Button
-            title="sdfdsf"
-            onPress={() => {
-              dispatch(
-                UpdateCartAction(id, {
-                  food: data,
-                  no_of_items: item,
-                })
-              );
-            }}
-          />
+          <View style={{ flexDirection: "row" }}>
+            <Text
+              marginLeft={2}
+              top={4}
+              noOfLines={1}
+              bold
+              fontSize={18}
+              color="primary.50"
+            >
+              No of Items:
+            </Text>
+            <Input
+              w="40%"
+              mx={3}
+              color="#000"
+              keyboardType="number-pad"
+              value={formik.values.no_of_items}
+              onChangeText={formik.handleChange("no_of_items")}
+              onSubmitEditing={formik.handleSubmit}
+            />
+          </View>
+
           <Button
             onPress={() => {
               dispatch(DeleteCartAction(id));
               navigation.goBack();
               showToast(data?.recipe?.label);
             }}
-            bg={"#E8BD0D"}
+            bg={"#E21717"}
             colorScheme="secondary"
-            w={240}
-            ml={75}
-            mt={75}
-            my={20}
+            my={1}
             shadow={2}
             borderRadius={40}
             startIcon={
@@ -106,12 +122,31 @@ const CartDetails = (props) => {
           >
             <Text
               left={1}
-              fontSize={20}
+              fontSize={18}
               noOfLines={2}
               color="#fff"
               isTruncated={true}
             >
               Remove to Cart
+            </Text>
+          </Button>
+
+          <Button
+            bg={"#000"}
+            colorScheme="secondary"
+            shadow={2}
+            borderRadius={40}
+            startIcon={
+              <Icon
+                as={Ionicons}
+                name="briefcase-outline"
+                color="#fff"
+                size={6}
+              />
+            }
+          >
+            <Text left={1} fontSize={18} noOfLines={2} color="#fff">
+              Proceed to Buy
             </Text>
           </Button>
         </Stack>

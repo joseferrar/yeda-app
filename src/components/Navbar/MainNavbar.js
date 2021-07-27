@@ -9,6 +9,7 @@ import DrawerNavbar from "./Drawer/DrawerNavbar";
 import Search from "../../screens/Search/Search";
 import Details from "../../screens/Details/Details";
 import Cart from "../../screens/Cart/Cart";
+import Admin from "../../screens/Admin/Admin";
 
 const Stack = createStackNavigator();
 
@@ -24,25 +25,6 @@ export default function MainNavbar() {
           }}
         />
         <Stack.Screen
-          name="Home"
-          component={DrawerNavbar}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen name="Search" component={Search} />
-        <Stack.Screen
-          name="Cart"
-          component={Cart}
-          options={{
-            headerStyle: {
-              backgroundColor: "#E03B8B",
-            },
-            headerTintColor: "#fff",
-          }}
-        />
-        <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen
           name="Login"
           component={Login}
           options={{
@@ -56,6 +38,35 @@ export default function MainNavbar() {
             headerShown: false,
           }}
         />
+
+        <Stack.Screen
+          name="Home"
+          component={DrawerNavbar}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={Search}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Cart"
+          component={Cart}
+          options={{
+            headerStyle: {
+              backgroundColor: "#E03B8B",
+            },
+            headerTintColor: "#fff",
+          }}
+        />
+        <Stack.Screen name="Details" component={Details} />
+
+        {/* Admin */}
+        <Stack.Screen name="Admin" component={Admin} />
       </Stack.Navigator>
     </NavigationContainer>
   );

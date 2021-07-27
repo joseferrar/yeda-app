@@ -12,7 +12,7 @@ const Protected = (props) => {
     if (data?.user?.role === "user") {
       await navigation.replace("Home");
     } else if (data?.user?.role === "admin") {
-      await navigation.replace("Search");
+      await navigation.replace("Admin");
     } else {
       await navigation.replace("Login");
     }

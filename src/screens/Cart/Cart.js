@@ -15,7 +15,7 @@ const Cart = (props) => {
 
   useEffect(() => {
     dispatch(GetCartAction());
-  }, [dispatch]);
+  }, []);
   console.log(cart);
 
   return (
@@ -25,7 +25,7 @@ const Cart = (props) => {
       )} */}
       {loading && Loading()}
       <ScrollView>
-        {cart.map((cartItem) =>
+        {cart?.map((cartItem) =>
           cartItem?.food?.map((item, index) => (
             
             <TouchableOpacity
@@ -98,17 +98,17 @@ const Cart = (props) => {
                   >
                     {item?.recipe?.source}
                   </Text>
-                  <Text left={3} noOfLines={1} bold w={75} color="primary.50">
-                  {cartItem?.no_of_items}
+                  <Text left={3} noOfLines={1} bold  color="primary.50">
+                  No of Items: {cartItem?.no_of_items}
                   </Text>
                 </Stack>
               </Box>
-              <Button
+              {/* <Button
                 title="delete"
                 onPress={() => {
                   dispatch(DeleteCartAction(cartItem._id));
                 }}
-              />
+              /> */}
             </TouchableOpacity>
           ))
         )}

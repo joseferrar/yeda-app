@@ -1,15 +1,19 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { logout } from "../../actions/AuthAction";
-import { useSelector, useDispatch } from "react-redux";
+import SearchBar from "react-native-dynamic-search-bar";
 
 const Search = (props) => {
-const {navigation}= props;
-const dispatch = useDispatch();
+  const { navigation } = props;
+
   return (
     <View style={styles.container}>
-      <Text onPress={() => navigation.navigate('Cart')}>Search</Text>
-      <Text  onPress={() => dispatch(logout(navigation))}>logout</Text>
+      <SearchBar
+        style={{ height: 50 }}
+        autoFocus
+        placeholder="Search here"
+        onPress={() => alert("onPress")}
+        onChangeText={(text) => console.log(text)}
+      />
     </View>
   );
 };
@@ -18,6 +22,7 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  }
+    flex: 1,
+    marginTop: 40,
+  },
 });
