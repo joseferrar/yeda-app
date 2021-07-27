@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { ScrollView, View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Icon, Text, Box, Stack, Button, Input } from "native-base";
@@ -42,17 +42,16 @@ const CartDetails = (props) => {
   useEffect(() => {
     dispatch(GetCartAction());
   }, []);
-
-  navigation.setOptions(
-    {
+  
+  useLayoutEffect(() => {
+    navigation.setOptions({
       headerStyle: {
         backgroundColor: "#8D3DAF",
       },
       headerTitle: <Text color="#fff">{data.recipe.label}</Text>,
       headerTintColor: "#fff",
-    },
-    [navigation]
-  );
+    });
+  }, [navigation]);
 
   return (
     <ScrollView>
