@@ -4,6 +4,7 @@ import CartReducer from "./CartReducer";
 import CountReducer from "./CountReducer";
 import FoodReducer from "./FoodReducer";
 import ProfileReducer from "./ProfileReducer";
+import SearchReducer from "./SearchReducer";
 
 const allReducers = combineReducers({
   auth: AuthReducer,
@@ -11,6 +12,7 @@ const allReducers = combineReducers({
   food: FoodReducer,
   cart: CartReducer,
   count: CountReducer,
+  search: SearchReducer,
 });
 
 export default allReducers;
