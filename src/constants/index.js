@@ -9,3 +9,4 @@ export const UPDATECART = "UPDATECART";
 export const DELETECART = "DELETECART";
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
+export const SEARCH = "SEARCH";

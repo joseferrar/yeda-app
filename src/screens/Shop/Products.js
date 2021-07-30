@@ -13,7 +13,7 @@ const Products = (props) => {
 
   useEffect(() => {
     dispatch(FoodAction());
-  }, [dispatch]);
+  }, []);
   return (
     <View>
       {loading && Loading()}
