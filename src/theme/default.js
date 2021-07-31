@@ -4,12 +4,22 @@ export const theme = extendTheme({
   colors: {
     primary: {
       50: "#000",
+      100: "#5A20CB",
     },
     secondary: {
-        100: "#E03B8B",
+      100: "#E03B8B",
+      200: "#8D3DAF",
+    },
+
+    success: {
+      100: "#3DBE29",
     },
     default: {
-        50:"#fff"
+      50: "#fff",
+    },
+    dark: {
+      50: "#120E43",
+      100: "#242B2E",
     },
     gray: {
       400: "gray",

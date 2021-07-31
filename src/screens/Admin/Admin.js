@@ -1,15 +1,38 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { logout } from "../../actions/AuthAction";
 import { useSelector, useDispatch } from "react-redux";
+import { HStack, Stack, Center, Box, Button } from "native-base";
+import AdminCard from "./AdminCard";
 
 const Admin = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: "#8D3DAF",
+      },
+      headerTintColor: "#fff",
+      headerRight: () => (
+        <View style={{ flexDirection: "row" }}>
+          <Ionicons
+            name="log-out-outline"
+            size={32}
+            color="#fff"
+            style={{ marginRight: 30 }}
+            onPress={() => dispatch(logout(navigation))}
+          />
+        </View>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View>
-      <Text>Admin</Text>
-      <Text  onPress={() => dispatch(logout(navigation))}>logout</Text>
+      <AdminCard navigation={navigation} />
     </View>
   );
 };
