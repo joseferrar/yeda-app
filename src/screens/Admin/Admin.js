@@ -13,7 +13,7 @@ const Admin = (props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#8D3DAF",
+        backgroundColor: "#E03B8B",
       },
       headerTintColor: "#fff",
       headerRight: () => (

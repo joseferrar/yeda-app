@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import AdminReducer from "./AdminReducer";
 import AuthReducer from "./AuthReducer";
 import CartReducer from "./CartReducer";
 import CountReducer from "./CountReducer";
@@ -13,6 +14,7 @@ const allReducers = combineReducers({
   cart: CartReducer,
   count: CountReducer,
   search: SearchReducer,
+  admin: AdminReducer,
 });
 
 export default allReducers;
