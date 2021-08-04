@@ -58,7 +58,7 @@ const AdminCard = (props) => {
         </HStack>
 
         <HStack space={4} alignItems="center" top={10}>
-          <TouchableOpacity onPress={() => navigation.navigate("UserList")}>
+          <TouchableOpacity>
             <Center
               w="180px"
               h="120px"

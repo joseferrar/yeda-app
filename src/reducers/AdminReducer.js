@@ -1,4 +1,4 @@
-import { GET_USERS } from "../constants";
+import { GET_USERS, POST_USERS } from "../constants";
 
 const initialState = {
   loading: true,
@@ -12,6 +12,10 @@ const AdminReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         data: action.payload,
+      };
+    case POST_USERS:
+      return {
+        ...state,
       };
     default:
       return state;

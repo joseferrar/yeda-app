@@ -20,8 +20,14 @@ export const theme = extendTheme({
     dark: {
       50: "#120E43",
       100: "#242B2E",
+      200: "rgb(255, 255, 255)",
     },
-    gray: "gray",
+    gray: {
+      700: "rgb(255, 255, 255)",
+    },
+    Black: {
+      200: "#3DBE29",
+    }
     // Redefinig only one shade, rest of the color will remain same.
   },
   config: {
