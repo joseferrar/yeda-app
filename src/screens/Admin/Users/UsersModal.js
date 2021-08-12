@@ -14,12 +14,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { PostUserAction, GetUsersAction } from "../../../actions/AdminAction";
-import { showToast } from '../../../components/Toast/toast'
+import { showToast } from "../../../components/Toast/toast";
+import { bool } from "yup";
 
 const UsersModal = (props) => {
   const dispatch = useDispatch();
   const { modalVisible, setModalVisible, item } = props;
-  
+
   useEffect(() => {
     dispatch(GetUsersAction());
   }, [item]);
@@ -30,7 +31,7 @@ const UsersModal = (props) => {
       email: "",
       password: "",
       role: "user",
-      status: "active" ? true : false,
+      status: "true",
     },
     validationSchema: yup.object().shape({
       name: yup.string().required("Name must be required"),
@@ -41,15 +42,13 @@ const UsersModal = (props) => {
     onSubmit: (data) => {
       // console.log(data);
       dispatch(PostUserAction(data));
-      showToast('dsdsfs')
+      showToast("dsdsfs");
       setModalVisible(!modalVisible);
     },
   });
- 
 
   return (
     <View>
-      
       <Modal isOpen={modalVisible} onClose={setModalVisible} avoidKeyboard>
         <Modal.Content>
           <Modal.CloseButton bg="#000" />
@@ -115,7 +114,7 @@ const UsersModal = (props) => {
                 onChange={formik.handleChange("status")}
               >
                 <Radio
-                  value={formik.values.status}
+                  value={"true"}
                   ml={1}
                   bg="#fff"
                   aria-label="Close"
@@ -124,7 +123,7 @@ const UsersModal = (props) => {
                   Yes
                 </Radio>
                 <Radio
-                  value={formik.values.status}
+                  value={"false"}
                   ml={1}
                   bg="#fff"
                   colorScheme="Black"

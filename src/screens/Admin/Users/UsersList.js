@@ -10,6 +10,7 @@ import {
   Flex,
   Fab,
   Icon,
+  Divider,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { GetUsersAction } from "../../../actions/AdminAction";
@@ -36,23 +37,23 @@ const UsersList = (props) => {
   }, []);
 
   return (
-    <View flex={1}>
+    <View bg="#fff" flex={1}>
       <FlatList
-        scrollEnabled
         refreshing={loading}
         onRefresh={GetUsersAction}
         data={data?.users}
         renderItem={({ item }) => (
           <TouchableOpacity
+            activeOpacity={0.9}
             onPress={() => {
               navigation.navigate("UsersDetails", {
                 data: item,
               });
             }}
           >
-            <Box px={5} py={2} rounded="lg" my={0} bg="#fff">
+            <Box px={5} py={2} rounded="lg" my={0}>
               <View flexDirection="row" top={2}>
-                <Avatar size="lg" mr={3} bg="#fff">
+                <Avatar size="lg" mr={3} bg="#000">
                   {item?.name[0]}
                   <Avatar.Badge
                     borderColor="papayawhip"
@@ -63,14 +64,6 @@ const UsersList = (props) => {
                   {" "}
                   {item?.name}
                 </Text>
-                <Icon
-                  color="primary.100"
-                  as={<Ionicons name="chevron-forward-circle-outline" />}
-                  size="lg"
-                  left={210}
-                  fontWeight="bold"
-                  top={15}
-                />
               </View>
               <Flex right={85} top={-26}>
                 <Text color="primary.50" fontWeight="bold" left={40}>
@@ -78,6 +71,7 @@ const UsersList = (props) => {
                   {item?.email}
                 </Text>
               </Flex>
+              <Divider my={0} bg="gray.50" />
             </Box>
           </TouchableOpacity>
         )}

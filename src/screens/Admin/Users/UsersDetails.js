@@ -5,7 +5,7 @@ const UsersDetails = (props) => {
   const { navigation } = props;
   const { data } = props.route.params;
   console.log(data);
-  
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: data.name,
@@ -15,7 +15,6 @@ const UsersDetails = (props) => {
       headerTintColor: "#fff",
     });
   }, [navigation]);
-
 
   return (
     <View>
