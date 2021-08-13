@@ -1,8 +1,8 @@
-import { GET_USERS, POST_USERS } from "../constants";
+import { GET_USERS, POST_USERS, EDIT_USERS, DELETE_USERS } from "../constants";
 
 const initialState = {
   loading: true,
-  data: [],
+  users: [],
 };
 
 const AdminReducer = (state = initialState, action) => {
@@ -11,11 +11,26 @@ const AdminReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.payload,
+        users: action.payload,
       };
     case POST_USERS:
       return {
         ...state,
+      };
+    case EDIT_USERS:
+      return {
+        ...state,
+        loading: false,
+        // users: users.map((item) =>
+        //   item._id === action.payload._id ? action.payload : item
+        // ),
+      };
+
+    case DELETE_USERS:
+      return {
+        ...state,
+        loading: false,
+        // users: state.users.filter((item) => item._id !== action.payload),
       };
     default:
       return state;

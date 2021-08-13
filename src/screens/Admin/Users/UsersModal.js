@@ -14,7 +14,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { PostUserAction, GetUsersAction } from "../../../actions/AdminAction";
-import { showToast } from "../../../components/Toast/toast";
 
 const UsersModal = (props) => {
   const dispatch = useDispatch();
@@ -39,9 +38,8 @@ const UsersModal = (props) => {
       // status: yup.boolean().required().oneOf([true]),
     }),
     onSubmit: (data) => {
-      // console.log(data);
       dispatch(PostUserAction(data));
-      showToast("dsdsfs");
+      // showToast("Created Successfully !!!");
       setModalVisible(!modalVisible);
     },
   });
@@ -135,9 +133,14 @@ const UsersModal = (props) => {
           </Modal.Body>
           <Modal.Footer>
             <Button.Group variant="outline" space={6} my={3}>
-              <Button colorScheme="rgb(14, 107, 237)">SUBMIT</Button>
               <Button
+                colorScheme="rgb(14, 107, 237)"
                 onPress={formik.handleSubmit}
+              >
+                SUBMIT
+              </Button>
+              <Button
+                onPress={() => setModalVisible(!modalVisible)}
                 colorScheme="rgb(252, 0, 0)"
               >
                 CANCEL

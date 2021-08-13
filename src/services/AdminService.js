@@ -12,3 +12,17 @@ export const PostUsers = async (data) => {
   });
   return api;
 };
+
+export const EditUsers = async (id, edituser) => {
+  const api = await REACT_URL.put(`/edituser/${id}`, edituser, {
+    headers: await authHeader(),
+  });
+  return api;
+};
+
+export const DeleteUsers = async (id) => {
+  const api = await REACT_URL.delete(`/deluser/${id}`, {
+    headers: await authHeader(),
+  });
+  return api;
+};

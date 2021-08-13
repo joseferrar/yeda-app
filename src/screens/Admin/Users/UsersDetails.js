@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import {
   FormControl,
@@ -9,38 +9,26 @@ import {
   Button,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import * as yup from "yup";
+import { DeleteUserAction, EditUserAction } from "../../../actions/AdminAction";
+import { showToast } from "../../../components/Toast/toast";
 
 const UsersDetails = (props) => {
-  const [disable, setDisable] = useState(true);
   const { navigation } = props;
+  const [disable, setDisable] = useState(true);
+  const dispatch = useDispatch();
   const { data } = props.route.params;
-  console.log(data);
 
   const ChangeDisabled = () => {
     setDisable(!disable);
   };
-  const formik = useFormik({
-    initialValues: {
-      name: data.name,
-      email: data.email,
-      password: "",
-      role: data.role,
-      status: data.status ? "true" : "false",
-    },
-    validationSchema: yup.object().shape({
-      name: yup.string().required("Name must be required"),
-      email: yup.string().email().required("Email must be required"),
-      password: yup.string().min(8).required("Password must be required"),
-      // status: yup.boolean().required().oneOf([true]),
-    }),
-    onSubmit: (data) => {
-      console.log(data);
-      showToast("Updated Successfully !!!");
-      setDisable(!disable);
-    },
-  });
+
+  const deleteUser = () => {
+    navigation.goBack();
+    dispatch(DeleteUserAction(data._id));
+    showToast(`${data.name} Deleted !!!`);
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -51,7 +39,7 @@ const UsersDetails = (props) => {
           lineBreakMode="middle"
           textBreakStrategy="simple"
         >
-          {data.name}
+          {data?.name}
         </Text>
       ),
       headerStyle: {
@@ -63,13 +51,27 @@ const UsersDetails = (props) => {
           <TouchableOpacity style={styles.button} onPress={ChangeDisabled}>
             <Ionicons name="pencil-sharp" size={30} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={deleteUser}>
             <Ionicons name="trash-sharp" size={30} color="#fff" />
           </TouchableOpacity>
         </View>
       ),
     });
   }, [navigation]);
+
+  const formik = useFormik({
+    initialValues: {
+      name: data.name,
+      email: data.email,
+      password: "",
+      role: data.role,
+      status: data.status ? "true" : "false",
+    },
+    onSubmit: (Data) => {
+      dispatch(EditUserAction(data._id, Data));
+      setDisable(true);
+    },
+  });
 
   return (
     <View>

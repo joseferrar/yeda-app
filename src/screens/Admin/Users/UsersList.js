@@ -21,7 +21,7 @@ const UsersList = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { navigation } = props;
 
-  const { loading, data } = useSelector((state) => state.admin);
+  const { loading, users } = useSelector((state) => state.admin);
   useEffect(() => {
     dispatch(GetUsersAction());
   }, []);
@@ -41,7 +41,7 @@ const UsersList = (props) => {
       <FlatList
         refreshing={loading}
         onRefresh={GetUsersAction}
-        data={data?.users}
+        data={users?.users}
         renderItem={({ item }) => (
           <TouchableOpacity
             activeOpacity={0.9}
@@ -105,7 +105,7 @@ const UsersList = (props) => {
       <UsersModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        item={data}
+        item={users}
       />
     </View>
   );
