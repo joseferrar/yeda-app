@@ -10,6 +10,8 @@ import Search from "../../screens/Search/Search";
 import Details from "../../screens/Details/Details";
 import Cart from "../../screens/Cart/Cart";
 import Admin from "../../screens/Admin/Admin";
+import UsersList from "../../screens/Admin/Users/UsersList";
+import UsersDetails from "../../screens/Admin/Users/UsersDetails";
 
 const Stack = createStackNavigator();
 
@@ -67,6 +69,8 @@ export default function MainNavbar() {
 
         {/* Admin */}
         <Stack.Screen name="Admin" component={Admin} />
+        <Stack.Screen name="UserList" component={UsersList} />
+        <Stack.Screen name="UsersDetails" component={UsersDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
