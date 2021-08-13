@@ -64,6 +64,14 @@ const UsersList = (props) => {
                   {" "}
                   {item?.name}
                 </Text>
+                <Icon
+                  color="primary.100"
+                  as={<Ionicons name="chevron-forward-circle-outline" />}
+                  size="lg"
+                  marginLeft="auto"
+                  fontWeight="bold"
+                  top={15}
+                />
               </View>
               <Flex right={85} top={-26}>
                 <Text color="primary.50" fontWeight="bold" left={40}>

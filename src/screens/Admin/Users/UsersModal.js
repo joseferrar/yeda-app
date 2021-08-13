@@ -15,7 +15,6 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { PostUserAction, GetUsersAction } from "../../../actions/AdminAction";
 import { showToast } from "../../../components/Toast/toast";
-import { bool } from "yup";
 
 const UsersModal = (props) => {
   const dispatch = useDispatch();
