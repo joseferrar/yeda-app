@@ -105,7 +105,7 @@ const UsersList = (props) => {
       <UsersModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
-        item={users}
+        // item={users}
       />
     </View>
   );
