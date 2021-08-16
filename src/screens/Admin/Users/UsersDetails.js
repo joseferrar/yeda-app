@@ -11,7 +11,11 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { DeleteUserAction, EditUserAction } from "../../../actions/AdminAction";
+import {
+  DeleteUserAction,
+  EditUserAction,
+  GetUsersAction,
+} from "../../../actions/AdminAction";
 import { showToast } from "../../../components/Toast/toast";
 
 const UsersDetails = (props) => {
@@ -24,11 +28,27 @@ const UsersDetails = (props) => {
     setDisable(!disable);
   };
 
-  const deleteUser = () => {
+  const deleteUser = async () => {
     navigation.goBack();
-    dispatch(DeleteUserAction(data._id));
+    await dispatch(DeleteUserAction(data._id));
+    await dispatch(GetUsersAction());
     showToast(`${data.name} Deleted !!!`);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      name: data.name,
+      email: data.email,
+      password: "",
+      role: data.role,
+      status: data.status ? "true" : "false",
+    },
+    onSubmit: async (Data) => {
+      await dispatch(EditUserAction(data._id, Data));
+      await dispatch(GetUsersAction());
+      setDisable(true);
+    },
+  });
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -58,20 +78,6 @@ const UsersDetails = (props) => {
       ),
     });
   }, [navigation]);
-
-  const formik = useFormik({
-    initialValues: {
-      name: data.name,
-      email: data.email,
-      password: "",
-      role: data.role,
-      status: data.status ? "true" : "false",
-    },
-    onSubmit: (Data) => {
-      dispatch(EditUserAction(data._id, Data));
-      setDisable(true);
-    },
-  });
 
   return (
     <View>

@@ -17,11 +17,11 @@ import { PostUserAction, GetUsersAction } from "../../../actions/AdminAction";
 
 const UsersModal = (props) => {
   const dispatch = useDispatch();
-  const { modalVisible, setModalVisible, item } = props;
+  const { modalVisible, setModalVisible } = props;
 
-  useEffect(() => {
-    dispatch(GetUsersAction());
-  }, [item]);
+  // useEffect(() => {
+  //   dispatch(GetUsersAction());
+  // }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -37,9 +37,10 @@ const UsersModal = (props) => {
       password: yup.string().min(8).required("Password must be required"),
       // status: yup.boolean().required().oneOf([true]),
     }),
-    onSubmit: (data) => {
-      dispatch(PostUserAction(data));
+    onSubmit: async (data) => {
+      await dispatch(PostUserAction(data));
       // showToast("Created Successfully !!!");
+      await dispatch(GetUsersAction());
       setModalVisible(!modalVisible);
     },
   });
