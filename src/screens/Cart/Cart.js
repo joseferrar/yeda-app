@@ -3,10 +3,7 @@ import { View, TouchableOpacity, ScrollView, Button } from "react-native";
 import { Avatar, Text, Box, Stack, Input } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  GetCartAction,
-  DeleteCartAction,
-} from "../../actions/CartAction";
+import { GetCartAction, DeleteCartAction } from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
@@ -26,7 +23,6 @@ const Cart = (props) => {
       <ScrollView>
         {cart?.map((cartItem) =>
           cartItem?.food?.map((item, index) => (
-            
             <TouchableOpacity
               activeOpacity={10}
               key={item?.recipe?.label}
@@ -34,7 +30,7 @@ const Cart = (props) => {
                 navigation.navigate("CartDetails", {
                   data: item,
                   id: cartItem?._id,
-                  quantity: cartItem?.no_of_items
+                  quantity: cartItem?.no_of_items,
                 });
               }}
             >
@@ -71,7 +67,7 @@ const Cart = (props) => {
                   m={[4, 4, 8]}
                   bg="#fff"
                 >
-                  5
+                  {item?.recipe?.yield}
                   <Ionicons name={"star"} color="orange" size={16} />
                 </Text>
 
@@ -97,8 +93,8 @@ const Cart = (props) => {
                   >
                     {item?.recipe?.source}
                   </Text>
-                  <Text left={3} noOfLines={1} bold  color="primary.50">
-                  No of Items: {cartItem?.no_of_items}
+                  <Text left={3} noOfLines={1} bold color="primary.50">
+                    No of Items: {cartItem?.no_of_items}
                   </Text>
                 </Stack>
               </Box>
