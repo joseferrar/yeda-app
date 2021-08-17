@@ -45,10 +45,12 @@ const Products = (props) => {
                   uri: item?.recipe?.image,
                 }}
                 alt="image base"
-                roundedTop="md"
+            
                 top={5}
                 left={4}
                 bg="transparent"
+                borderColor="#fff"
+                borderWidth={6}
               ></Avatar>
               <Text
                 bold
