@@ -37,10 +37,10 @@ const CartDetails = (props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#8D3DAF",
+        backgroundColor: "#fff",
       },
-      headerTitle: <Text color="#fff">{data.recipe.label}</Text>,
-      headerTintColor: "#fff",
+      headerTitle: <Text color="#000">{data.recipe.label}</Text>,
+      headerTintColor: "#000",
     });
   }, [navigation]);
 

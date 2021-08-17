@@ -13,8 +13,8 @@ export const Loading = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
+    marginTop: 240,
     justifyContent: "center",
-    marginTop: 400,
+    alignItems: "center",
   },
 });

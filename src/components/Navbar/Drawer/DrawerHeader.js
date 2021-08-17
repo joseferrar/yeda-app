@@ -1,7 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Shop/Products";
 import Profile from "../../../screens/Profile/ProfileInfo";
@@ -25,7 +24,7 @@ export const ShopStackScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -35,7 +34,7 @@ export const ShopStackScreen = ({ navigation }) => (
           <Ionicons
             name="search-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginRight: 25 }}
             lineBreakMode="head"
             onPress={() => navigation.navigate("Search")}
@@ -43,8 +42,8 @@ export const ShopStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#E03B8B",
-          elevation: 0,
+          backgroundColor: "#fff",
+          elevation: 8,
         },
       }}
     />
@@ -62,7 +61,7 @@ export const ProfileScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -72,7 +71,7 @@ export const ProfileScreen = ({ navigation }) => (
           <Ionicons
             name="search-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginRight: 25 }}
             lineBreakMode="head"
             onPress={() => navigation.navigate("Search")}
@@ -80,7 +79,7 @@ export const ProfileScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#E03B8B",
+          backgroundColor: "#fff",
           elevation: 0,
         },
       }}
@@ -99,7 +98,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -109,7 +108,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
           <Ionicons
             name="search-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginRight: 25 }}
             lineBreakMode="head"
             onPress={() => navigation.navigate("Search")}
@@ -117,7 +116,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#E03B8B",
+          backgroundColor: "#fff",
           elevation: 0,
         },
       }}
@@ -136,7 +135,7 @@ export const CartStackScreen = ({ navigation }) => (
           <Ionicons
             name="menu-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginLeft: 10 }}
             lineBreakMode="head"
             onPress={() => navigation.openDrawer()}
@@ -146,7 +145,7 @@ export const CartStackScreen = ({ navigation }) => (
           <Ionicons
             name="search-outline"
             size={35}
-            color="#fff"
+            color="#000"
             style={{ marginRight: 25 }}
             lineBreakMode="head"
             onPress={() => navigation.navigate("Search")}
@@ -154,7 +153,7 @@ export const CartStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#E03B8B",
+          backgroundColor: "#fff",
           elevation: 0,
         },
       }}
@@ -167,6 +166,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     textAlign: "left",
-    color: "#fff",
+    color: "#000",
   },
 });

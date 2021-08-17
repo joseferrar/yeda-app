@@ -55,16 +55,7 @@ export default function MainNavbar() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="Cart"
-          component={Cart}
-          options={{
-            headerStyle: {
-              backgroundColor: "#E03B8B",
-            },
-            headerTintColor: "#fff",
-          }}
-        />
+        <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Details" component={Details} />
 
         {/* Admin */}

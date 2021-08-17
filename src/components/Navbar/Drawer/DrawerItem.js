@@ -46,7 +46,7 @@ const DrawerItem = (props) => {
   return (
     <ImageBackground
       source={{
-        uri: "https://wallpapercave.com/wp/yFk2QjB.png",
+        uri: "https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ",
       }}
       style={styles.container}
     >
@@ -84,7 +84,7 @@ const DrawerItem = (props) => {
               >
                 <HStack space={7} alignItems="center">
                   <Icon
-                    color={index === props.state.index ? "#fff" : "#fff"}
+                    color={index === props.state.index ? "#fff" : "#000"}
                     size={8}
                     as={<Ionicons name={getIcon(name)} />}
                   />
@@ -92,7 +92,7 @@ const DrawerItem = (props) => {
                     fontWeight={"500"}
                     textTransform="uppercase"
                     fontSize={17}
-                    color={index === props.state.index ? "#fff" : "#fff"}
+                    color={index === props.state.index ? "#fff" : "#000"}
                   >
                     {name}
                   </Text>
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000",
     marginTop: 10,
   },
   subtitle: {
     fontWeight: "bold",
-    color: "#fff",
+    color: "#000",
     marginTop: 10,
   },
 });
