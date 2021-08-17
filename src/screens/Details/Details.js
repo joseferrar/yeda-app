@@ -12,10 +12,11 @@ const Details = (props) => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(GetCartAction());
-  }, []);
-
+  const addcart = async () => {
+    await dispatch(AddCartAction({ food: data, no_of_items: 1 }));
+    showToast(data?.recipe?.label);
+    await dispatch(GetCartAction());
+  };
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
@@ -55,7 +56,7 @@ const Details = (props) => {
       ),
     });
   }, [navigation]);
-  
+
   return (
     <ScrollView>
       <Image
@@ -89,10 +90,7 @@ const Details = (props) => {
             {data?.recipe?.totalWeight}
           </Text>
           <Button
-            onPress={() => {
-              dispatch(AddCartAction({ food: data, no_of_items: 1 }));
-              showToast(data?.recipe?.label);
-            }}
+            onPress={addcart}
             bg={"#E8BD0D"}
             colorScheme="secondary"
             w={200}

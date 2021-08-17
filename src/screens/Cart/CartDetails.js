@@ -23,26 +23,17 @@ const CartDetails = (props) => {
       no_of_items: `${quantity}`,
     },
 
-    onSubmit: (Data) => {
-      dispatch(
+    onSubmit: async (Data) => {
+      await dispatch(
         UpdateCartAction(id, {
           food: data,
           no_of_items: Data.no_of_items,
         })
       );
-      dispatch(
-        UpdateCartAction(id, {
-          food: data,
-          no_of_items: Data.no_of_items,
-        })
-      );
+      await dispatch(GetCartAction());
     },
   });
 
-  useEffect(() => {
-    dispatch(GetCartAction());
-  }, []);
-  
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {

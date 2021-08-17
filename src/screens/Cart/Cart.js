@@ -16,7 +16,6 @@ const Cart = (props) => {
   useEffect(() => {
     dispatch(GetCartAction());
   }, []);
-  console.log(cart);
 
   return (
     <View>

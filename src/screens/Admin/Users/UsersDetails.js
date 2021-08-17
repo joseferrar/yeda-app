@@ -39,7 +39,6 @@ const UsersDetails = (props) => {
     initialValues: {
       name: data.name,
       email: data.email,
-      password: "",
       role: data.role,
       status: data.status ? "true" : "false",
     },
@@ -109,24 +108,6 @@ const UsersDetails = (props) => {
           onChangeText={formik.handleChange("email")}
           color={disable ? "default.50" : "primary.50"}
           placeholder="Email"
-          _light={{
-            placeholderTextColor: "gray.50",
-          }}
-          _dark={{
-            placeholderTextColor: "gray.50",
-          }}
-        />
-        <Text style={styles.label}>New Password:</Text>
-        <Input
-          w="90%"
-          mx={3}
-          my={3}
-          isDisabled={disable}
-          value={formik.values.password}
-          onChangeText={formik.handleChange("password")}
-          type="password"
-          color={disable ? "default.50" : "primary.50"}
-          placeholder="Password"
           _light={{
             placeholderTextColor: "gray.50",
           }}
