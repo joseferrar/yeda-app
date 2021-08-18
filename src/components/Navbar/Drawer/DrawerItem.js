@@ -4,7 +4,7 @@ import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../../actions/AuthAction";
-import { ProfileAction } from "../../../actions/ProfileAction";
+import { GetProfileAction } from "../../../actions/ProfileAction";
 import {
   Button,
   Box,
@@ -41,7 +41,7 @@ const DrawerItem = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ProfileAction());
+    dispatch(GetProfileAction());
   }, []);
   return (
     <ImageBackground

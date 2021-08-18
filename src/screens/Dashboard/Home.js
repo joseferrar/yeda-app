@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../actions/AuthAction";
-import { ProfileAction } from "../../actions/ProfileAction";
+import { GetProfileAction } from "../../actions/ProfileAction";
 
 const Home = (props) => {
   const { navigation } = props;
@@ -10,7 +10,7 @@ const Home = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(ProfileAction());
+    dispatch(GetProfileAction());
   }, []);
 
 

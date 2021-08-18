@@ -1,7 +1,7 @@
 import { PROFILE } from "../constants";
 import { Profile } from "../services/ProfileService";
 
-export const ProfileAction = () => async (dispatch) => {
+export const GetProfileAction = () => async (dispatch) => {
   try {
     const { data } = await Profile();
     dispatch({ type: PROFILE, payload: data });
