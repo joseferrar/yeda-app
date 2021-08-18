@@ -126,6 +126,12 @@ const CartDetails = (props) => {
             colorScheme="secondary"
             shadow={2}
             borderRadius={40}
+            onPress={() => {
+              navigation.navigate("Orders", {
+                data: data,
+                quantity: quantity,
+              });
+            }}
             startIcon={
               <Icon
                 as={Ionicons}

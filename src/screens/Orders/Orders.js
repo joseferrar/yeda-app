@@ -1,14 +1,24 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
-const Orders = () => {
-    return (
-        <View>
-            <Text>Orders</Text>
-        </View>
-    )
-}
+const Orders = (props) => {
+  const { data, quantity } = props.route.params;
 
-export default Orders
+  const orders = {
+    ...data,
+    quantity: quantity,
+  };
 
-const styles = StyleSheet.create({})
+  console.log(orders);
+  return (
+    <View>
+      <Text>
+        Orders - {orders.quantity} - {orders.recipe.label}
+      </Text>
+    </View>
+  );
+};
+
+export default Orders;
+
+const styles = StyleSheet.create({});
