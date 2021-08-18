@@ -12,23 +12,24 @@ const Details = (props) => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(GetCartAction());
-  }, []);
-
+  const addcart = async () => {
+    await dispatch(AddCartAction({ food: data, no_of_items: 1 }));
+    showToast(data?.recipe?.label);
+    await dispatch(GetCartAction());
+  };
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#8D3DAF",
+        backgroundColor: "#fff",
       },
-      headerTitle: <Text color="#fff">{data.recipe.label}</Text>,
-      headerTintColor: "#fff",
+      headerTitle: <Text color="#000">{data.recipe.label}</Text>,
+      headerTintColor: "#000",
       headerRight: () => (
         <View style={{ flexDirection: "row" }}>
           <Ionicons
             name="cart-outline"
             size={32}
-            color="#fff"
+            color="#000"
             style={{ marginRight: 30 }}
             onPress={() => navigation.navigate("Cart")}
           />
@@ -39,7 +40,7 @@ const Details = (props) => {
               top: -2,
               right: 20,
               borderRadius: 15,
-              backgroundColor: "#E8BD0D",
+              backgroundColor: "#E21717",
             }}
           >
             <Text
@@ -55,7 +56,7 @@ const Details = (props) => {
       ),
     });
   }, [navigation]);
-  
+
   return (
     <ScrollView>
       <Image
@@ -89,11 +90,8 @@ const Details = (props) => {
             {data?.recipe?.totalWeight}
           </Text>
           <Button
-            onPress={() => {
-              dispatch(AddCartAction({ food: data, no_of_items: 1 }));
-              showToast(data?.recipe?.label);
-            }}
-            bg={"#E8BD0D"}
+            onPress={addcart}
+            bg={"#FF6666"}
             colorScheme="secondary"
             w={200}
             ml={75}

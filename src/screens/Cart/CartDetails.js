@@ -23,33 +23,24 @@ const CartDetails = (props) => {
       no_of_items: `${quantity}`,
     },
 
-    onSubmit: (Data) => {
-      dispatch(
+    onSubmit: async (Data) => {
+      await dispatch(
         UpdateCartAction(id, {
           food: data,
           no_of_items: Data.no_of_items,
         })
       );
-      dispatch(
-        UpdateCartAction(id, {
-          food: data,
-          no_of_items: Data.no_of_items,
-        })
-      );
+      await dispatch(GetCartAction());
     },
   });
 
-  useEffect(() => {
-    dispatch(GetCartAction());
-  }, []);
-  
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#8D3DAF",
+        backgroundColor: "#fff",
       },
-      headerTitle: <Text color="#fff">{data.recipe.label}</Text>,
-      headerTintColor: "#fff",
+      headerTitle: <Text color="#000">{data.recipe.label}</Text>,
+      headerTintColor: "#000",
     });
   }, [navigation]);
 
@@ -135,6 +126,12 @@ const CartDetails = (props) => {
             colorScheme="secondary"
             shadow={2}
             borderRadius={40}
+            onPress={() => {
+              navigation.navigate("Orders", {
+                data: data,
+                quantity: quantity,
+              });
+            }}
             startIcon={
               <Icon
                 as={Ionicons}

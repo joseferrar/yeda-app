@@ -12,6 +12,7 @@ import Cart from "../../screens/Cart/Cart";
 import Admin from "../../screens/Admin/Admin";
 import UsersList from "../../screens/Admin/Users/UsersList";
 import UsersDetails from "../../screens/Admin/Users/UsersDetails";
+import Orders from "../../screens/Orders/Orders";
 
 const Stack = createStackNavigator();
 
@@ -55,17 +56,9 @@ export default function MainNavbar() {
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="Cart"
-          component={Cart}
-          options={{
-            headerStyle: {
-              backgroundColor: "#E03B8B",
-            },
-            headerTintColor: "#fff",
-          }}
-        />
+        <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Details" component={Details} />
+        <Stack.Screen name="Orders" component={Orders} />
 
         {/* Admin */}
         <Stack.Screen name="Admin" component={Admin} />

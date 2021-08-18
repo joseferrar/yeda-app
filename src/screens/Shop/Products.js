@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { View, TouchableOpacity, ScrollView } from "react-native";
-import { Avatar, Text, Box, Stack } from "native-base";
+import { Avatar, Text, Box, Stack, FlatList } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { FoodAction } from "../../actions/FoodAction";
@@ -14,14 +14,18 @@ const Products = (props) => {
   useEffect(() => {
     dispatch(FoodAction());
   }, []);
+
   return (
     <View>
       {loading && Loading()}
-      <ScrollView>
-        {data?.hits?.map((item) => (
+      <FlatList
+        refreshing={loading}
+        onRefresh={FoodAction}
+        data={data?.hits}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item }) => (
           <TouchableOpacity
-            activeOpacity={10}
-            key={item?.recipe?.label}
+            activeOpacity={0.9}
             onPress={() => {
               navigation.navigate("Details", {
                 data: item,
@@ -41,10 +45,12 @@ const Products = (props) => {
                   uri: item?.recipe?.image,
                 }}
                 alt="image base"
-                roundedTop="md"
+            
                 top={5}
                 left={4}
                 bg="transparent"
+                borderColor="#fff"
+                borderWidth={6}
               ></Avatar>
               <Text
                 bold
@@ -61,7 +67,7 @@ const Products = (props) => {
                 m={[4, 4, 8]}
                 bg="#fff"
               >
-                5
+                {item?.recipe?.yield}
                 <Ionicons name={"star"} color="orange" size={16} />
               </Text>
 
@@ -93,8 +99,8 @@ const Products = (props) => {
               </Stack>
             </Box>
           </TouchableOpacity>
-        ))}
-      </ScrollView>
+        )}
+      />
     </View>
   );
 };
