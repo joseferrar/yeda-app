@@ -1,4 +1,4 @@
-import { GET_PROFILE, CREATE_PROFILE } from "../constants";
+import { GET_PROFILE, CREATE_PROFILE, EDIT_PROFILE } from "../constants";
 import {
   GetProfile,
   CreateProfile,
@@ -28,7 +28,7 @@ export const CreateProfileAction = (Data) => async (dispatch) => {
 export const EditProfileAction = (id, editProfile) => async (dispatch) => {
   try {
     const { data } = await EditProfile(id, editProfile);
-    dispatch({ type: EDIT_USERS, payload: data });
+    dispatch({ type: EDIT_PROFILE, payload: data });
     showToast("Updated Successfully !!!");
   } catch (error) {
     console.log(error.message);

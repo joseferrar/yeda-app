@@ -7,12 +7,14 @@ const ProfileCard = ({ profile, navigation }) => {
   return (
     <View>
       <View style={styles.mainCardView}>
-     
         <View style={{ marginTop: 8 }}>
-
-        <Box px={4} style={{ flexDirection: "row", marginTop: 8 }}>
-        <Ionicons name={"location"} color="red" size={30} />
-            <Text fontSize={16}  style={styles.location} onPress={() => navigation.navigate('Profile')}>
+          <Box px={4} style={{ flexDirection: "row", marginTop: 8 }}>
+            <Ionicons name={"location"} color="red" size={30} />
+            <Text
+              fontSize={16}
+              style={styles.location}
+              onPress={() => navigation.navigate("Profile")}
+            >
               edit your information
             </Text>
           </Box>
@@ -22,7 +24,7 @@ const ProfileCard = ({ profile, navigation }) => {
               Country:{" "}
             </Text>
             <Text fontSize={16} w={120} style={styles.rate}>
-              {profile?.myprofile?.country}
+              {profile?.country}
             </Text>
           </Box>
           <Box px={4} style={{ flexDirection: "row", marginTop: 8 }}>
@@ -30,15 +32,15 @@ const ProfileCard = ({ profile, navigation }) => {
               Full Name:{" "}
             </Text>
             <Text fontSize={16} w={120} style={styles.rate}>
-              {profile?.myprofile?.fullName}
+              {profile?.fullName}
             </Text>
           </Box>
           <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
             <Text fontSize={16} color="#000" fontWeight="bold">
               Phone:{" "}
             </Text>
-            <Text fontSize={16}  w={120} style={styles.rate}>
-              {profile?.myprofile?.phone}
+            <Text fontSize={16} w={120} style={styles.rate}>
+              {profile?.phone}
             </Text>
           </Box>
           <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -46,7 +48,7 @@ const ProfileCard = ({ profile, navigation }) => {
               Pin code:{" "}
             </Text>
             <Text fontSize={16} w={120} style={styles.rate}>
-              {profile?.myprofile?.pinCode}
+              {profile?.pinCode}
             </Text>
           </Box>
           <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -62,7 +64,7 @@ const ProfileCard = ({ profile, navigation }) => {
               lineBreakMode="middle"
               textBreakStrategy="simple"
             >
-              {profile?.myprofile?.address1}
+              {profile?.address1}
             </Text>
           </Box>
           <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -75,10 +77,10 @@ const ProfileCard = ({ profile, navigation }) => {
               w={120}
               isTruncated={true}
               numberOfLines={1}
-            //   lineBreakMode="middle"
-            //   textBreakStrategy="simple"
+              //   lineBreakMode="middle"
+              //   textBreakStrategy="simple"
             >
-              {profile?.myprofile?.address2}
+              {profile?.address2}
             </Text>
           </Box>
           <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -92,7 +94,7 @@ const ProfileCard = ({ profile, navigation }) => {
               isTruncated={true}
               noOfLines={1}
             >
-              {profile?.myprofile?.city}
+              {profile?.city}
             </Text>
           </Box>
         </View>
@@ -135,5 +137,5 @@ const styles = StyleSheet.create({
     marginLeft: "auto",
     marginTop: 1,
     textDecorationLine: "underline",
-  }
+  },
 });
