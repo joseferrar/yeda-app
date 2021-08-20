@@ -1,7 +1,9 @@
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
-export const PROFILE = "PROFILE";
+export const GET_PROFILE = "GET_PROFILE";
+export const CREATE_PROFILE = "CREATE_PROFILE";
+export const EDIT_PROFILE = "EDIT_PROFILE";
 export const PRODUCT = "PRODUCT";
 export const ADDCART = "ADDCART";
 export const GETCART = "GETCART";

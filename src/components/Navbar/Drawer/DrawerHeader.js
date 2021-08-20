@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Shop/Products";
-import Profile from "../../../screens/Profile/ProfileInfo";
+import Profile from "../../../screens/Profile/Profile";
 import Favorite from "../../../screens/Favorite/Favorite";
 import Cart from "../../../screens/Cart/Cart";
 import CartDetails from "../../../screens/Cart/CartDetails";

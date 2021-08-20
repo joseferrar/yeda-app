@@ -37,7 +37,7 @@ const getIcon = (screenName) => {
 };
 
 const DrawerItem = (props) => {
-  const profile = useSelector((state) => state.profile.profile);
+  const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -64,10 +64,10 @@ const DrawerItem = (props) => {
               <Avatar.Badge bg={"green.500"} borderColor="default.50" />
             </Avatar>
             <Text style={styles.title}>
-              {profile?.myprofile?.ProfileBy?.name}
+              {profile?.ProfileBy?.name}
             </Text>
             <Text style={styles.subtitle}>
-              {profile?.myprofile?.ProfileBy?.email}
+              {profile?.ProfileBy?.email}
             </Text>
           </Box>
           <VStack space={6}>

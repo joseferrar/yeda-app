@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { VStack, Box, Divider, Avatar, Text } from "native-base";
-import ProfileCard from "../Profile/ProfileCard";
 import { useSelector, useDispatch } from "react-redux";
+import ProfileCard from "../Profile/ProfileCard";
 import { GetProfileAction } from "../../actions/ProfileAction";
+import { Processing } from "../../utils/Tracking";
 
 const Orders = (props) => {
   const { navigation } = props;
@@ -21,6 +22,7 @@ const Orders = (props) => {
     quantity: quantity,
     rate: 1250,
     profile: profile,
+    tracking: Processing,
   };
 
   console.log(orders);
@@ -76,7 +78,7 @@ const Orders = (props) => {
           <Divider />
         </VStack>
       </Box>
-      <ProfileCard profile={profile} navigation={navigation}/>
+      <ProfileCard profile={profile} navigation={navigation} />
     </View>
   );
 };
