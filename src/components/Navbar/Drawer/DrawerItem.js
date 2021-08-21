@@ -3,7 +3,7 @@ import { StyleSheet, View, ImageBackground } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../../actions/AuthAction";
+import { logout, UserAction } from "../../../actions/AuthAction";
 import { GetProfileAction } from "../../../actions/ProfileAction";
 import {
   Button,
@@ -37,12 +37,14 @@ const getIcon = (screenName) => {
 };
 
 const DrawerItem = (props) => {
-  const { profile } = useSelector((state) => state.profile);
+  const { auth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(GetProfileAction());
+    dispatch(UserAction());
   }, []);
+
   return (
     <ImageBackground
       source={{
@@ -64,10 +66,10 @@ const DrawerItem = (props) => {
               <Avatar.Badge bg={"green.500"} borderColor="default.50" />
             </Avatar>
             <Text style={styles.title}>
-              {profile?.ProfileBy?.name}
+              {auth?.name}
             </Text>
             <Text style={styles.subtitle}>
-              {profile?.ProfileBy?.email}
+              {auth?.email}
             </Text>
           </Box>
           <VStack space={6}>

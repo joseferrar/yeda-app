@@ -28,6 +28,16 @@ export const LoginAction = (login, navigation) => async (dispatch) => {
   }
 };
 
+export const UserAction = () => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const data = await JSON.parse(token);
+    dispatch({ type: "USER", payload: data.user });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const logout = (navigation) => async (dispatch) => {
   await AsyncStorage.removeItem("token").then(() => {
     navigation.replace("Login");
