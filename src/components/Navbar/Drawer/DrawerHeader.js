@@ -7,11 +7,13 @@ import Profile from "../../../screens/Profile/Profile";
 import Favorite from "../../../screens/Favorite/Favorite";
 import Cart from "../../../screens/Cart/Cart";
 import CartDetails from "../../../screens/Cart/CartDetails";
+import MyOrder from "../../../screens/Orders/MyOrder";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
 const CartStack = createStackNavigator();
+const OrderStack = createStackNavigator();
 
 export const ShopStackScreen = ({ navigation }) => (
   <ShopStack.Navigator>
@@ -160,6 +162,34 @@ export const CartStackScreen = ({ navigation }) => (
     />
     <CartStack.Screen name="CartDetails" component={CartDetails} />
   </CartStack.Navigator>
+);
+
+export const OrderStackScreen = ({ navigation }) => (
+  <OrderStack.Navigator>
+    <OrderStack.Screen
+      name="Orders"
+      component={MyOrder}
+      options={{
+        headerTitle: () => <Text style={styles.title}>Orders</Text>,
+        headerLeft: () => (
+          <Ionicons
+            name="menu-outline"
+            size={35}
+            color="#000"
+            style={{ marginLeft: 10 }}
+            lineBreakMode="head"
+            onPress={() => navigation.openDrawer()}
+          />
+        ),
+        headerTitleAlign: "left",
+        headerStyle: {
+          backgroundColor: "#fff",
+          elevation: 0,
+        },
+      }}
+    />
+    {/* <OrderStack.Screen name="CartDetails" component={CartDetails} /> */}
+  </OrderStack.Navigator>
 );
 const styles = StyleSheet.create({
   title: {

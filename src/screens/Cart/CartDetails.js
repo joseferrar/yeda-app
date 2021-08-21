@@ -127,7 +127,7 @@ const CartDetails = (props) => {
             shadow={2}
             borderRadius={40}
             onPress={() => {
-              navigation.navigate("Orders", {
+              navigation.navigate("AddOrder", {
                 data: data,
                 quantity: quantity,
               });

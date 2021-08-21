@@ -27,8 +27,8 @@ const getIcon = (screenName) => {
       return "heart-outline";
     case `Cart`:
       return "cart-outline";
-    case "Trash":
-      return "trash-can";
+    case "Orders":
+      return "briefcase-outline";
     case "Spam":
       return "alert-circle";
     default:

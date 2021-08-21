@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { VStack, Box, Divider, Avatar, Text } from "native-base";
+import { VStack, Box, Divider, Avatar, Text, Button } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
 import ProfileCard from "../Profile/ProfileCard";
 import { GetProfileAction } from "../../actions/ProfileAction";
 import { Processing } from "../../utils/Tracking";
+import { AddOrderAction, GetOrderAction } from "../../actions/OrderAction";
 
 const Orders = (props) => {
   const { navigation } = props;
@@ -26,6 +28,10 @@ const Orders = (props) => {
   };
 
   console.log(orders);
+  const addOrder = async () => {
+    await dispatch(AddOrderAction({ order: orders }));
+    await dispatch(GetOrderAction());
+  };
   return (
     <View>
       {/* <Text>
@@ -79,6 +85,25 @@ const Orders = (props) => {
         </VStack>
       </Box>
       <ProfileCard profile={profile} navigation={navigation} />
+
+      <Button
+        size="md"
+        width={300}
+        mt={8}
+        bg={"#000"}
+        colorScheme="secondary"
+        shadow={2}
+        borderRadius={10}
+        marginLeft={6}
+        marginRight="auto"
+        marginLeft="auto"
+        startIcon={
+          <Ionicons name={"briefcase-outline"} color="#fff" size={28} />
+        }
+        onPress={addOrder}
+      >
+        <Text style={styles.buttonText}>Confirm Your Order</Text>
+      </Button>
     </View>
   );
 };
@@ -97,5 +122,10 @@ const styles = StyleSheet.create({
     color: "green",
     marginLeft: "auto",
     fontFamily: "NunitoSans-Regular",
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });

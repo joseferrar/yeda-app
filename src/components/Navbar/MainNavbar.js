@@ -12,7 +12,7 @@ import Cart from "../../screens/Cart/Cart";
 import Admin from "../../screens/Admin/Admin";
 import UsersList from "../../screens/Admin/Users/UsersList";
 import UsersDetails from "../../screens/Admin/Users/UsersDetails";
-import Orders from "../../screens/Orders/Orders";
+import AddOrder from "../../screens/Orders/AddOrder";
 
 const Stack = createStackNavigator();
 
@@ -58,7 +58,7 @@ export default function MainNavbar() {
         />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="Orders" component={Orders} />
+        <Stack.Screen name="AddOrder" component={AddOrder} />
 
         {/* Admin */}
         <Stack.Screen name="Admin" component={Admin} />
