@@ -1,6 +1,16 @@
 import { Add_ORDER, GET_ORDER } from "../constants";
-import { AddOrderService, GetOrderService } from "../services/OrderService";
+import { AddOrderService, GetOrderService, AllOrderService } from "../services/OrderService";
 import { showToast } from "../components/Toast/toast";
+
+export const AllOrderAction = () => async (dispatch) => {
+  try {
+    const { data } = await AllOrderService();
+    dispatch({ type: GET_ORDER, payload: data });
+  } catch (err) {
+    showToast(err.response.data);
+  }
+};
+
 
 export const AddOrderAction = (Add) => async (dispatch) => {
   try {

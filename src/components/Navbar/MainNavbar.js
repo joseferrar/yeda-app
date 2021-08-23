@@ -13,6 +13,9 @@ import Admin from "../../screens/Admin/Admin";
 import UsersList from "../../screens/Admin/Users/UsersList";
 import UsersDetails from "../../screens/Admin/Users/UsersDetails";
 import AddOrder from "../../screens/Orders/AddOrder";
+import AllOrders from "../../screens/Workers/AllOrders";
+import EditOrders from "../../screens/Workers/EditOrders";
+import Workers from "../../screens/Workers/Workers";
 
 const Stack = createStackNavigator();
 
@@ -64,6 +67,11 @@ export default function MainNavbar() {
         <Stack.Screen name="Admin" component={Admin} />
         <Stack.Screen name="UserList" component={UsersList} />
         <Stack.Screen name="UsersDetails" component={UsersDetails} />
+
+        {/* Workers */}
+        <Stack.Screen name="Workers" component={Workers} />
+        <Stack.Screen name="AllOrders" component={AllOrders} />
+        <Stack.Screen name="EditOrders" component={EditOrders} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack, Input } from "native-base";
+import { Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetOrderAction } from "../../actions/OrderAction";
+import { AllOrderAction } from "../../actions/OrderAction";
 import { Loading } from "../../components/Spinner/Spinner";
-const MyOrder = (props) => {
+const AllOrders = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const { loading, order } = useSelector((state) => state.order);
 
   useEffect(() => {
-    dispatch(GetOrderAction());
+    dispatch(AllOrderAction());
   }, []);
   console.log("....Order", order);
   return (
@@ -24,11 +24,9 @@ const MyOrder = (props) => {
               activeOpacity={10}
               key={index}
               onPress={() => {
-                navigation.navigate("OrderDetails", {
+                navigation.navigate("EditOrders", {
                   data: item,
                   id: orderItem?._id,
-                  createdAt: orderItem?.createdAt,
-                  updatedAt: orderItem?.updatedAt,
                 });
               }}
             >
@@ -37,7 +35,7 @@ const MyOrder = (props) => {
                 left={3}
                 top={4}
                 flexDirection="row"
-                height={165}
+                height={200}
               >
                 <Avatar
                   size="2xl"
@@ -46,7 +44,7 @@ const MyOrder = (props) => {
                   }}
                   alt="image base"
                   roundedTop="md"
-                  top={5}
+                  top={8}
                   left={4}
                   bg="transparent"
                 ></Avatar>
@@ -94,6 +92,9 @@ const MyOrder = (props) => {
                   <Text left={3} noOfLines={1} bold color="primary.50">
                     No of Items: {item?.quantity}
                   </Text>
+                  <Badge colorScheme="gray.500" ml={1} rounded="xl" width={120}>
+                    <Text fontWeight="bold">{item?.tracking}</Text>
+                  </Badge>
                 </Stack>
               </Box>
             </TouchableOpacity>
@@ -104,4 +105,4 @@ const MyOrder = (props) => {
   );
 };
 
-export default MyOrder;
+export default AllOrders;

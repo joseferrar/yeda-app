@@ -8,6 +8,7 @@ import Favorite from "../../../screens/Favorite/Favorite";
 import Cart from "../../../screens/Cart/Cart";
 import CartDetails from "../../../screens/Cart/CartDetails";
 import MyOrder from "../../../screens/Orders/MyOrder";
+import OrderDetails from "../../../screens/Orders/OrderDetails";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -188,7 +189,7 @@ export const OrderStackScreen = ({ navigation }) => (
         },
       }}
     />
-    {/* <OrderStack.Screen name="CartDetails" component={CartDetails} /> */}
+    <OrderStack.Screen name="OrderDetails" component={OrderDetails} />
   </OrderStack.Navigator>
 );
 const styles = StyleSheet.create({

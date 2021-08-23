@@ -20,6 +20,8 @@ export const LoginAction = (login, navigation) => async (dispatch) => {
     await AsyncStorage.setItem("token", JSON.stringify(data));
     if (data?.user?.role === "user") {
       await navigation.replace("Home");
+    } else if (data?.user?.role === "worker") {
+      await navigation.replace("Workers");
     } else if (data?.user?.role === "admin") {
       await navigation.replace("Admin");
     }
