@@ -51,10 +51,10 @@ const EditOrders = (props) => {
     ...data,
     tracking: "data.tracking,",
   };
-  console.log("orders", users);
+  console.log(" worker orders", orders);
   return (
-    <View>
-      <Box style={{ backgroundColor: "#fff" }}>
+    <View style={{ backgroundColor: "#fff" }}>
+      <Box>
         <VStack space={3}>
           <Box px={5} flexDirection="row" top={2}>
             <Avatar
@@ -98,6 +98,31 @@ const EditOrders = (props) => {
       </Box>
 
       <FormControl mt={4}>
+        {users
+          .filter((user) => user?.role === "admin")
+          .map((filteredPerson, index) => (
+            <Select
+              key={index}
+              minWidth={200}
+              accessibilityLabel="Assign Delivery Boy"
+              placeholder="Assign Delivery Boy"
+              color="#000"
+              _selectedItem={{
+                bg: "primary.50",
+                endIcon: <CheckIcon size={5} />,
+              }}
+              mt={1}
+              ml={5}
+              mr={5}
+            >
+              <Select.Item
+                label={filteredPerson?.name}
+                value={filteredPerson?.name}
+                bg="default.50"
+              />
+            </Select>
+          ))}
+
         {/* <Select
           minWidth={200}
           accessibilityLabel="Select your Role"
@@ -109,7 +134,7 @@ const EditOrders = (props) => {
           }}
           mt={1}
         >
-          {users?.users?.map((a, index) => (
+          {users?.map((a, index) => (
             <Select.Item
               key={index}
               label={a?.role == "admin" && a?.name}
