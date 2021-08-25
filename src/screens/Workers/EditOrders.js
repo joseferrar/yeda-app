@@ -15,6 +15,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { GetUsersAction } from "../../actions/AdminAction";
+import {
+  UpdateOrderAction,
+  GetOrderAction,
+  AllOrderAction,
+} from "../../actions/OrderAction";
+import { Dispatch } from "../../utils/Tracking";
 
 const EditOrders = (props) => {
   const { users } = useSelector((state) => state.admin);
@@ -28,28 +34,32 @@ const EditOrders = (props) => {
   useEffect(() => {
     dispatch(GetUsersAction());
   }, []);
+
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      delivery_boy: "",
     },
 
     validationSchema: yup.object({
-      email: yup.string().email().required("email is required"),
-      password: yup
-        .string()
-        .required("password is required")
-        .min(8, "8 characters required"),
+      delivery_boy: yup.string().required("Data must be required"),
     }),
 
-    onSubmit: (Data) => {
-      dispatch(LoginAction(Data, navigation));
+    onSubmit: async (Data) => {
+      const orders = {
+        ...data,
+        tracking: Dispatch,
+        delivery_boy: Data.delivery_boy,
+      };
+      await dispatch(UpdateOrderAction(id, { order: orders }));
+      await dispatch(GetOrderAction());
+      await dispatch(AllOrderAction());
+      navigation.goBack();
     },
   });
 
   const orders = {
     ...data,
-    tracking: "data.tracking,",
+    tracking: Dispatch,
   };
   console.log(" worker orders", orders);
   return (
@@ -100,7 +110,7 @@ const EditOrders = (props) => {
       <FormControl mt={4}>
         {users
           .filter((user) => user?.role === "admin")
-          .map((filteredPerson, index) => (
+          .map((userData, index) => (
             <Select
               key={index}
               minWidth={200}
@@ -114,10 +124,12 @@ const EditOrders = (props) => {
               mt={1}
               ml={5}
               mr={5}
+              selectedValue={formik.values.delivery_boy || orders?.delivery_boy}
+              onValueChange={formik.handleChange("delivery_boy")}
             >
               <Select.Item
-                label={filteredPerson?.name}
-                value={filteredPerson?.name}
+                label={userData?.name}
+                value={userData?.name}
                 bg="default.50"
               />
             </Select>
@@ -144,6 +156,21 @@ const EditOrders = (props) => {
           ))}
         </Select> */}
       </FormControl>
+      <Button
+        size="md"
+        width={300}
+        mt={8}
+        bg={"#000"}
+        colorScheme="secondary"
+        shadow={2}
+        borderRadius={10}
+        marginLeft={6}
+        marginRight="auto"
+        marginLeft="auto"
+        onPress={formik.handleSubmit}
+      >
+        <Text style={styles.buttonText}>Submit</Text>
+      </Button>
     </View>
   );
 };
@@ -155,7 +182,6 @@ const styles = StyleSheet.create({
     color: "#000",
     marginLeft: "auto",
     marginBottom: "auto",
-
     fontFamily: "NunitoSans-Black",
   },
   rate: {

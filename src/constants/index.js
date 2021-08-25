@@ -11,6 +11,7 @@ export const UPDATECART = "UPDATECART";
 export const DELETECART = "DELETECART";
 export const Add_ORDER = "ADD_ORDER";
 export const GET_ORDER = "GET_ORDER";
+export const UPDATE_ORDER = "UPDATE_ORDER";
 export const INCREMENT = "INCREMENT";
 export const DECREMENT = "DECREMENT";
 export const SEARCH = "SEARCH";

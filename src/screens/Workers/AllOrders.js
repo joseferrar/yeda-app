@@ -13,7 +13,7 @@ const AllOrders = (props) => {
   useEffect(() => {
     dispatch(AllOrderAction());
   }, []);
-  console.log("....Order", order);
+  // console.log("....Order", order);
   return (
     <View>
       {loading && Loading()}

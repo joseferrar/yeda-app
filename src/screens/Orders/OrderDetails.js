@@ -12,13 +12,13 @@ const OrderDetails = (props) => {
   const timeline1 = [
     {
       time: Time(createdAt),
-      title: data.tracking,
-      description: Time(updatedAt),
+      title: data.tracking === "Processing" ? data.tracking : "Processing",
+      description: Time(createdAt),
     },
     {
-      time: Time(createdAt),
-      title: data.tracking,
-      description: Time(updatedAt),
+      time: data.tracking === "Dispatch" && Time(updatedAt),
+      title: data.tracking === "Dispatch" && data.tracking,
+      description: data.tracking === "Dispatch" && Time(updatedAt),
     },
   ];
 
@@ -63,7 +63,6 @@ const OrderDetails = (props) => {
           left: 2,
         }}
         lineWidth={4}
-        renderFullLine
       />
     </View>
   );

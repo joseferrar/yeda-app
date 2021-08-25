@@ -1,5 +1,10 @@
-import { Add_ORDER, GET_ORDER } from "../constants";
-import { AddOrderService, GetOrderService, AllOrderService } from "../services/OrderService";
+import { Add_ORDER, GET_ORDER, UPDATE_ORDER } from "../constants";
+import {
+  AddOrderService,
+  GetOrderService,
+  AllOrderService,
+  UpdateOrderService,
+} from "../services/OrderService";
 import { showToast } from "../components/Toast/toast";
 
 export const AllOrderAction = () => async (dispatch) => {
@@ -10,7 +15,6 @@ export const AllOrderAction = () => async (dispatch) => {
     showToast(err.response.data);
   }
 };
-
 
 export const AddOrderAction = (Add) => async (dispatch) => {
   try {
@@ -28,5 +32,14 @@ export const GetOrderAction = () => async (dispatch) => {
     dispatch({ type: GET_ORDER, payload: data });
   } catch (err) {
     showToast(err.response.data);
+  }
+};
+
+export const UpdateOrderAction = (id, updateorder) => async (dispatch) => {
+  try {
+    const { data } = await UpdateOrderService(id, updateorder);
+    dispatch({ type: UPDATE_ORDER, payload: data });
+  } catch (error) {
+    console.log(error.message);
   }
 };
