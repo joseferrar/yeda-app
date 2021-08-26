@@ -109,7 +109,7 @@ const EditOrders = (props) => {
 
       <FormControl mt={4}>
         {users
-          .filter((user) => user?.role === "admin")
+          .filter((user) => user?.role === "delivery")
           .map((userData, index) => (
             <Select
               key={index}

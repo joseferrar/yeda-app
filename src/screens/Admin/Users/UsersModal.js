@@ -93,6 +93,11 @@ const UsersModal = (props) => {
                 <Select.Item label="User" value="user" bg="default.50" />
                 <Select.Item label="Worker" value="worker" bg="default.50" />
                 <Select.Item
+                  label="Delivery"
+                  value="delivery"
+                  bg="default.50"
+                />
+                <Select.Item
                   label="Admin"
                   value="admin"
                   bg="default.50"
