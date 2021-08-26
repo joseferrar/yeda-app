@@ -3,6 +3,13 @@ import { StyleSheet, View } from "react-native";
 import { VStack, Box, Divider, Avatar, Text } from "native-base";
 import Timeline from "react-native-timeline-flatlist";
 import { Time } from "../../utils/DateFormet";
+import {
+  Processing,
+  Dispatch,
+  Out_of_Delivery,
+  Delivered,
+} from "../../utils/Tracking";
+
 const OrderDetails = (props) => {
   const { navigation } = props;
   const { data, id, createdAt, updatedAt } = props.route.params;
@@ -12,13 +19,39 @@ const OrderDetails = (props) => {
   const timeline1 = [
     {
       time: Time(createdAt),
-      title: data.tracking === "Processing" ? data.tracking : "Processing",
+      title: data?.tracking === Processing ? data?.tracking : Processing,
       description: Time(createdAt),
     },
     {
-      time: data.tracking === "Dispatch" && Time(updatedAt),
-      title: data.tracking === "Dispatch" && data.tracking,
-      description: data.tracking === "Dispatch" && Time(updatedAt),
+      time:
+        (data?.tracking === Out_of_Delivery && Time(data?.dispatchTime)) ||
+        (data?.tracking === Dispatch && Time(data?.dispatchTime)) ||
+        (data?.tracking === Delivered && Time(data?.deliveredTime)),
+      title:
+        (data?.tracking === Out_of_Delivery && Dispatch) ||
+        (data?.tracking === Dispatch && Dispatch) ||
+        (data?.tracking === Delivered && Dispatch),
+      description:
+        (data?.tracking === Out_of_Delivery && Time(data?.dispatchTime)) ||
+        (data?.tracking === Dispatch && Time(data?.dispatchTime)) ||
+        (data?.tracking === Delivered && Time(data?.dispatchTime)),
+    },
+    {
+      time:
+        (data?.tracking === Out_of_Delivery && Time(data?.outTime)) ||
+        (data?.tracking === Delivered && Time(data?.outTime)),
+      title:
+        (data?.tracking === Out_of_Delivery && Out_of_Delivery) ||
+        (data?.tracking === Delivered && Out_of_Delivery),
+      description:
+        (data?.tracking === Out_of_Delivery && Time(data?.outTime)) ||
+        (data?.tracking === Delivered && Time(data?.outTime)),
+    },
+
+    {
+      time: data?.tracking === Delivered && Time(data?.deliveredTime),
+      title: data?.tracking === Delivered && Delivered,
+      description: data?.tracking === Delivered && Time(data?.deliveredTime),
     },
   ];
 

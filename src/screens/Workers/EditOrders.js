@@ -20,7 +20,7 @@ import {
   GetOrderAction,
   AllOrderAction,
 } from "../../actions/OrderAction";
-import { Dispatch } from "../../utils/Tracking";
+import { Dispatch, Out_of_Delivery, Delivered } from "../../utils/Tracking";
 
 const EditOrders = (props) => {
   const { users } = useSelector((state) => state.admin);
@@ -49,6 +49,7 @@ const EditOrders = (props) => {
         ...data,
         tracking: Dispatch,
         delivery_boy: Data.delivery_boy,
+        dispatchTime: new Date(),
       };
       await dispatch(UpdateOrderAction(id, { order: orders }));
       await dispatch(GetOrderAction());
@@ -57,11 +58,6 @@ const EditOrders = (props) => {
     },
   });
 
-  const orders = {
-    ...data,
-    tracking: Dispatch,
-  };
-  console.log(" worker orders", orders);
   return (
     <View style={{ backgroundColor: "#fff" }}>
       <Box>
@@ -70,7 +66,7 @@ const EditOrders = (props) => {
             <Avatar
               size="2xl"
               source={{
-                uri: orders?.recipe?.image,
+                uri: data?.recipe?.image,
               }}
               roundedTop="md"
               left={2}
@@ -83,7 +79,7 @@ const EditOrders = (props) => {
               noOfLines={2}
               style={styles.label}
             >
-              {orders?.recipe?.label}
+              {data?.recipe?.label}
             </Text>
           </Box>
 
@@ -92,7 +88,7 @@ const EditOrders = (props) => {
               Total Items:{" "}
             </Text>
             <Text fontSize={18} style={styles.rate}>
-              {orders?.quantity}
+              {data?.quantity}
             </Text>
           </Box>
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -100,7 +96,7 @@ const EditOrders = (props) => {
               Order total:
             </Text>
             <Text fontSize={18} style={styles.rate}>
-              ₹ {nf.format(orders?.rate)}
+              ₹ {nf.format(data?.rate)}
             </Text>
           </Box>
           <Divider bgColor="#fff" />
@@ -116,7 +112,13 @@ const EditOrders = (props) => {
               minWidth={200}
               accessibilityLabel="Assign Delivery Boy"
               placeholder="Assign Delivery Boy"
-              color="#000"
+              isDisabled={
+                data?.tracking === Out_of_Delivery ||
+                (data?.tracking === Delivered && true)
+              }
+              color={
+                data?.tracking === Out_of_Delivery ? "default.50" : "primary.50"
+              }
               _selectedItem={{
                 bg: "primary.50",
                 endIcon: <CheckIcon size={5} />,
@@ -124,7 +126,7 @@ const EditOrders = (props) => {
               mt={1}
               ml={5}
               mr={5}
-              selectedValue={formik.values.delivery_boy || orders?.delivery_boy}
+              selectedValue={formik.values.delivery_boy || data?.delivery_boy}
               onValueChange={formik.handleChange("delivery_boy")}
             >
               <Select.Item
@@ -134,28 +136,8 @@ const EditOrders = (props) => {
               />
             </Select>
           ))}
-
-        {/* <Select
-          minWidth={200}
-          accessibilityLabel="Select your Role"
-          placeholder="Select your Role"
-          color="#000"
-          _selectedItem={{
-            bg: "primary.50",
-            endIcon: <CheckIcon size={5} />,
-          }}
-          mt={1}
-        >
-          {users?.map((a, index) => (
-            <Select.Item
-              key={index}
-              label={a?.role == "admin" && a?.name}
-              value={a?.role == "admin" && a?.name}
-              bg="default.50"
-            />
-          ))}
-        </Select> */}
       </FormControl>
+
       <Button
         size="md"
         width={300}
@@ -164,6 +146,10 @@ const EditOrders = (props) => {
         colorScheme="secondary"
         shadow={2}
         borderRadius={10}
+        disabled={
+          data?.tracking === Out_of_Delivery ||
+          (data?.tracking === Delivered && true)
+        }
         marginLeft={6}
         marginRight="auto"
         marginLeft="auto"

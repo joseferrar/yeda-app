@@ -92,7 +92,7 @@ const AllOrders = (props) => {
                   <Text left={3} noOfLines={1} bold color="primary.50">
                     No of Items: {item?.quantity}
                   </Text>
-                  <Badge colorScheme="gray.500" ml={1} rounded="xl" width={120}>
+                  <Badge colorScheme="gray.500" ml={1} rounded="xl">
                     <Text fontWeight="bold">{item?.tracking}</Text>
                   </Badge>
                 </Stack>
