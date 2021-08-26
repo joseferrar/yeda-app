@@ -13,6 +13,8 @@ const Protected = (props) => {
       await navigation.replace("Home");
     } else if (data?.user?.role === "worker") {
       await navigation.replace("Workers");
+    } else if (data?.user?.role === "delivery") {
+      await navigation.replace("Delivery");
     } else if (data?.user?.role === "admin") {
       await navigation.replace("Admin");
     } else {

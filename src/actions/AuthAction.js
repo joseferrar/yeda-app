@@ -24,6 +24,8 @@ export const LoginAction = (login, navigation) => async (dispatch) => {
       await navigation.replace("Workers");
     } else if (data?.user?.role === "admin") {
       await navigation.replace("Admin");
+    } else if (data?.user?.role === "delivery") {
+      await navigation.replace("Delivery");
     }
   } catch (err) {
     showToast(err.response.data.error);

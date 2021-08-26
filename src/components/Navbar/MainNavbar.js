@@ -16,6 +16,8 @@ import AddOrder from "../../screens/Orders/AddOrder";
 import AllOrders from "../../screens/Workers/AllOrders";
 import EditOrders from "../../screens/Workers/EditOrders";
 import Workers from "../../screens/Workers/Workers";
+import Delivery from "../../screens/Delivery/Delivery";
+import DeliveryDetails from "../../screens/Delivery/DeliveryDetails";
 
 const Stack = createStackNavigator();
 
@@ -72,6 +74,10 @@ export default function MainNavbar() {
         <Stack.Screen name="Workers" component={Workers} />
         <Stack.Screen name="AllOrders" component={AllOrders} />
         <Stack.Screen name="EditOrders" component={EditOrders} />
+
+        {/* Delivery */}
+        <Stack.Screen name="Delivery" component={Delivery} />
+        <Stack.Screen name="DeliveryDetails" component={DeliveryDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
