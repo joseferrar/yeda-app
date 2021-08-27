@@ -20,6 +20,7 @@ import {
   GetOrderAction,
   AllOrderAction,
 } from "../../actions/OrderAction";
+import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
 import { Dispatch, Out_of_Delivery, Delivered } from "../../utils/Tracking";
 
 const EditOrders = (props) => {
@@ -51,9 +52,11 @@ const EditOrders = (props) => {
         delivery_boy: Data.delivery_boy,
         dispatchTime: new Date(),
       };
+      await dispatch(ShowSpinner());
       await dispatch(UpdateOrderAction(id, { order: orders }));
       await dispatch(GetOrderAction());
       await dispatch(AllOrderAction());
+      await dispatch(HideSpinner());
       navigation.goBack();
     },
   });

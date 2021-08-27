@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import AdminReducer from "./AdminReducer";
 import AuthReducer from "./AuthReducer";
 import CartReducer from "./CartReducer";
+import CommonReducer from "./CommonReducer";
 import CountReducer from "./CountReducer";
 import FoodReducer from "./FoodReducer";
 import OrderReducer from "./OrderReducer";
@@ -17,6 +18,7 @@ const allReducers = combineReducers({
   search: SearchReducer,
   admin: AdminReducer,
   order: OrderReducer,
+  common: CommonReducer,
 });
 
 export default allReducers;

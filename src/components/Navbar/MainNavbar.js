@@ -18,10 +18,13 @@ import EditOrders from "../../screens/Workers/EditOrders";
 import Workers from "../../screens/Workers/Workers";
 import Delivery from "../../screens/Delivery/Delivery";
 import DeliveryDetails from "../../screens/Delivery/DeliveryDetails";
+import { useSelector, useDispatch } from "react-redux";
+import { Loading } from "../Spinner/Spinner";
 
 const Stack = createStackNavigator();
 
 export default function MainNavbar() {
+  const { loading } = useSelector((state) => state.common);
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -79,6 +82,7 @@ export default function MainNavbar() {
         <Stack.Screen name="Delivery" component={Delivery} />
         <Stack.Screen name="DeliveryDetails" component={DeliveryDetails} />
       </Stack.Navigator>
+      {loading && Loading()}
     </NavigationContainer>
   );
 }

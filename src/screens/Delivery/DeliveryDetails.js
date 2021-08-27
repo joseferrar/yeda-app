@@ -18,9 +18,11 @@ import {
   GetOrderAction,
   AllOrderAction,
 } from "../../actions/OrderAction";
-import { Out_of_Delivery,Delivered } from "../../utils/Tracking";
+import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
+import { Out_of_Delivery, Delivered } from "../../utils/Tracking";
 
 const DeliveryDetails = (props) => {
+  const [loading, SetLoading] = React.useState(false);
   const dispatch = useDispatch();
   const { navigation } = props;
   const { data, id } = props.route.params;
@@ -35,9 +37,11 @@ const DeliveryDetails = (props) => {
       dispatchTime: data?.dispatchTime,
       outTime: new Date(),
     };
+    await dispatch(ShowSpinner());
     await dispatch(UpdateOrderAction(id, { order: orders }));
     await dispatch(GetOrderAction());
     await dispatch(AllOrderAction());
+    await dispatch(HideSpinner());
     navigation.goBack();
   };
   const DeliveredBtn = async () => {
@@ -48,9 +52,11 @@ const DeliveryDetails = (props) => {
       outTime: data?.outTime,
       deliveredTime: new Date(),
     };
+    await dispatch(ShowSpinner());
     await dispatch(UpdateOrderAction(id, { order: orders }));
     await dispatch(GetOrderAction());
     await dispatch(AllOrderAction());
+    await dispatch(HideSpinner());
     navigation.goBack();
   };
 
@@ -63,6 +69,11 @@ const DeliveryDetails = (props) => {
   console.log("ordersddd", orders);
   return (
     <ScrollView style={{ backgroundColor: "#fff" }}>
+      {loading && (
+        <Text color="#000" fontSize={30}>
+          Loading....
+        </Text>
+      )}
       <Box>
         <VStack space={3}>
           <Box px={5} flexDirection="row" top={2}>

@@ -19,3 +19,5 @@ export const GET_USERS = "GET_USERS";
 export const POST_USERS = "POST_USERS";
 export const EDIT_USERS = "EDIT_USERS";
 export const DELETE_USERS = "DELETE_USERS";
+export const SHOW_SPINNER = "SHOW_SPINNER";
+export const HIDE_SPINNER = "HIDE_SPINNER";
