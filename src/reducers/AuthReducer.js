@@ -1,7 +1,7 @@
 import { REGISTER, LOGIN, LOGOUT } from "../constants";
 
 const initialState = {
-  auth: [],
+  auth: {},
 };
 
 const AuthReducer = (state = initialState, action) => {
@@ -12,6 +12,11 @@ const AuthReducer = (state = initialState, action) => {
         auth: action.payload,
       };
     case LOGIN:
+      return {
+        ...state,
+        auth: action.payload,
+      };
+    case "USER":
       return {
         ...state,
         auth: action.payload,

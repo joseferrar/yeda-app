@@ -3,8 +3,8 @@ import { StyleSheet, View, ImageBackground } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../../actions/AuthAction";
-import { ProfileAction } from "../../../actions/ProfileAction";
+import { logout, UserAction } from "../../../actions/AuthAction";
+import { GetProfileAction } from "../../../actions/ProfileAction";
 import {
   Button,
   Box,
@@ -27,8 +27,8 @@ const getIcon = (screenName) => {
       return "heart-outline";
     case `Cart`:
       return "cart-outline";
-    case "Trash":
-      return "trash-can";
+    case "Orders":
+      return "briefcase-outline";
     case "Spam":
       return "alert-circle";
     default:
@@ -37,12 +37,14 @@ const getIcon = (screenName) => {
 };
 
 const DrawerItem = (props) => {
-  const profile = useSelector((state) => state.profile.profile);
+  const { auth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(ProfileAction());
+    dispatch(GetProfileAction());
+    dispatch(UserAction());
   }, []);
+
   return (
     <ImageBackground
       source={{
@@ -64,10 +66,10 @@ const DrawerItem = (props) => {
               <Avatar.Badge bg={"green.500"} borderColor="default.50" />
             </Avatar>
             <Text style={styles.title}>
-              {profile?.myprofile?.ProfileBy?.name}
+              {auth?.name}
             </Text>
             <Text style={styles.subtitle}>
-              {profile?.myprofile?.ProfileBy?.email}
+              {auth?.email}
             </Text>
           </Box>
           <VStack space={6}>

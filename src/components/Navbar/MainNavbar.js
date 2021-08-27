@@ -12,11 +12,19 @@ import Cart from "../../screens/Cart/Cart";
 import Admin from "../../screens/Admin/Admin";
 import UsersList from "../../screens/Admin/Users/UsersList";
 import UsersDetails from "../../screens/Admin/Users/UsersDetails";
-import Orders from "../../screens/Orders/Orders";
+import AddOrder from "../../screens/Orders/AddOrder";
+import AllOrders from "../../screens/Workers/AllOrders";
+import EditOrders from "../../screens/Workers/EditOrders";
+import Workers from "../../screens/Workers/Workers";
+import Delivery from "../../screens/Delivery/Delivery";
+import DeliveryDetails from "../../screens/Delivery/DeliveryDetails";
+import { useSelector, useDispatch } from "react-redux";
+import { Loading } from "../Spinner/Spinner";
 
 const Stack = createStackNavigator();
 
 export default function MainNavbar() {
+  const { loading } = useSelector((state) => state.common);
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -58,13 +66,23 @@ export default function MainNavbar() {
         />
         <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="Orders" component={Orders} />
+        <Stack.Screen name="AddOrder" component={AddOrder} />
 
         {/* Admin */}
         <Stack.Screen name="Admin" component={Admin} />
         <Stack.Screen name="UserList" component={UsersList} />
         <Stack.Screen name="UsersDetails" component={UsersDetails} />
+
+        {/* Workers */}
+        <Stack.Screen name="Workers" component={Workers} />
+        <Stack.Screen name="AllOrders" component={AllOrders} />
+        <Stack.Screen name="EditOrders" component={EditOrders} />
+
+        {/* Delivery */}
+        <Stack.Screen name="Delivery" component={Delivery} />
+        <Stack.Screen name="DeliveryDetails" component={DeliveryDetails} />
       </Stack.Navigator>
+      {loading && Loading()}
     </NavigationContainer>
   );
 }

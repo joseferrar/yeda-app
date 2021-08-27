@@ -41,7 +41,7 @@ const UsersList = (props) => {
       <FlatList
         refreshing={loading}
         onRefresh={GetUsersAction}
-        data={users?.users}
+        data={users}
         renderItem={({ item }) => (
           <TouchableOpacity
             activeOpacity={0.9}

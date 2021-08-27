@@ -1,34 +1,29 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../actions/AuthAction";
 import { GetProfileAction } from "../../actions/ProfileAction";
+import { Loading } from "../../components/Spinner/Spinner";
+import ProfileForm from "./ProfileForm";
 
-const Home = (props) => {
+const Profile = (props) => {
   const { navigation } = props;
-  const profile = useSelector((state) => state.profile.profile);
+  const { loading, profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   React.useEffect(() => {
     dispatch(GetProfileAction());
   }, []);
 
-
   return (
     <View>
-      <Text>Home</Text>
-      <Text
-        onPress={() => dispatch(logout(navigation))}
-        style={{ fontSize: 22 }}
-      >
-        logout
-      </Text>
+      {loading && Loading}
 
-      <Text>{profile?.myprofile?.ProfileBy?.name}</Text>
+      <ProfileForm profile={profile} navigation={navigation} />
+      {/* <Text>{profile?.ProfileBy?.name}</Text> */}
     </View>
   );
 };
 
-export default Home;
+export default Profile;
 
 const styles = StyleSheet.create({});

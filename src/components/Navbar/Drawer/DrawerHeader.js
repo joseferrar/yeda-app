@@ -3,15 +3,18 @@ import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Shop/Products";
-import Profile from "../../../screens/Profile/ProfileInfo";
+import Profile from "../../../screens/Profile/Profile";
 import Favorite from "../../../screens/Favorite/Favorite";
 import Cart from "../../../screens/Cart/Cart";
 import CartDetails from "../../../screens/Cart/CartDetails";
+import MyOrder from "../../../screens/Orders/MyOrder";
+import OrderDetails from "../../../screens/Orders/OrderDetails";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const FavoriteStack = createStackNavigator();
 const CartStack = createStackNavigator();
+const OrderStack = createStackNavigator();
 
 export const ShopStackScreen = ({ navigation }) => (
   <ShopStack.Navigator>
@@ -160,6 +163,34 @@ export const CartStackScreen = ({ navigation }) => (
     />
     <CartStack.Screen name="CartDetails" component={CartDetails} />
   </CartStack.Navigator>
+);
+
+export const OrderStackScreen = ({ navigation }) => (
+  <OrderStack.Navigator>
+    <OrderStack.Screen
+      name="Orders"
+      component={MyOrder}
+      options={{
+        headerTitle: () => <Text style={styles.title}>Orders</Text>,
+        headerLeft: () => (
+          <Ionicons
+            name="menu-outline"
+            size={35}
+            color="#000"
+            style={{ marginLeft: 10 }}
+            lineBreakMode="head"
+            onPress={() => navigation.openDrawer()}
+          />
+        ),
+        headerTitleAlign: "left",
+        headerStyle: {
+          backgroundColor: "#fff",
+          elevation: 0,
+        },
+      }}
+    />
+    <OrderStack.Screen name="OrderDetails" component={OrderDetails} />
+  </OrderStack.Navigator>
 );
 const styles = StyleSheet.create({
   title: {

@@ -20,11 +20,25 @@ export const LoginAction = (login, navigation) => async (dispatch) => {
     await AsyncStorage.setItem("token", JSON.stringify(data));
     if (data?.user?.role === "user") {
       await navigation.replace("Home");
+    } else if (data?.user?.role === "worker") {
+      await navigation.replace("Workers");
     } else if (data?.user?.role === "admin") {
       await navigation.replace("Admin");
+    } else if (data?.user?.role === "delivery") {
+      await navigation.replace("Delivery");
     }
   } catch (err) {
     showToast(err.response.data.error);
+  }
+};
+
+export const UserAction = () => async (dispatch) => {
+  try {
+    const token = await AsyncStorage.getItem("token");
+    const data = await JSON.parse(token);
+    dispatch({ type: "USER", payload: data.user });
+  } catch (err) {
+    console.log(err);
   }
 };
 
