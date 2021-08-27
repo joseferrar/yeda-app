@@ -19,7 +19,7 @@ import {
   AllOrderAction,
 } from "../../actions/OrderAction";
 import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
-import { Out_of_Delivery, Delivered } from "../../utils/Tracking";
+import { Dispatch, Delivered, Out_of_Delivery } from "../../utils/Tracking";
 
 const DeliveryDetails = (props) => {
   const [loading, SetLoading] = React.useState(false);
@@ -60,13 +60,7 @@ const DeliveryDetails = (props) => {
     navigation.goBack();
   };
 
-  const orders = {
-    ...data,
-    tracking: Out_of_Delivery,
-    lastUpade: new Date(),
-    // delivery_boy: Data.delivery_boy,
-  };
-  console.log("ordersddd", orders);
+  console.log("ordersddd", data);
   return (
     <ScrollView style={{ backgroundColor: "#fff" }}>
       {loading && (
@@ -210,36 +204,40 @@ const DeliveryDetails = (props) => {
           </Box>
         </View>
       </View>
-      <Button
-        size="md"
-        width={300}
-        mt={8}
-        bg={"#000"}
-        colorScheme="secondary"
-        shadow={2}
-        borderRadius={10}
-        marginLeft={6}
-        marginRight="auto"
-        marginLeft="auto"
-        onPress={BuyProduct}
-      >
-        <Text style={styles.buttonText}>Buy the Product</Text>
-      </Button>
-      <Button
-        size="md"
-        width={300}
-        mt={8}
-        bg={"#000"}
-        colorScheme="secondary"
-        shadow={2}
-        borderRadius={10}
-        marginLeft={6}
-        marginRight="auto"
-        marginLeft="auto"
-        onPress={DeliveredBtn}
-      >
-        <Text style={styles.buttonText}>Delivered</Text>
-      </Button>
+      {data?.tracking === Dispatch ? (
+        <Button
+          size="md"
+          width={300}
+          mt={8}
+          bg={"#000"}
+          colorScheme="secondary"
+          shadow={2}
+          borderRadius={10}
+          marginLeft={6}
+          marginRight="auto"
+          marginLeft="auto"
+          onPress={BuyProduct}
+        >
+          <Text style={styles.buttonText}>Buy the Product</Text>
+        </Button>
+      ) : null}
+      {data?.tracking === Out_of_Delivery || data?.tracking !== Delivered ? (
+        <Button
+          size="md"
+          width={300}
+          mt={8}
+          bg={"#000"}
+          colorScheme="secondary"
+          shadow={2}
+          borderRadius={10}
+          marginLeft={6}
+          marginRight="auto"
+          marginLeft="auto"
+          onPress={DeliveredBtn}
+        >
+          <Text style={styles.buttonText}>Delivered</Text>
+        </Button>
+      ) : null}
     </ScrollView>
   );
 };
