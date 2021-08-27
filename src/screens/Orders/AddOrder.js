@@ -31,6 +31,7 @@ const Orders = (props) => {
   const addOrder = async () => {
     await dispatch(AddOrderAction({ order: orders }));
     await dispatch(GetOrderAction());
+    navigation.goBack();
   };
   return (
     <View>

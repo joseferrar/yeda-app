@@ -16,7 +16,7 @@ const CartDetails = (props) => {
   const { navigation } = props;
   const { data, id, quantity } = props.route.params;
   const dispatch = useDispatch();
-  const [item, Setitem] = useState(`${quantity}`);
+
 
   const formik = useFormik({
     initialValues: {
@@ -27,7 +27,7 @@ const CartDetails = (props) => {
       await dispatch(
         UpdateCartAction(id, {
           food: data,
-          no_of_items: Data.no_of_items,
+          no_of_items: Data?.no_of_items,
         })
       );
       await dispatch(GetCartAction());
@@ -43,6 +43,9 @@ const CartDetails = (props) => {
       headerTintColor: "#000",
     });
   }, [navigation]);
+  useEffect(() => {
+    dispatch(GetCartAction());
+  }, []);
 
   return (
     <ScrollView>
@@ -129,7 +132,7 @@ const CartDetails = (props) => {
             onPress={() => {
               navigation.navigate("AddOrder", {
                 data: data,
-                quantity: quantity,
+                quantity: formik.values.no_of_items,
               });
             }}
             startIcon={
