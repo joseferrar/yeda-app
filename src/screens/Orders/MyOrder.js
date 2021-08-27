@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack, Input } from "native-base";
+import { View, TouchableOpacity, ScrollView } from "react-native";
+import { Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GetOrderAction } from "../../actions/OrderAction";
@@ -94,6 +94,9 @@ const MyOrder = (props) => {
                   <Text left={3} noOfLines={1} bold color="primary.50">
                     No of Items: {item?.quantity}
                   </Text>
+                  <Badge colorScheme="gray.500" ml={1} rounded="xl">
+                    <Text fontWeight="bold">{item?.tracking}</Text>
+                  </Badge>
                 </Stack>
               </Box>
             </TouchableOpacity>

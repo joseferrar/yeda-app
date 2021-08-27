@@ -7,9 +7,6 @@ import {
   Avatar,
   Text,
   Button,
-  FormControl,
-  Select,
-  CheckIcon,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,13 +19,10 @@ import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
 import { Dispatch, Delivered, Out_of_Delivery } from "../../utils/Tracking";
 
 const DeliveryDetails = (props) => {
-  const [loading, SetLoading] = React.useState(false);
   const dispatch = useDispatch();
   const { navigation } = props;
   const { data, id } = props.route.params;
   const nf = new Intl.NumberFormat();
-  // console.log("data", data);
-  // console.log("id", id);
 
   const BuyProduct = async () => {
     const orders = {
@@ -60,14 +54,8 @@ const DeliveryDetails = (props) => {
     navigation.goBack();
   };
 
-  console.log("ordersddd", data);
   return (
-    <ScrollView style={{ backgroundColor: "#fff" }}>
-      {loading && (
-        <Text color="#000" fontSize={30}>
-          Loading....
-        </Text>
-      )}
+    <ScrollView style={{ backgroundColor: "#fff", }}>
       <Box>
         <VStack space={3}>
           <Box px={5} flexDirection="row" top={2}>
@@ -118,7 +106,6 @@ const DeliveryDetails = (props) => {
             <Text
               fontSize={16}
               style={styles.location}
-              onPress={() => navigation.navigate("Profile")}
             >
               Your Delivery Address
             </Text>
@@ -182,8 +169,6 @@ const DeliveryDetails = (props) => {
               w={120}
               isTruncated={true}
               numberOfLines={1}
-              //   lineBreakMode="middle"
-              //   textBreakStrategy="simple"
             >
               {data?.profile?.address2}
             </Text>
@@ -277,6 +262,5 @@ const styles = StyleSheet.create({
     color: "blue",
     marginLeft: "auto",
     marginTop: 1,
-    textDecorationLine: "underline",
   },
 });
