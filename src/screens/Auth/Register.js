@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   StyleSheet,
-  Text,
-  View,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
@@ -12,10 +10,13 @@ import {
 import {
   FormControl,
   Input,
+  Text,
   Button,
-  Center,
-  NativeBaseProvider,
+  Icon,
+  View,
+  Image,
 } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useDispatch } from "react-redux";
@@ -46,47 +47,150 @@ const RegisterPage = (props) => {
   });
 
   return (
-    <ScrollView keyboardDismissMode="interactive" style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}></View>
-      <Text>Register</Text>
-
-      <FormControl>
-        <FormControl.Label>Username</FormControl.Label>
-        <Input
-          color="#000"
-          value={formik.values.name}
-          onChangeText={formik.handleChange("name")}
-          onBlur={formik.handleBlur("name")}
-        />
-        <Text>{formik.errors.name}</Text>
-
-        <FormControl.Label>Email</FormControl.Label>
-        <Input
-          color="#000"
-          value={formik.values.email}
-          onChangeText={formik.handleChange("email")}
-          onBlur={formik.handleBlur("email")}
-        />
-        <Text>{formik.errors.email}</Text>
-
-        <FormControl.Label>Password</FormControl.Label>
-        <Input
-          color="#000"
-          value={formik.values.password}
-          onChangeText={formik.handleChange("password")}
-          onBlur={formik.handleBlur("password")}
-        />
-        <Text>{formik.errors.email}</Text>
-
-        <Button onPress={formik.handleSubmit}>Register</Button>
-      </FormControl>
-
+      <Image
+        source={require("../../../assets/yeda_logo.jpeg")}
+        size={120}
+        marginLeft="auto"
+        marginRight="auto"
+        resizeMode={"contain"}
+        borderRadius={100}
+        top={-60}
+        alt={"yeda_logo"}
+      />
       <Text
-        style={{ color: "#fc036f", marginLeft: 4, fontSize: 16 }}
-        onPress={() => navigation.navigate("Login")}
+        color="primary.50"
+        fontWeight="bold"
+        textAlign="center"
+        fontSize={28}
+        top={-40}
       >
-        go to login
+        Welcome back !!!
       </Text>
+      <Text color="primary.50" textAlign="center" fontSize={18} top={-40}>
+        Create a new account
+      </Text>
+      <FormControl top={-100}>
+        <View my={20}>
+          <Input
+            backgroundColor="#e8e6e1"
+            borderWidth={0}
+            borderRadius={15}
+            mx={4}
+            placeholder="Email"
+            height={60}
+            paddingTop={10}
+            color={"#000"}
+            InputLeftElement={
+              <Icon
+                as={<Ionicons name={"person"} size={16} />}
+                size="md"
+                m={2}
+                color="#000"
+              />
+            }
+            value={formik.values.name}
+            onChangeText={formik.handleChange("name")}
+            onBlur={formik.handleBlur("name")}
+          />
+          {formik.errors.name && formik.touched.name ? (
+            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
+              {formik.errors.name}
+            </Text>
+          ) : null}
+        </View>
+        <View my={-12}>
+          <Input
+            backgroundColor="#e8e6e1"
+            borderWidth={0}
+            borderRadius={15}
+            mx={4}
+            placeholder="Email"
+            height={60}
+            paddingTop={10}
+            color={"#000"}
+            InputLeftElement={
+              <Icon
+                as={<Ionicons name={"mail"} size={16} />}
+                size="md"
+                m={2}
+                color="#000"
+              />
+            }
+            value={formik.values.email}
+            onChangeText={formik.handleChange("email")}
+            onBlur={formik.handleBlur("email")}
+          />
+          {formik.errors.email && formik.touched.email ? (
+            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
+              {formik.errors.email}
+            </Text>
+          ) : null}
+        </View>
+        <View my={78}>
+          <Input
+            placeholder="Password"
+            backgroundColor="#e8e6e1"
+            borderWidth={0}
+            borderRadius={15}
+            mx={4}
+            height={60}
+            paddingTop={10}
+            color={"#000"}
+            InputLeftElement={
+              <Icon
+                as={<Ionicons name={"lock-closed"} size={16} />}
+                size="md"
+                m={2}
+                color="#000"
+              />
+            }
+            value={formik.values.password}
+            onChangeText={formik.handleChange("password")}
+            onBlur={formik.handleBlur("password")}
+          />
+          {formik.errors.password && formik.touched.password ? (
+            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
+              {formik.errors.password}
+            </Text>
+          ) : null}
+        </View>
+
+        <Button
+          onPress={formik.handleSubmit}
+          bg={"secondary.200"}
+          colorScheme="secondary"
+          w={300}
+          height={60}
+          marginLeft="auto"
+          marginRight="auto"
+          my={-12}
+          shadow={2}
+          borderRadius={15}
+        >
+          <Text
+            fontSize={20}
+            noOfLines={2}
+            color="#fff"
+            isTruncated={true}
+            textTransform="uppercase"
+          >
+            Register
+          </Text>
+        </Button>
+      </FormControl>
+      <View flexDirection="row" marginLeft="auto" marginRight="auto" top={-30}>
+        <Text style={{ color: "#000", marginLeft: 4, fontSize: 16 }}>
+          Already Registered ?
+        </Text>
+        <Text
+          style={{ color: "#fc036f", marginLeft: 5, fontSize: 16 }}
+          onPress={() => navigation.navigate("Login")}
+        >
+          Sign In
+        </Text>
+      </View>
     </ScrollView>
   );
 };
@@ -99,55 +203,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    backgroundColor: "#fc036f",
+    backgroundColor: "#E07C24",
     paddingTop: 180,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     alignItems: "center",
-  },
-  icon: {
-    marginTop: -70,
-    marginLeft: 120,
-  },
-  title: {
-    textAlign: "center",
-    fontSize: 30,
-    fontWeight: "bold",
-    marginTop: 15,
-  },
-  subtitle: {
-    textAlign: "center",
-    fontSize: 20,
-  },
-  input: {
-    borderWidth: 0,
-    borderBottomWidth: 0,
-    paddingTop: 5,
-    marginTop: 10,
-    backgroundColor: "#e8e6e1",
-    borderRadius: 30,
-    color: "#000",
-  },
-  forgot: {
-    color: "blue",
-    textAlign: "right",
-    marginRight: 20,
-  },
-  button: {
-    marginTop: 5,
-    marginLeft: 100,
-    marginRight: 100,
-    borderRadius: 30,
-    padding: 15,
-    backgroundColor: "#fc036f",
-  },
-  btnText: {
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  error: {
-    color: "red",
-    marginLeft: 20,
-    marginTop: 10,
   },
 });
