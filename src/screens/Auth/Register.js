@@ -135,6 +135,7 @@ const RegisterPage = (props) => {
             borderWidth={0}
             borderRadius={15}
             mx={4}
+            secureTextEntry
             height={60}
             paddingTop={10}
             color={"#000"}
