@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import {
-  Modal,
+  Box,
   Button,
   Input,
-  Radio,
-  View,
+  Avatar,
+  IconButton,
   Text,
   FormControl,
   Select,
@@ -14,7 +14,10 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import * as Permissions from "expo-permissions";
+import * as ImagePicker from "expo-image-picker";
 import { Countries } from "../../utils/Countries";
 import {
   GetProfileAction,
@@ -25,9 +28,47 @@ import {
 const ProfileForm = (props) => {
   const dispatch = useDispatch();
   const { profile, navigation } = props;
+  const [picture, setpicture] = React.useState("");
+
+  const handleUpload = (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "siflcc0k");
+    data.append("cloud_name", "dwwmdn5p4");
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/dwwmdn5p4/image/upload", data)
+      .then((res) => {
+        console.log(res.data.url);
+        setpicture(res.data.url);
+      });
+  };
+
+  const pickerFromGallery = async () => {
+    const { granted } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (granted) {
+      let data = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.5,
+      });
+      if (!data.cancelled) {
+        let newFile = {
+          uri: data.uri,
+          type: `test/${data.uri.split(".")[1]}`,
+          name: `test/${data.uri.split(".")[1]}`,
+        };
+        handleUpload(newFile);
+      }
+    } else {
+      Alert.alert("you need to give up permission to work");
+    }
+  };
 
   const formik = useFormik({
     initialValues: {
+      picture: picture,
       country: profile?.country,
       fullName: profile?.fullName,
       phone: profile?.phone,
@@ -47,10 +88,12 @@ const ProfileForm = (props) => {
     }),
     onSubmit: async (data) => {
       if (profile === null) {
-        await dispatch(CreateProfileAction(data));
+        await dispatch(CreateProfileAction(data, (data.picture = picture)));
         await dispatch(GetProfileAction());
       } else {
-        await dispatch(EditProfileAction(profile?._id, data));
+        await dispatch(
+          EditProfileAction(profile?._id, data, (data.picture = picture))
+        );
         await dispatch(GetProfileAction());
       }
     },
@@ -58,11 +101,38 @@ const ProfileForm = (props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <Text color="primary.50" fontWeight="bold" fontSize={22} textAlign="center" my={6}>
+      <Text
+        color="primary.50"
+        fontWeight="bold"
+        fontSize={22}
+        textAlign="center"
+        my={6}
+      >
         Your Account Information
       </Text>
 
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={2}>
+      <Avatar
+        size="2xl"
+        max={3}
+        borderColor="#000"
+        marginLeft="auto"
+        marginRight="auto"
+        bg="primary.50"
+        source={{
+          uri: (profile?.picture && picture) || profile?.picture,
+        }}
+      ></Avatar>
+
+      <IconButton
+        variant="unstyled"
+        height={33}
+        marginLeft="auto"
+        marginRight="auto"
+        top={-70}
+        onPress={() => pickerFromGallery()}
+        icon={<Ionicons name={"camera-outline"} color="#fff" size={50} />}
+      />
+      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4}>
         Your Country:
       </Text>
       <FormControl mt={4}>
@@ -196,6 +266,18 @@ const ProfileForm = (props) => {
           {formik.errors.city}
         </Text>
       ) : null}
+      {/* <Button
+        size="md"
+        width={150}
+        mt={8}
+        marginLeft={6}
+        marginRight="auto"
+        backgroundColor="#8D3DAF"
+        startIcon={<Ionicons name={"save-outline"} color="#fff" size={28} />}
+        onPress={() => pickerFromGallery()}
+      >
+        <Text style={styles.buttonText}>Upload img</Text>
+      </Button> */}
 
       {profile === null ? (
         <Button

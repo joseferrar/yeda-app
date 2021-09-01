@@ -50,7 +50,7 @@ const RegisterPage = (props) => {
     <ScrollView style={styles.container}>
       <View style={styles.header}></View>
       <Image
-        source={require("../../../assets/yeda_logo.jpeg")}
+        source={require("../../../assets/yeda_logo.png")}
         size={120}
         marginLeft="auto"
         marginRight="auto"
