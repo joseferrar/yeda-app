@@ -68,7 +68,7 @@ const ProfileForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      picture: picture,
+      picture: profile?.picture,
       country: profile?.country,
       fullName: profile?.fullName,
       phone: profile?.phone,
