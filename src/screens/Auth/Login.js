@@ -2,25 +2,26 @@ import React, { useEffect } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   StyleSheet,
-  Text,
-  View,
   KeyboardAvoidingView,
   Platform,
   ToastAndroid,
-  SafeAreaView,
   ScrollView,
 } from "react-native";
 import {
   FormControl,
   Input,
+  Text,
   Button,
-  Center,
-  NativeBaseProvider,
+  Icon,
+  View,
+  Image,
 } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 import { LoginAction } from "../../actions/AuthAction";
+import foot_logo from "../../../assets/foot_logo.jpg";
 
 const LoginPage = (props) => {
   const { navigation } = props;
@@ -46,37 +47,123 @@ const LoginPage = (props) => {
   });
 
   return (
-    <ScrollView keyboardDismissMode="interactive" style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}></View>
-      <Text>Login</Text>
-      <FormControl>
-        <FormControl.Label>Email</FormControl.Label>
-        <Input
-        color={"#000"}
-          value={formik.values.email}
-          onChangeText={formik.handleChange("email")}
-          onBlur={formik.handleBlur("email")}
-        />
-        <Text>{formik.errors.email}</Text>
-
-        <FormControl.Label>Password</FormControl.Label>
-        <Input
-         color={"#000"}
-          value={formik.values.password}
-          onChangeText={formik.handleChange("password")}
-          onBlur={formik.handleBlur("password")}
-        />
-        <Text>{formik.errors.password}</Text>
-
-        <Button onPress={formik.handleSubmit}>Login</Button>
-      </FormControl>
-
+      <Image
+        source={require("../../../assets/yeda_logo.png")}
+        size={120}
+        marginLeft="auto"
+        marginRight="auto"
+        resizeMode={"contain"}
+        borderRadius={100}
+        top={-60}
+        alt={"yeda_logo"}
+      />
       <Text
-          style={{ color: "#fc036f", marginLeft: 4, fontSize: 16 }}
+        color="primary.50"
+        fontWeight="bold"
+        textAlign="center"
+        fontSize={28}
+        top={-40}
+      >
+        Welcome back !!!
+      </Text>
+      <Text color="primary.50" textAlign="center" fontSize={18} top={-40}>
+        Login to continue
+      </Text>
+      <FormControl top={-80}>
+        <View my={20}>
+          <Input
+            backgroundColor="#e8e6e1"
+            borderWidth={0}
+            borderRadius={15}
+            mx={4}
+            placeholder="Email"
+            height={60}
+            paddingTop={10}
+            color={"#000"}
+            InputLeftElement={
+              <Icon
+                as={<Ionicons name={"mail"} size={16} />}
+                size="md"
+                m={2}
+                color="#000"
+              />
+            }
+            value={formik.values.email}
+            onChangeText={formik.handleChange("email")}
+            onBlur={formik.handleBlur("email")}
+          />
+          {formik.errors.email && formik.touched.email ? (
+            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
+              {formik.errors.email}
+            </Text>
+          ) : null}
+        </View>
+        <View my={-10}>
+          <Input
+            placeholder="Password"
+            backgroundColor="#e8e6e1"
+            borderWidth={0}
+            borderRadius={15}
+            mx={4}
+            secureTextEntry
+            height={60}
+            paddingTop={10}
+            color={"#000"}
+            InputLeftElement={
+              <Icon
+                as={<Ionicons name={"lock-closed"} size={16} />}
+                size="md"
+                m={2}
+                color="#000"
+              />
+            }
+            value={formik.values.password}
+            onChangeText={formik.handleChange("password")}
+            onBlur={formik.handleBlur("password")}
+          />
+          {formik.errors.password && formik.touched.password ? (
+            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
+              {formik.errors.password}
+            </Text>
+          ) : null}
+        </View>
+
+        <Button
+          onPress={formik.handleSubmit}
+          bg={"secondary.200"}
+          colorScheme="secondary"
+          w={300}
+          height={60}
+          marginLeft="auto"
+          marginRight="auto"
+          my={20}
+          shadow={2}
+          borderRadius={15}
+        >
+          <Text
+            fontSize={20}
+            noOfLines={2}
+            color="#fff"
+            isTruncated={true}
+            textTransform="uppercase"
+          >
+            Login
+          </Text>
+        </Button>
+      </FormControl>
+      <View flexDirection="row" marginLeft="auto" marginRight="auto" top={-120}>
+        <Text style={{ color: "#000", marginLeft: 4, fontSize: 16 }}>
+          Create a new account ?
+        </Text>
+        <Text
+          style={{ color: "#fc036f", marginLeft: 5, fontSize: 16 }}
           onPress={() => navigation.navigate("Register")}
         >
           Sign Up
         </Text>
+      </View>
     </ScrollView>
   );
 };
@@ -89,55 +176,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    backgroundColor: "#fc036f",
+    backgroundColor: "#E07C24",
     paddingTop: 180,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     alignItems: "center",
-  },
-  icon: {
-    marginTop: -70,
-    marginLeft: 120,
-  },
-  title: {
-    textAlign: "center",
-    fontSize: 30,
-    fontWeight: "bold",
-    marginTop: 20,
-  },
-  subtitle: {
-    textAlign: "center",
-    fontSize: 20,
-  },
-  input: {
-    borderWidth: 0,
-    borderBottomWidth: 0,
-    paddingTop: 5,
-    marginTop: 15,
-    backgroundColor: "#e8e6e1",
-    borderRadius: 30,
-    color: "#000",
-  },
-  forgot: {
-    color: "blue",
-    textAlign: "right",
-    marginRight: 20,
-  },
-  button: {
-    marginTop: 20,
-    marginLeft: 100,
-    marginRight: 100,
-    borderRadius: 30,
-    padding: 15,
-    backgroundColor: "#fc036f",
-  },
-  btnText: {
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-  error: {
-    color: "red",
-    marginLeft: 20,
-    marginTop: 10,
   },
 });

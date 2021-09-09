@@ -38,6 +38,7 @@ const getIcon = (screenName) => {
 
 const DrawerItem = (props) => {
   const { auth } = useSelector((state) => state.auth);
+  const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,19 +59,18 @@ const DrawerItem = (props) => {
             <Avatar
               size="2xl"
               borderColor="#000"
-              bg="tomato"
+              bg="#000"
               source={{
-                uri: "https://coolwallpapers.me/picsup/5771328-hailee-steinfeld-wallpapers.jpg",
+                uri:
+                  profile?.picture === ""
+                    ? "https://res.cloudinary.com/dwwmdn5p4/image/upload/v1630484093/yeda/zfqnjsqrj5envyz7j1hn.jpg"
+                    : profile?.picture,
               }}
             >
               <Avatar.Badge bg={"green.500"} borderColor="default.50" />
             </Avatar>
-            <Text style={styles.title}>
-              {auth?.name}
-            </Text>
-            <Text style={styles.subtitle}>
-              {auth?.email}
-            </Text>
+            <Text style={styles.title}>{auth?.name}</Text>
+            <Text style={styles.subtitle}>{auth?.email}</Text>
           </Box>
           <VStack space={6}>
             {props.state.routeNames.map((name, index) => (

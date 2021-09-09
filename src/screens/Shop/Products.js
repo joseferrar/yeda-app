@@ -4,6 +4,7 @@ import { Avatar, Text, Box, Stack, FlatList } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { FoodAction } from "../../actions/FoodAction";
+import { GetCartAction } from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 
 const Products = (props) => {
@@ -30,6 +31,7 @@ const Products = (props) => {
               navigation.navigate("Details", {
                 data: item,
               });
+              dispatch(GetCartAction());
             }}
           >
             <Box
@@ -45,7 +47,6 @@ const Products = (props) => {
                   uri: item?.recipe?.image,
                 }}
                 alt="image base"
-            
                 top={5}
                 left={4}
                 bg="transparent"

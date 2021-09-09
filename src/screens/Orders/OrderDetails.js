@@ -26,7 +26,7 @@ const OrderDetails = (props) => {
       time:
         (data?.tracking === Out_of_Delivery && Time(data?.dispatchTime)) ||
         (data?.tracking === Dispatch && Time(data?.dispatchTime)) ||
-        (data?.tracking === Delivered && Time(data?.deliveredTime)),
+        (data?.tracking === Delivered && Time(data?.dispatchTime)),
       title:
         (data?.tracking === Out_of_Delivery && Dispatch) ||
         (data?.tracking === Dispatch && Dispatch) ||

@@ -4,6 +4,7 @@ import { VStack, Box, Divider, Avatar, Text } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
 const ProfileCard = ({ profile, navigation }) => {
+  console.log("Profile", profile);
   return (
     <View>
       <View style={styles.mainCardView}>
