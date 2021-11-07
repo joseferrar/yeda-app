@@ -26,3 +26,9 @@ export const DeleteUsers = async (id) => {
   });
   return api;
 };
+
+//Admin Products
+export const GetProducts = async () => {
+  const api = await REACT_URL.get("/allproducts", { headers: await authHeader() });
+  return api;
+};

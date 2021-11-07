@@ -6,6 +6,7 @@ import CommonReducer from "./CommonReducer";
 import CountReducer from "./CountReducer";
 import FoodReducer from "./FoodReducer";
 import OrderReducer from "./OrderReducer";
+import ProductReducer from "./ProductReducer";
 import ProfileReducer from "./ProfileReducer";
 import SearchReducer from "./SearchReducer";
 
@@ -18,6 +19,7 @@ const allReducers = combineReducers({
   search: SearchReducer,
   admin: AdminReducer,
   order: OrderReducer,
+  product: ProductReducer,
   common: CommonReducer,
 });
 
