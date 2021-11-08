@@ -1,5 +1,14 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { View, Text, FlatList, Box, Avatar, Fab, Icon } from "native-base";
+import {
+  View,
+  Text,
+  FlatList,
+  Box,
+  Avatar,
+  Fab,
+  Icon,
+  Button,
+} from "native-base";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -99,20 +108,26 @@ const AllProduct = (props) => {
         )}
       />
 
-      <Box position="relative" w="100%">
-        <Fab
-          bg="secondary.200"
-          position="absolute"
-          size="sm"
-          icon={
-            <Icon
-              color="default.50"
-              as={<Ionicons name="add-sharp" />}
-              size="md"
-            />
-          }
-        />
-      </Box>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => navigation.navigate("Search")}
+        style={{
+          borderWidth: 1,
+          borderColor: "rgba(0,0,0,0.2)",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 70,
+          resizeMode: "contain",
+          position: "absolute",
+          bottom: 30,
+          right: 30,
+          height: 70,
+          backgroundColor: "red",
+          borderRadius: 100,
+        }}
+      >
+        <Ionicons name="add-sharp" size={30} color="#fff" />
+      </TouchableOpacity>
     </View>
   );
 };
