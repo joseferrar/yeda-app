@@ -110,7 +110,7 @@ const AllProduct = (props) => {
 
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigate("CreateProduct")}
         style={{
           borderWidth: 1,
           borderColor: "rgba(0,0,0,0.2)",
