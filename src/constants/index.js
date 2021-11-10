@@ -22,3 +22,4 @@ export const DELETE_USERS = "DELETE_USERS";
 export const SHOW_SPINNER = "SHOW_SPINNER";
 export const HIDE_SPINNER = "HIDE_SPINNER";
 export const GET_PRODUCTS = "GET_PRODUCTS";
+export const ADD_PRODUCT = "ADD_PRODUCT";

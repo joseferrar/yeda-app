@@ -4,6 +4,7 @@ import {
   EDIT_USERS,
   DELETE_USERS,
   GET_PRODUCTS,
+  ADD_PRODUCT,
 } from "../constants";
 import {
   GetUsers,
@@ -11,6 +12,7 @@ import {
   EditUsers,
   DeleteUsers,
   GetProducts,
+  AddProduct,
 } from "../services/AdminService";
 import { showToast } from "../components/Toast/toast";
 
@@ -57,6 +59,16 @@ export const GetProductAction = () => async (dispatch) => {
   try {
     const { data } = await GetProducts();
     dispatch({ type: GET_PRODUCTS, payload: data });
+  } catch (err) {
+    showToast(err.response.data);
+  }
+};
+
+export const AddProductAction = (Data) => async (dispatch) => {
+  try {
+    const { data } = await AddProduct(Data);
+    dispatch({ type: ADD_PRODUCT, payload: data });
+    showToast("Created Successfully !!!");
   } catch (err) {
     showToast(err.response.data);
   }

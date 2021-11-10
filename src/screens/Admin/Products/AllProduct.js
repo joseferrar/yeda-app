@@ -8,6 +8,7 @@ import {
   Fab,
   Icon,
   Button,
+  Divider
 } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -63,7 +64,7 @@ const AllProduct = (props) => {
                   bg="amber.500"
                   size="xl"
                   source={{
-                    uri: "https://cdn.downtoearth.org.in/library/large/2019-01-23/0.21667800_1548245196_food1.jpg",
+                    uri: item?.image,
                   }}
                 >
                   AK
@@ -104,7 +105,9 @@ const AllProduct = (props) => {
                 ${item?.price}
               </Text>
             </Box>
+            <Divider my={0} bg="gray.50" />
           </TouchableOpacity>
+          
         )}
       />
 
