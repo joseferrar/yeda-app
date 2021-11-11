@@ -20,11 +20,14 @@ import Delivery from "../../screens/Delivery/Delivery";
 import DeliveryDetails from "../../screens/Delivery/DeliveryDetails";
 import { useSelector, useDispatch } from "react-redux";
 import { Loading } from "../Spinner/Spinner";
+import AllProduct from "../../screens/Admin/Products/AllProduct";
+import CreateProduct from "../../screens/Admin/Products/CreateProduct";
 
 const Stack = createStackNavigator();
 
 export default function MainNavbar() {
   const { loading } = useSelector((state) => state.common);
+  
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -72,6 +75,8 @@ export default function MainNavbar() {
         <Stack.Screen name="Admin" component={Admin} />
         <Stack.Screen name="UserList" component={UsersList} />
         <Stack.Screen name="UsersDetails" component={UsersDetails} />
+        <Stack.Screen name="AllProduct" component={AllProduct} />
+        <Stack.Screen name="CreateProduct" component={CreateProduct} />
 
         {/* Workers */}
         <Stack.Screen name="Workers" component={Workers} />

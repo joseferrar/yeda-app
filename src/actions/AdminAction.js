@@ -1,9 +1,18 @@
-import { GET_USERS, POST_USERS, EDIT_USERS, DELETE_USERS } from "../constants";
+import {
+  GET_USERS,
+  POST_USERS,
+  EDIT_USERS,
+  DELETE_USERS,
+  GET_PRODUCTS,
+  ADD_PRODUCT,
+} from "../constants";
 import {
   GetUsers,
   PostUsers,
   EditUsers,
   DeleteUsers,
+  GetProducts,
+  AddProduct,
 } from "../services/AdminService";
 import { showToast } from "../components/Toast/toast";
 
@@ -42,5 +51,25 @@ export const DeleteUserAction = (id) => async (dispatch) => {
     await dispatch({ type: DELETE_USERS, payload: id });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+//Admin Products
+export const GetProductAction = () => async (dispatch) => {
+  try {
+    const { data } = await GetProducts();
+    dispatch({ type: GET_PRODUCTS, payload: data });
+  } catch (err) {
+    showToast(err.response.data);
+  }
+};
+
+export const AddProductAction = (Data) => async (dispatch) => {
+  try {
+    const { data } = await AddProduct(Data);
+    dispatch({ type: ADD_PRODUCT, payload: data });
+    showToast("Created Successfully !!!");
+  } catch (err) {
+    showToast(err.response.data);
   }
 };
