@@ -5,10 +5,9 @@ import {
   FlatList,
   Box,
   Avatar,
-  Fab,
   Icon,
   Button,
-  Divider
+  Divider,
 } from "native-base";
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -26,6 +25,7 @@ const AllProduct = (props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerTitle: "Yeda Products",
       headerStyle: {
         backgroundColor: "#E03B8B",
       },
@@ -44,70 +44,77 @@ const AllProduct = (props) => {
         data={data}
         keyExtractor={(item) => item?._id}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            activeOpacity={0.9}
-            // onPress={() => {
-            //   navigation.navigate("UsersDetails", {
-            //     data: item,
-            //   });
-            // }}
-          >
-            <Box
-              px={2}
-              rounded="lg"
-              marginBottom={-8}
-              _light={{ backgroundColor: "gray.50" }}
-              _dark={{ backgroundColor: "gray.700" }}
+          <View>
+            <TouchableOpacity
+              activeOpacity={0.9}
+              // onPress={() => {
+              //   navigation.navigate("UsersDetails", {
+              //     data: item,
+              //   });
+              // }}
             >
-              <View flexDirection="row" top={2}>
-                <Avatar
-                  bg="amber.500"
-                  size="xl"
-                  source={{
-                    uri: item?.image,
-                  }}
-                >
-                  AK
-                </Avatar>
-                <Text
-                  color="primary.50"
-                  fontWeight="bold"
-                  fontSize={22}
-                  left={2}
-                  noOfLines={1}
-                  w={220}
-                >
-                  {" "}
-                  {item?.foodName}
-                </Text>
-                <Icon
-                  color="gray.50"
-                  as={<Ionicons name="chevron-forward-circle" />}
-                  size="md"
-                  marginLeft="auto"
-                  fontWeight="bold"
-                  top={26}
-                />
-              </View>
-
-              <Text color="#a8abad" noOfLines={1} left={110} top={-50} w={200}>
-                {item?.category}
-              </Text>
-              <Text
-                color="success.100"
-                fontWeight="bold"
-                noOfLines={1}
-                left={110}
-                top={-40}
-                w={200}
-                fontSize={18}
+              <Box
+                px={2}
+                rounded="lg"
+                marginBottom={-8}
+                _light={{ backgroundColor: "gray.50" }}
+                _dark={{ backgroundColor: "gray.700" }}
               >
-                ${item?.price}
-              </Text>
-            </Box>
+                <View flexDirection="row" top={2}>
+                  <Avatar
+                    bg="amber.500"
+                    size="xl"
+                    source={{
+                      uri: item?.image,
+                    }}
+                  >
+                    AK
+                  </Avatar>
+                  <Text
+                    color="primary.50"
+                    fontWeight="bold"
+                    fontSize={22}
+                    left={2}
+                    noOfLines={1}
+                    w={220}
+                  >
+                    {" "}
+                    {item?.foodName}
+                  </Text>
+                  <Icon
+                    color="gray.50"
+                    as={<Ionicons name="chevron-forward-circle" />}
+                    size="md"
+                    marginLeft="auto"
+                    fontWeight="bold"
+                    top={26}
+                  />
+                </View>
+
+                <Text
+                  color="#a8abad"
+                  noOfLines={1}
+                  left={110}
+                  top={-50}
+                  w={200}
+                >
+                  {item?.category}
+                </Text>
+                <Text
+                  color="success.100"
+                  fontWeight="bold"
+                  noOfLines={1}
+                  left={110}
+                  top={-40}
+                  w={200}
+                  fontSize={18}
+                >
+                  ₽ {item?.price}
+                </Text>
+              </Box>
+            </TouchableOpacity>
             <Divider my={0} bg="gray.50" />
-          </TouchableOpacity>
-          
+          </View>
         )}
       />
 

@@ -20,6 +20,8 @@ import {
   AddProductAction,
   GetProductAction,
 } from "../../../actions/AdminAction";
+import { FoodCategory } from "../../../utils/FoodCategories";
+import FormError from "../../../components/ErrorMessage/FormError";
 
 const CreateProduct = (props) => {
   const dispatch = useDispatch();
@@ -37,10 +39,18 @@ const CreateProduct = (props) => {
       foodName: yup.string().required("Date must be required"),
       image: yup.string().required("Data Name must be required"),
       category: yup.string().required("Data Name must be required"),
+      price: yup.number().required("Data Name must be required"),
     }),
-    onSubmit: async (data) => {
+    onSubmit: async (data, action) => {
       await dispatch(AddProductAction(data));
       await dispatch(GetProductAction());
+      action.resetForm({
+        foodName: "",
+        description: "",
+        image: "",
+        category: "",
+        price: "",
+      });
     },
   });
 
@@ -81,7 +91,9 @@ const CreateProduct = (props) => {
           value={formik.values.foodName}
           onChangeText={formik.handleChange("foodName")}
         />
-
+        {formik.errors.foodName && formik.touched.foodName ? (
+          <FormError>{formik.errors.foodName}</FormError>
+        ) : null}
         <Text fontWeight="bold" fontSize={16} color="dark.50">
           Image Url
         </Text>
@@ -93,7 +105,9 @@ const CreateProduct = (props) => {
           value={formik.values.image}
           onChangeText={formik.handleChange("image")}
         />
-
+        {formik.errors.image && formik.touched.image ? (
+          <FormError>{formik.errors.image}</FormError>
+        ) : null}
         <Text fontWeight="bold" fontSize={16} color="dark.50">
           Category
         </Text>
@@ -112,40 +126,27 @@ const CreateProduct = (props) => {
           }}
           mt={1}
         >
-          <Select.Item
-            label="UX Research"
-            value="ux"
-            _text={{ color: "dark.50" }}
-          />
-          <Select.Item
-            label="Web Development"
-            value="web"
-            _text={{ color: "dark.50" }}
-          />
-          <Select.Item
-            label="Cross Platform Development"
-            value="cross"
-            _text={{ color: "dark.50" }}
-          />
-          <Select.Item
-            label="UI Designing"
-            value="ui"
-            _text={{ color: "dark.50" }}
-          />
-          <Select.Item
-            label="Backend Development"
-            value="backend"
-            _text={{ color: "dark.50" }}
-          />
+          {FoodCategory &&
+            FoodCategory.map((a, index) => (
+              <Select.Item
+                label={a.label}
+                value={a.value}
+                key={index}
+                _pressed={{ bg: "gray.50" }}
+                _text={{ color: "dark.50" }}
+              />
+            ))}
         </Select>
-
+        {formik.errors.category && formik.touched.category ? (
+          <FormError>{formik.errors.category}</FormError>
+        ) : null}
         <Text fontWeight="bold" fontSize={16} color="dark.50">
           Price
         </Text>
         <Input
           size="xl"
           height={55}
-          placeholder="$"
+          placeholder="₽"
           borderWidth={1}
           borderColor="dark.50"
           width={200}
@@ -154,7 +155,9 @@ const CreateProduct = (props) => {
           value={formik.values.price}
           onChangeText={formik.handleChange("price")}
         />
-
+        {formik.errors.price && formik.touched.price ? (
+          <FormError>{formik.errors.price}</FormError>
+        ) : null}
         <Text fontWeight="bold" fontSize={16} color="dark.50">
           Description
         </Text>
