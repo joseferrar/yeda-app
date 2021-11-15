@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack, Input } from "native-base";
+import { TouchableOpacity } from "react-native";
+import { Avatar, Text, Box, View, Button, ScrollView } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -38,6 +38,9 @@ const Cart = (props) => {
           ...i,
           quantity: (i.quantity -= 1),
         };
+        if (i.quantity == 0) {
+          dispatch(DeleteCartAction(i._id));
+        }
         dispatch(UpdateCartAction(i._id, qtyupdate));
         dispatch(GetCartAction());
       }
@@ -55,94 +58,95 @@ const Cart = (props) => {
   }
 
   return (
-    <View>
-      {loading && Loading()}
-      <ScrollView>
-        {cart &&
-          cart?.map((item, index) => (
-            <TouchableOpacity
-              activeOpacity={10}
-              key={index}
-              onPress={() => {
-                navigation.navigate("Details", {
-                  data: item,
-                });
-              }}
-            >
-              <Box
-                maxWidth="94%"
-                left={3}
-                top={4}
-                flexDirection="row"
-                height={165}
+    <ScrollView flex={1}>
+      {cart &&
+        cart?.map((item, index) => (
+          <TouchableOpacity
+            activeOpacity={10}
+            key={index}
+            onPress={() => {
+              navigation.navigate("Details", {
+                data: item,
+              });
+            }}
+          >
+            <Box maxWidth="94%" top={4} flexDirection="row">
+              <Avatar
+                size="lg"
+                source={{
+                  uri: item?.image,
+                }}
+                alt="image base"
+                left={4}
+                bg="transparent"
+              ></Avatar>
+
+              <Text
+                left={6}
+                fontFamily="NunitoSans-Black"
+                color="primary.50"
+                fontSize={18}
+                w={200}
+                noOfLines={2}
+                isTruncated={true}
               >
-                <Avatar
-                  size="2xl"
-                  source={{
-                    uri: item?.image,
-                  }}
-                  alt="image base"
-                  roundedTop="md"
-                  top={5}
-                  left={4}
-                  bg="transparent"
-                ></Avatar>
-                <Text
-                  bold
-                  position="absolute"
-                  color="primary.50"
-                  left={7}
-                  top={1.5}
-                  p={1}
-                  // borderRadius={4}
-                  style={{ transform: [{ rotate: "-18deg" }] }}
-                  borderRightRadius={5}
-                  borderTopLeftRadius={10}
-                  borderBottomRadius={15}
-                  m={[4, 4, 8]}
-                  bg="#fff"
-                >
-                  {item?.price}
-                  <Ionicons name={"star"} color="orange" size={16} />
-                </Text>
-
-                <Stack space={1} p={[4, 4, 4]} top={4}>
-                  <Text
-                    left={3}
-                    fontFamily="NunitoSans-Black"
-                    color="primary.50"
-                    fontSize={18}
-                    w={200}
-                    noOfLines={2}
-                    isTruncated={true}
-                  >
-                    {item?.foodName}
-                  </Text>
-
-                  <Text
-                    left={3}
-                    color="gray.500"
-                    isTruncated={true}
-                    fontFamily="NunitoSans-Regular"
-                    fontSize={14}
-                  >
-                    {item?.category}
-                  </Text>
-                </Stack>
-              </Box>
-              <Button title="+" onPress={() => increment(item)} />
+                {item?.foodName}
+              </Text>
+              <Button
+                _text={{ fontSize: 40 }}
+                fontWeight="bold"
+                height={42}
+                size="sm"
+                top={2}
+                bgColor="gray.50"
+                right={14}
+                marginTop={-2}
+                onPress={() => decrease(item)}
+              >
+                -
+              </Button>
+              <Text color="primary.50" top={2} right={2} fontSize={18}>
+                {item?.quantity}
+              </Text>
+              <Button
+                _text={{ fontSize: 26 }}
+                fontWeight="bold"
+                height={42}
+                size="sm"
+                top={2}
+                left={2}
+                bgColor="gray.50"
+                marginLeft="auto"
+                marginTop={-2}
+                onPress={() => increment(item)}
+              >
+                +
+              </Button>
+            </Box>
+            <Text
+              right={20}
+              marginLeft="auto"
+              marginRight="auto"
+              color="primary.50"
+              isTruncated={true}
+              fontFamily="NunitoSans-Regular"
+              fontSize={14}
+              top={-12}
+            >
+              {`₽ ${item?.price}`}
+            </Text>
+            {/* <Button title="+" onPress={() => increment(item)} />
               <Button title="-" onPress={() => decrease(item)} />
               <Button
                 title={`delete`}
                 onPress={() => {
                   dispatch(DeleteCartAction(item?._id));
                 }}
-              />
-            </TouchableOpacity>
-          ))}
-        <Text color="primary.50">{total()}</Text>
-      </ScrollView>
-    </View>
+              /> */}
+          </TouchableOpacity>
+        ))}
+      <Text color="primary.50">{total()}</Text>
+    </ScrollView>
   );
 };
 

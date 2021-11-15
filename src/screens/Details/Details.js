@@ -14,9 +14,9 @@ const Details = (props) => {
 
   const addcart = async () => {
     await dispatch(AddCartAction(data));
-    showToast(data?.foodName);
     await dispatch(GetCartAction());
   };
+  
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
