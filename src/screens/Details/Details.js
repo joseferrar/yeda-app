@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import { View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Icon, Text, Box, Stack, Button, Badge,ScrollView } from "native-base";
+import { Icon, Text, Box, Stack, Button, Badge, ScrollView } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { showToast } from "../../components/Toast/toast";
 import { AddCartAction, GetCartAction } from "../../actions/CartAction";
@@ -13,7 +13,7 @@ const Details = (props) => {
   const dispatch = useDispatch();
 
   const addcart = async () => {
-    await dispatch(AddCartAction({ food: data, no_of_items: 1 }));
+    await dispatch(AddCartAction(data));
     showToast(data?.foodName);
     await dispatch(GetCartAction());
   };
@@ -102,7 +102,6 @@ const Details = (props) => {
             colorScheme="secondary"
             w={200}
             ml={75}
-       
             my={2}
             marginBottom={2}
             shadow={2}

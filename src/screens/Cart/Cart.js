@@ -3,7 +3,11 @@ import { View, TouchableOpacity, ScrollView, Button } from "react-native";
 import { Avatar, Text, Box, Stack, Input } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetCartAction, DeleteCartAction } from "../../actions/CartAction";
+import {
+  GetCartAction,
+  DeleteCartAction,
+  UpdateCartAction,
+} from "../../actions/CartAction";
 import { Loading } from "../../components/Spinner/Spinner";
 const Cart = (props) => {
   const { navigation } = props;
@@ -14,22 +18,54 @@ const Cart = (props) => {
     dispatch(GetCartAction());
   }, []);
 
-  console.log(cart)
+  async function increment(item) {
+    await cart.map((i) => {
+      if (item._id == i._id) {
+        const qtyupdate = {
+          ...i,
+          quantity: (i.quantity += 1),
+        };
+        dispatch(UpdateCartAction(i._id, qtyupdate));
+        dispatch(GetCartAction());
+      }
+    });
+  }
+
+  async function decrease(item) {
+    await cart.map((i) => {
+      if (item._id == i._id) {
+        const qtyupdate = {
+          ...i,
+          quantity: (i.quantity -= 1),
+        };
+        dispatch(UpdateCartAction(i._id, qtyupdate));
+        dispatch(GetCartAction());
+      }
+    });
+  }
+
+  function total() {
+    let x = 0;
+    cart.map((i) => {
+      x += i.price * i.quantity;
+      console.log("total", x);
+    });
+    var subTotalFormatted = parseFloat(x).toFixed(2);
+    return subTotalFormatted;
+  }
+
   return (
     <View>
-    
       {loading && Loading()}
       <ScrollView>
-        {cart?.map((cartItem) =>
-          cartItem?.food?.map((item, index) => (
+        {cart &&
+          cart?.map((item, index) => (
             <TouchableOpacity
               activeOpacity={10}
               key={index}
               onPress={() => {
-                navigation.navigate("CartDetails", {
+                navigation.navigate("Details", {
                   data: item,
-                  id: cartItem?._id,
-                  quantity: cartItem?.no_of_items,
                 });
               }}
             >
@@ -92,20 +128,19 @@ const Cart = (props) => {
                   >
                     {item?.category}
                   </Text>
-                  <Text left={3} noOfLines={1} bold color="primary.50">
-                    No of Items: {cartItem?.no_of_items}
-                  </Text>
                 </Stack>
               </Box>
+              <Button title="+" onPress={() => increment(item)} />
+              <Button title="-" onPress={() => decrease(item)} />
               <Button
-                title="delete"
+                title={`delete`}
                 onPress={() => {
-                  dispatch(DeleteCartAction(cartItem._id));
+                  dispatch(DeleteCartAction(item?._id));
                 }}
               />
             </TouchableOpacity>
-          ))
-        )}
+          ))}
+        <Text color="primary.50">{total()}</Text>
       </ScrollView>
     </View>
   );

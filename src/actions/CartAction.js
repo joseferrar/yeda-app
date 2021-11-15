@@ -6,6 +6,7 @@ import {
   UpdateCart,
 } from "../services/CartService";
 import { showToast } from "../components/Toast/toast";
+import { ShowSpinner, HideSpinner } from "../actions/CommonAction"
 
 export const AddCartAction = (Add) => async (dispatch) => {
   try {
@@ -27,8 +28,10 @@ export const GetCartAction = () => async (dispatch) => {
 
 export const UpdateCartAction = (id, updatecart) => async (dispatch) => {
   try {
+    dispatch(ShowSpinner())
     const { data } = await UpdateCart(id, updatecart);
     dispatch({ type: UPDATECART, payload: data });
+    dispatch(HideSpinner())
   } catch (error) {
     console.log(error.message);
   }
