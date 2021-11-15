@@ -14,18 +14,17 @@ const Cart = (props) => {
     dispatch(GetCartAction());
   }, []);
 
+  console.log(cart)
   return (
     <View>
-      {/* {cart.map((item) =>
-        item.food.map((item) => <Text>{item?.recipe?.label}</Text>)
-      )} */}
+    
       {loading && Loading()}
       <ScrollView>
         {cart?.map((cartItem) =>
           cartItem?.food?.map((item, index) => (
             <TouchableOpacity
               activeOpacity={10}
-              key={item?.recipe?.label}
+              key={index}
               onPress={() => {
                 navigation.navigate("CartDetails", {
                   data: item,
@@ -44,7 +43,7 @@ const Cart = (props) => {
                 <Avatar
                   size="2xl"
                   source={{
-                    uri: item?.recipe?.image,
+                    uri: item?.image,
                   }}
                   alt="image base"
                   roundedTop="md"
@@ -67,7 +66,7 @@ const Cart = (props) => {
                   m={[4, 4, 8]}
                   bg="#fff"
                 >
-                  {item?.recipe?.yield}
+                  {item?.price}
                   <Ionicons name={"star"} color="orange" size={16} />
                 </Text>
 
@@ -81,7 +80,7 @@ const Cart = (props) => {
                     noOfLines={2}
                     isTruncated={true}
                   >
-                    {item?.recipe?.label}
+                    {item?.foodName}
                   </Text>
 
                   <Text
@@ -91,19 +90,19 @@ const Cart = (props) => {
                     fontFamily="NunitoSans-Regular"
                     fontSize={14}
                   >
-                    {item?.recipe?.source}
+                    {item?.category}
                   </Text>
                   <Text left={3} noOfLines={1} bold color="primary.50">
                     No of Items: {cartItem?.no_of_items}
                   </Text>
                 </Stack>
               </Box>
-              {/* <Button
+              <Button
                 title="delete"
                 onPress={() => {
                   dispatch(DeleteCartAction(cartItem._id));
                 }}
-              /> */}
+              />
             </TouchableOpacity>
           ))
         )}

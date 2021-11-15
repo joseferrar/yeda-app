@@ -39,7 +39,7 @@ const CartDetails = (props) => {
       headerStyle: {
         backgroundColor: "#fff",
       },
-      headerTitle: <Text color="#000">{data.recipe.label}</Text>,
+      headerTitle: <Text color="#000">{data?.foodName}</Text>,
       headerTintColor: "#000",
     });
   }, [navigation]);
@@ -51,7 +51,7 @@ const CartDetails = (props) => {
     <ScrollView>
       <Image
         resizeMode="cover"
-        source={{ uri: data.recipe.image }}
+        source={{ uri: data?.image }}
         style={{ height: 350 }}
       />
       <Box rounded="lg" maxWidth="100%" height={400}>
@@ -64,7 +64,7 @@ const CartDetails = (props) => {
             noOfLines={2}
             isTruncated={true}
           >
-            {data?.recipe?.label}
+            {data?.foodName}
           </Text>
 
           <Text
@@ -74,7 +74,7 @@ const CartDetails = (props) => {
             fontFamily="NunitoSans-Regular"
             fontSize={16}
           >
-            {data?.recipe?.source}
+            {data?.category}
           </Text>
           <View style={{ flexDirection: "row" }}>
             <Text
@@ -102,7 +102,7 @@ const CartDetails = (props) => {
             onPress={() => {
               dispatch(DeleteCartAction(id));
               navigation.goBack();
-              showToast(data?.recipe?.label);
+              showToast(data?.foodName);
             }}
             bg={"#E21717"}
             colorScheme="secondary"
