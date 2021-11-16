@@ -41,7 +41,6 @@ const Products = (props) => {
         refreshing={loading}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
-        onRefresh={GetProductAction}
         data={data}
         horizontal
         keyExtractor={(item, index) => index.toString()}
@@ -65,7 +64,6 @@ const Products = (props) => {
         refreshing={loading}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
-        onRefresh={GetProductAction}
         data={data}
         horizontal
         keyExtractor={(item, index) => index.toString()}
@@ -86,7 +84,6 @@ const Products = (props) => {
         refreshing={loading}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
-        onRefresh={GetProductAction}
         data={data}
         horizontal
         keyExtractor={(item, index) => index.toString()}
@@ -107,7 +104,6 @@ const Products = (props) => {
         refreshing={loading}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
-        onRefresh={GetProductAction}
         data={data}
         horizontal
         keyExtractor={(item, index) => index.toString()}

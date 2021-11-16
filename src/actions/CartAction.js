@@ -36,6 +36,7 @@ export const UpdateCartAction = (id, updatecart) => async (dispatch) => {
     await dispatch(ShowSpinner());
     const { data } = await UpdateCart(id, updatecart);
     await dispatch({ type: UPDATECART, payload: data });
+    await dispatch(GetCartAction());
     await dispatch(HideSpinner());
   } catch (error) {
     console.log(error.message);

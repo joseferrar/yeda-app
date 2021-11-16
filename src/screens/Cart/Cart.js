@@ -8,11 +8,11 @@ import {
   DeleteCartAction,
   UpdateCartAction,
 } from "../../actions/CartAction";
-import { Loading } from "../../components/Spinner/Spinner";
+
 const Cart = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
-  const { loading, cart } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   useEffect(() => {
     dispatch(GetCartAction());
@@ -26,7 +26,6 @@ const Cart = (props) => {
           quantity: (i.quantity += 1),
         };
         dispatch(UpdateCartAction(i._id, qtyupdate));
-        dispatch(GetCartAction());
       }
     });
   }
@@ -42,7 +41,6 @@ const Cart = (props) => {
           dispatch(DeleteCartAction(i._id));
         }
         dispatch(UpdateCartAction(i._id, qtyupdate));
-        dispatch(GetCartAction());
       }
     });
   }
@@ -58,7 +56,37 @@ const Cart = (props) => {
   }
 
   return (
-    <ScrollView flex={1}>
+    <ScrollView flex={1} bg="#fff">
+      <View flexDirection="row" marginTop={4} marginLeft={6}>
+        <Text color="primary.50" fontSize={24}>
+          {"Total"}
+        </Text>
+        <Text color="primary.50" marginLeft={3} fontSize={16}>
+          {"₽"}
+        </Text>
+        <Text color="primary.50" fontSize={24} fontWeight="bold">
+          {` ${total()}`}
+        </Text>
+      </View>
+      <Button
+        _text={{ fontSize: 20, color: "#fff" }}
+        height={54}
+        w="96%"
+        position="relative"
+        size="xl"
+        left={0}
+        right={0}
+        bottom={0}
+        marginTop={4}
+        marginBottom={8}
+        bgColor="success.100"
+        marginLeft="auto"
+        marginRight="auto"
+      >
+        {`Proceed to checkout (${
+          cart.length === 1 ? cart.length + " item" : cart.length + " items"
+        })`}
+      </Button>
       {cart &&
         cart?.map((item, index) => (
           <TouchableOpacity
@@ -70,7 +98,7 @@ const Cart = (props) => {
               });
             }}
           >
-            <Box maxWidth="94%" top={4} flexDirection="row">
+            <Box maxWidth="94%" flexDirection="row">
               <Avatar
                 size="lg"
                 source={{
@@ -131,10 +159,11 @@ const Cart = (props) => {
               isTruncated={true}
               fontFamily="NunitoSans-Regular"
               fontSize={14}
-              top={-12}
+              top={-26}
             >
               {`₽ ${item?.price}`}
             </Text>
+
             {/* <Button title="+" onPress={() => increment(item)} />
               <Button title="-" onPress={() => decrease(item)} />
               <Button
@@ -145,7 +174,8 @@ const Cart = (props) => {
               /> */}
           </TouchableOpacity>
         ))}
-      <Text color="primary.50">{total()}</Text>
+
+      {/* <Text color="primary.50">{total()}</Text> */}
     </ScrollView>
   );
 };
