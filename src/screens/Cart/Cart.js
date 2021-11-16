@@ -13,6 +13,7 @@ const Cart = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
+  const Total = cart.reduce((a, c) => a + c.quantity * c.price, 0);
 
   useEffect(() => {
     dispatch(GetCartAction());
@@ -45,16 +46,6 @@ const Cart = (props) => {
     });
   }
 
-  function total() {
-    let x = 0;
-    cart.map((i) => {
-      x += i.price * i.quantity;
-      console.log("total", x);
-    });
-    var subTotalFormatted = parseFloat(x).toFixed(2);
-    return subTotalFormatted;
-  }
-
   return (
     <ScrollView flex={1} bg="#fff">
       <View flexDirection="row" marginTop={4} marginLeft={6}>
@@ -65,7 +56,7 @@ const Cart = (props) => {
           {"₽"}
         </Text>
         <Text color="primary.50" fontSize={24} fontWeight="bold">
-          {` ${total()}`}
+          {Total.toFixed(2)}
         </Text>
       </View>
       <Button
@@ -121,29 +112,35 @@ const Cart = (props) => {
                 {item?.foodName}
               </Text>
               <Button
-                _text={{ fontSize: 40 }}
+                _text={{ fontSize: 40, color: "#fff" }}
                 fontWeight="bold"
-                height={42}
+                height={34}
                 size="sm"
                 top={2}
-                bgColor="gray.50"
+                bgColor="primary.100"
                 right={14}
                 marginTop={-2}
                 onPress={() => decrease(item)}
               >
                 -
               </Button>
-              <Text color="primary.50" top={2} right={2} fontSize={18}>
+              <Text
+                color="primary.50"
+                fontWeight="bold"
+                top={1}
+                right={2}
+                fontSize={16}
+              >
                 {item?.quantity}
               </Text>
               <Button
-                _text={{ fontSize: 26 }}
+                _text={{ fontSize: 22, color: "#fff" }}
                 fontWeight="bold"
-                height={42}
+                height={34}
                 size="sm"
                 top={2}
                 left={2}
-                bgColor="gray.50"
+                bgColor="primary.100"
                 marginLeft="auto"
                 marginTop={-2}
                 onPress={() => increment(item)}
@@ -159,23 +156,12 @@ const Cart = (props) => {
               isTruncated={true}
               fontFamily="NunitoSans-Regular"
               fontSize={14}
-              top={-26}
+              top={-36}
             >
               {`₽ ${item?.price}`}
             </Text>
-
-            {/* <Button title="+" onPress={() => increment(item)} />
-              <Button title="-" onPress={() => decrease(item)} />
-              <Button
-                title={`delete`}
-                onPress={() => {
-                  dispatch(DeleteCartAction(item?._id));
-                }}
-              /> */}
           </TouchableOpacity>
         ))}
-
-      {/* <Text color="primary.50">{total()}</Text> */}
     </ScrollView>
   );
 };
