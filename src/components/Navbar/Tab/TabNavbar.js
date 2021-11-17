@@ -50,7 +50,7 @@ const TabNavbar = () => {
           backgroundColor: "#000",
           elevation: 6,
           borderTopWidth: 0,
-          height: 50,
+          height: 56,
         },
       }}
     >

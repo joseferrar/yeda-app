@@ -60,6 +60,11 @@ const Cart = (props) => {
         </Text>
       </View>
       <Button
+      onPress={() => navigation.navigate('AddOrder', {
+        data: cart,
+        total: Total,
+        
+      })}
         _text={{ fontSize: 20, color: "#fff" }}
         height={54}
         w="96%"

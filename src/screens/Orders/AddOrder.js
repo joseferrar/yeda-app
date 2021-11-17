@@ -12,24 +12,22 @@ const Orders = (props) => {
   const { navigation } = props;
   const profile = useSelector((state) => state.profile.profile);
   const dispatch = useDispatch();
-  const { data, quantity } = props.route.params;
+  const { data, total } = props.route.params;
   const nf = new Intl.NumberFormat();
 
   useEffect(() => {
     dispatch(GetProfileAction());
   }, []);
 
-  const orders = {
+  const order = {
     ...data,
-    quantity: quantity,
-    rate: 1250,
     profile: profile,
     tracking: Processing,
   };
 
   console.log(orders);
   const addOrder = async () => {
-    await dispatch(AddOrderAction({ order: orders }));
+    await dispatch(AddOrderAction({ order: order }));
     await dispatch(GetOrderAction());
     navigation.goBack();
   };
@@ -45,25 +43,23 @@ const Orders = (props) => {
               Confirm your order:
             </Text>
           </Box>
+
           <Box px={5} flexDirection="row">
-            <Avatar
-              size="2xl"
-              source={{
-                uri: orders?.recipe?.image,
-              }}
-              roundedTop="md"
-              left={2}
-              bg="transparent"
-            ></Avatar>
-            <Text
-              fontSize={18}
-              top={6}
-              w={200}
-              noOfLines={2}
-              style={styles.label}
-            >
-              {orders?.recipe?.label}
-            </Text>
+            <Avatar.Group size="lg" max={5}>
+              {data &&
+                data.map((item, index) => (
+                  <Avatar
+                    size="lg"
+                    key={index}
+                    bg="green.500"
+                    source={{
+                      uri: item?.image,
+                    }}
+                  >
+                    {item?.image}
+                  </Avatar>
+                ))}
+            </Avatar.Group>
           </Box>
 
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -71,7 +67,7 @@ const Orders = (props) => {
               Total Items:{" "}
             </Text>
             <Text fontSize={18} style={styles.rate}>
-              {orders?.quantity}
+              {data?.length}
             </Text>
           </Box>
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -79,7 +75,7 @@ const Orders = (props) => {
               Order total:
             </Text>
             <Text fontSize={18} style={styles.rate}>
-              ₹ {nf.format(orders?.rate)}
+              ₹ {`₽ ${total.toFixed(2)}`}
             </Text>
           </Box>
           <Divider />
@@ -92,6 +88,7 @@ const Orders = (props) => {
         width={300}
         mt={8}
         bg={"#000"}
+        disabled={profile === null ? true : false}
         colorScheme="secondary"
         shadow={2}
         borderRadius={10}

@@ -28,7 +28,9 @@ import {
 const ProfileForm = (props) => {
   const dispatch = useDispatch();
   const { profile, navigation } = props;
-  const [picture, setpicture] = React.useState("");
+  const [picture, setpicture] = React.useState(
+    "https://efp.org.pk/wp-content/uploads/2019/01/Blank-Trainer.png"
+  );
 
   const handleUpload = (image) => {
     const data = new FormData();
@@ -119,7 +121,7 @@ const ProfileForm = (props) => {
         marginRight="auto"
         bg="primary.50"
         source={{
-          uri: (profile?.picture && picture) || profile?.picture,
+          uri: picture,
         }}
       ></Avatar>
 
