@@ -20,7 +20,7 @@ const Details = (props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#fff",
+        backgroundColor: "#EDC126",
       },
       headerTitle: <Text color="#000">{data?.foodName}</Text>,
       headerTintColor: "#000",

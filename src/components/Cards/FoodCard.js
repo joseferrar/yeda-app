@@ -60,6 +60,7 @@ const Starches = ({ item, navigation }) => (
               textAlign="center"
               left={5}
               bold
+              fontSize={14}
               w={75}
               color="success.100"
             >
@@ -130,6 +131,7 @@ const Meat = ({ item, navigation }) => (
               textAlign="center"
               left={5}
               bold
+              fontSize={14}
               w={75}
               color="success.100"
             >
@@ -200,6 +202,7 @@ const Fats = ({ item, navigation }) => (
               textAlign="center"
               left={5}
               bold
+              fontSize={14}
               w={75}
               color="success.100"
             >
@@ -270,6 +273,7 @@ const Vegetables = ({ item, navigation }) => (
               textAlign="center"
               left={5}
               bold
+              fontSize={14}
               w={75}
               color="success.100"
             >

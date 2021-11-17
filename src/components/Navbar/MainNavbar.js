@@ -67,7 +67,6 @@ export default function MainNavbar() {
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Cart" component={Cart} />
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="AddOrder" component={AddOrder} />
 

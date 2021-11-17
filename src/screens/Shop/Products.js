@@ -25,11 +25,11 @@ const Products = (props) => {
 
   console.log(data);
   return (
-    <ScrollView marginBottom={15}>
+    <ScrollView>
       {loading && Loading()}
       <Text
         color="primary.50"
-        fontSize={20}
+        fontSize={18}
         fontWeight="bold"
         marginLeft={4}
         marginTop={4}
@@ -51,7 +51,7 @@ const Products = (props) => {
 
       <Text
         color="primary.50"
-        fontSize={20}
+        fontSize={18}
         fontWeight="bold"
         marginLeft={4}
         marginTop={4}
@@ -72,7 +72,7 @@ const Products = (props) => {
 
       <Text
         color="primary.50"
-        fontSize={20}
+        fontSize={18}
         fontWeight="bold"
         marginLeft={4}
         marginTop={4}
@@ -92,7 +92,7 @@ const Products = (props) => {
 
       <Text
         color="primary.50"
-        fontSize={20}
+        fontSize={18}
         fontWeight="bold"
         marginLeft={4}
         marginTop={4}

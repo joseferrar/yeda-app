@@ -9,6 +9,7 @@ import Cart from "../../../screens/Cart/Cart";
 import CartDetails from "../../../screens/Cart/CartDetails";
 import MyOrder from "../../../screens/Orders/MyOrder";
 import OrderDetails from "../../../screens/Orders/OrderDetails";
+import { Feather } from "@expo/vector-icons";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
@@ -22,7 +23,7 @@ export const ShopStackScreen = ({ navigation }) => (
       name="Shop"
       component={Shop}
       options={{
-        headerTitle: () => <Text style={styles.title}>Shop</Text>,
+        headerTitle: () => <Text style={styles.title}>еда</Text>,
         headerLeft: () => (
           <Ionicons
             name="menu-outline"
@@ -34,18 +35,22 @@ export const ShopStackScreen = ({ navigation }) => (
           />
         ),
         headerRight: () => (
-          <Ionicons
-            name="search-outline"
-            size={35}
-            color="#000"
-            style={{ marginRight: 25 }}
-            lineBreakMode="head"
-            onPress={() => navigation.navigate("Search")}
-          />
+          <View style={{ flexDirection: "row" }}>
+            <Text color="#000" style={{ marginRight: 25, fontSize: 16 }}>
+              RUS
+            </Text>
+            <Ionicons
+              name="notifications-outline"
+              size={28}
+              color="#000"
+              style={{ marginRight: 15 }}
+              lineBreakMode="head"
+            />
+          </View>
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#EDC126",
           elevation: 8,
         },
       }}
@@ -59,30 +64,21 @@ export const ProfileScreen = ({ navigation }) => (
       name="Profile"
       component={Profile}
       options={{
-        headerTitle: () => <Text style={styles.title}>Profile</Text>,
-        headerLeft: () => (
-          <Ionicons
-            name="menu-outline"
-            size={35}
-            color="#000"
-            style={{ marginLeft: 10 }}
-            lineBreakMode="head"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
+        headerTitle: () => <Text style={styles.title}>Your Profile</Text>,
+
         headerRight: () => (
           <Ionicons
-            name="search-outline"
-            size={35}
+            name="log-out-outline"
+            size={30}
             color="#000"
-            style={{ marginRight: 25 }}
+            style={{ marginRight: 15 }}
             lineBreakMode="head"
             onPress={() => navigation.navigate("Search")}
           />
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#EDC126",
           elevation: 0,
         },
       }}
@@ -133,30 +129,20 @@ export const CartStackScreen = ({ navigation }) => (
       name="Cart"
       component={Cart}
       options={{
-        headerTitle: () => <Text style={styles.title}>Cart</Text>,
+        headerTitle: () => <Text style={styles.title}>My Cart</Text>,
         headerLeft: () => (
-          <Ionicons
-            name="menu-outline"
-            size={35}
+          <Feather
+            name="arrow-left"
+            size={24}
             color="#000"
-            style={{ marginLeft: 10 }}
+            style={{ marginLeft: 12 }}
             lineBreakMode="head"
-            onPress={() => navigation.openDrawer()}
-          />
-        ),
-        headerRight: () => (
-          <Ionicons
-            name="search-outline"
-            size={35}
-            color="#000"
-            style={{ marginRight: 25 }}
-            lineBreakMode="head"
-            onPress={() => navigation.navigate("Search")}
+            onPress={() => navigation.goBack()}
           />
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#EDC126",
           elevation: 0,
         },
       }}
@@ -195,7 +181,6 @@ export const OrderStackScreen = ({ navigation }) => (
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
-    fontWeight: "bold",
     textAlign: "left",
     color: "#000",
   },
