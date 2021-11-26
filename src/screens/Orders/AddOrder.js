@@ -19,23 +19,19 @@ const Orders = (props) => {
     dispatch(GetProfileAction());
   }, []);
 
-  const order = {
-    ...data,
-    profile: profile,
-    tracking: Processing,
-  };
-
-  console.log(orders);
   const addOrder = async () => {
-    await dispatch(AddOrderAction({ order: order }));
-    await dispatch(GetOrderAction());
-    navigation.goBack();
+    await data.map((item) => {
+      const placeOrder = {
+        order: item,
+        location: profile,
+        tracking: Processing,
+      };
+      dispatch(AddOrderAction(placeOrder));
+      navigation.goBack();
+    });
   };
   return (
     <View>
-      {/* <Text>
-        Orders - {orders.quantity} - {orders.recipe.label}
-      </Text> */}
       <Box style={{ backgroundColor: "#fff" }}>
         <VStack space={2}>
           <Box px={4} pt={4} pb={4} bg="#E03B8B">
