@@ -157,7 +157,7 @@ export const OrderStackScreen = ({ navigation }) => (
       name="Orders"
       component={MyOrder}
       options={{
-        headerTitle: () => <Text style={styles.title}>Orders</Text>,
+        headerTitle: () => <Text style={styles.title}>Your Orders</Text>,
         headerLeft: () => (
           <Ionicons
             name="menu-outline"
@@ -170,12 +170,22 @@ export const OrderStackScreen = ({ navigation }) => (
         ),
         headerTitleAlign: "left",
         headerStyle: {
-          backgroundColor: "#fff",
+          backgroundColor: "#EDC126",
           elevation: 0,
         },
       }}
     />
-    <OrderStack.Screen name="OrderDetails" component={OrderDetails} />
+    <OrderStack.Screen
+      name="OrderDetails"
+      component={OrderDetails}
+      options={{
+        headerTitle: () => <Text style={styles.title}>Order Details</Text>,
+        headerStyle: {
+          backgroundColor: "#EDC126",
+          elevation: 0,
+        },
+      }}
+    />
   </OrderStack.Navigator>
 );
 const styles = StyleSheet.create({
