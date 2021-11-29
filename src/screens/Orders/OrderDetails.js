@@ -21,6 +21,7 @@ import {
   Delivered,
   Cancelled,
 } from "../../utils/Tracking";
+import { showToast } from "../../components/Toast/toast";
 import TimelineModal from "../../components/Modal/TimelineModal";
 import { UpdateOrderAction } from "../../actions/OrderAction";
 
@@ -76,6 +77,7 @@ const OrderDetails = (props) => {
       tracking: Cancelled,
     };
     dispatch(UpdateOrderAction(id, cancelled));
+    showToast("Order Cancelled !!!");
   };
 
   const modalHandler = () => {

@@ -47,13 +47,12 @@ const EditOrders = (props) => {
 
     onSubmit: async (Data) => {
       const orders = {
-        ...data,
         tracking: Dispatch,
         delivery_boy: Data.delivery_boy,
         dispatchTime: new Date(),
       };
       await dispatch(ShowSpinner());
-      await dispatch(UpdateOrderAction(id, { order: orders }));
+      await dispatch(UpdateOrderAction(id, orders));
       await dispatch(GetOrderAction());
       await dispatch(AllOrderAction());
       await dispatch(HideSpinner());
