@@ -20,7 +20,7 @@ export const AddOrderAction = (Add) => async (dispatch) => {
   try {
     const { data } = await AddOrderService(Add);
     dispatch({ type: Add_ORDER, payload: data });
-    dispatch(GetOrderAction())
+    dispatch(GetOrderAction());
     showToast("Order Successfully !!!");
   } catch (err) {
     showToast(err.response.data);
@@ -40,6 +40,7 @@ export const UpdateOrderAction = (id, updateorder) => async (dispatch) => {
   try {
     const { data } = await UpdateOrderService(id, updateorder);
     dispatch({ type: UPDATE_ORDER, payload: data });
+    dispatch(GetOrderAction());
   } catch (error) {
     console.log(error.message);
   }

@@ -30,6 +30,7 @@ const Orders = (props) => {
       navigation.goBack();
     });
   };
+
   return (
     <View>
       <Box style={{ backgroundColor: "#fff" }}>
@@ -65,6 +66,18 @@ const Orders = (props) => {
             <Text fontSize={18} style={styles.rate}>
               {data?.length}
             </Text>
+          </Box>
+          <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
+            <Text fontSize={18} color="#000" fontWeight="bold">
+              Total Quantity:{" "}
+            </Text>
+
+            {data &&
+              data.map((item, index) => (
+                <Text fontSize={18} style={styles.rate} key={index}>
+                  {item?.quantity}
+                </Text>
+              ))}
           </Box>
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
             <Text fontSize={18} color="#000" fontWeight="bold">

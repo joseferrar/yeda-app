@@ -12,16 +12,20 @@ import {
   HStack,
   Divider,
 } from "native-base";
+import { useDispatch } from "react-redux";
 import { Time, Date } from "../../utils/DateFormet";
 import {
   Processing,
   Dispatch,
   Out_of_Delivery,
   Delivered,
+  Cancelled,
 } from "../../utils/Tracking";
 import TimelineModal from "../../components/Modal/TimelineModal";
+import { UpdateOrderAction } from "../../actions/OrderAction";
 
 const OrderDetails = (props) => {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const { navigation } = props;
   const { data, id, createdAt, updatedAt } = props.route.params;
@@ -67,13 +71,19 @@ const OrderDetails = (props) => {
     },
   ];
 
+  const cancelledOrder = () => {
+    var cancelled = {
+      tracking: Cancelled,
+    };
+    dispatch(UpdateOrderAction(id, cancelled));
+  };
+
   const modalHandler = () => {
     setOpen(true);
   };
 
   return (
     <ScrollView style={styles.container}>
-
       <Box px={4} py={2} rounded="lg" my={0}>
         <View flexDirection="row" top={2}>
           <Avatar
@@ -117,11 +127,13 @@ const OrderDetails = (props) => {
           marginLeft="auto"
           marginTop={-8}
           size="sm"
-          borderColor="primary.50"
+          disabled={data?.tracking === Cancelled && true}
+          borderColor="danger.100"
           _pressed={{ bgColor: "gray.50" }}
+          onPress={cancelledOrder}
         >
-          <Text color="primary.50" fontFamily="NunitoSans-Regular">
-            {"Invoice"}
+          <Text color="danger.100" fontFamily="NunitoSans-Regular">
+            {"Cancelled"}
           </Text>
         </Button>
         <Divider my={3} bg="gray.50" />

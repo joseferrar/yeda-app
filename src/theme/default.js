@@ -14,6 +14,9 @@ export const theme = extendTheme({
     success: {
       100: "#3DBE29",
     },
+    danger: {
+      100: "rgb(220,20,60)"
+    },
     default: {
       50: "#fff",
     },
