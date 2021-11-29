@@ -13,93 +13,75 @@ const AllOrders = (props) => {
   useEffect(() => {
     dispatch(AllOrderAction());
   }, []);
-  // console.log("....Order", order);
+  console.log("....Order", order);
   return (
     <View>
       {loading && Loading()}
       <ScrollView>
-        {order?.map((orderItem) =>
-          orderItem?.order?.map((item, index) => (
-            <TouchableOpacity
-              activeOpacity={10}
-              key={index}
-              onPress={() => {
-                navigation.navigate("EditOrders", {
-                  data: item,
-                  id: orderItem?._id,
-                });
-              }}
+        {order?.map((item, index) => (
+          <TouchableOpacity
+            activeOpacity={10}
+            key={index}
+            onPress={() => {
+              navigation.navigate("EditOrders", {
+                data: item,
+                id: item?._id,
+                createdAt: item?.createdAt,
+                updatedAt: item?.updatedAt,
+              });
+            }}
+          >
+            <Box
+              maxWidth="94%"
+              left={3}
+              top={4}
+              flexDirection="row"
+              height={165}
             >
-              <Box
-                maxWidth="94%"
-                left={3}
-                top={4}
-                flexDirection="row"
-                height={200}
-              >
-                <Avatar
-                  size="2xl"
-                  source={{
-                    uri: item?.recipe?.image,
-                  }}
-                  alt="image base"
-                  roundedTop="md"
-                  top={8}
-                  left={4}
-                  bg="transparent"
-                ></Avatar>
+              <Avatar
+                size="2xl"
+                source={{
+                  uri: item?.order?.image,
+                }}
+                alt="image base"
+                roundedTop="md"
+                top={5}
+                left={4}
+                bg="transparent"
+              ></Avatar>
+
+              <Stack space={1} p={[4, 4, 4]} top={4}>
                 <Text
-                  bold
-                  position="absolute"
+                  left={3}
+                  fontFamily="NunitoSans-Black"
                   color="primary.50"
-                  left={7}
-                  top={1.5}
-                  p={1}
-                  // borderRadius={4}
-                  style={{ transform: [{ rotate: "-18deg" }] }}
-                  borderRightRadius={5}
-                  borderTopLeftRadius={10}
-                  borderBottomRadius={15}
-                  m={[4, 4, 8]}
-                  bg="#fff"
+                  fontSize={18}
+                  w={200}
+                  noOfLines={2}
+                  isTruncated={true}
                 >
-                  {item?.recipe?.yield}
-                  <Ionicons name={"star"} color="orange" size={16} />
+                  {item?.order?.foodName}
                 </Text>
 
-                <Stack space={1} p={[4, 4, 4]} top={4}>
-                  <Text
-                    left={3}
-                    fontFamily="NunitoSans-Black"
-                    color="primary.50"
-                    fontSize={18}
-                    w={200}
-                    noOfLines={2}
-                    isTruncated={true}
-                  >
-                    {item?.recipe?.label}
-                  </Text>
-
-                  <Text
-                    left={3}
-                    color="gray.500"
-                    isTruncated={true}
-                    fontFamily="NunitoSans-Regular"
-                    fontSize={14}
-                  >
-                    {item?.recipe?.source}
-                  </Text>
-                  <Text left={3} noOfLines={1} bold color="primary.50">
-                    No of Items: {item?.quantity}
-                  </Text>
-                  <Badge colorScheme="gray.500" ml={1} rounded="xl">
-                    <Text fontWeight="bold">{item?.tracking}</Text>
-                  </Badge>
-                </Stack>
-              </Box>
-            </TouchableOpacity>
-          ))
-        )}
+                <Text
+                  left={3}
+                  color="gray.500"
+                  isTruncated={true}
+                  fontFamily="NunitoSans-Regular"
+                  fontSize={14}
+                >
+                  {item?.order?.price}
+                </Text>
+                <Text left={3} noOfLines={1} bold color="primary.50">
+                  No of Items: {item?.order?.quantity}
+                </Text>
+                <Badge colorScheme="gray.500" ml={1} rounded="xl">
+                  <Text fontWeight="bold">{item?.tracking}</Text>
+                </Badge>
+              </Stack>
+            </Box>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
     </View>
   );

@@ -16,7 +16,7 @@ const Details = (props) => {
     await dispatch(AddCartAction(data));
     await dispatch(GetCartAction());
   };
-  
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
@@ -64,7 +64,7 @@ const Details = (props) => {
         source={{ uri: data?.image }}
         style={{ height: 350 }}
       />
-      <Box rounded="lg" maxWidth="100%" height={400}>
+      <Box rounded="lg" maxWidth="100%" height={"auto"}>
         <Stack space={3} p={[4, 4, 4]} top={4}>
           <Text
             left={3}
