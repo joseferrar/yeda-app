@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import {
-  VStack,
-  Box,
-  Divider,
-  Avatar,
+  View,
   Text,
+  ScrollView,
+  Box,
+  Avatar,
+  Flex,
   Button,
+  HStack,
+  VStack,
+  Divider,
   FormControl,
   Select,
   CheckIcon,
@@ -21,7 +25,12 @@ import {
   AllOrderAction,
 } from "../../actions/OrderAction";
 import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
-import { Dispatch, Out_of_Delivery, Delivered } from "../../utils/Tracking";
+import {
+  Processing,
+  Dispatch,
+  Out_of_Delivery,
+  Delivered,
+} from "../../utils/Tracking";
 
 const EditOrders = (props) => {
   const { users } = useSelector((state) => state.admin);
@@ -61,105 +70,209 @@ const EditOrders = (props) => {
   });
 
   return (
-    <View style={{ backgroundColor: "#fff" }}>
-      <Box>
-        <VStack space={3}>
-          <Box px={5} flexDirection="row" top={2}>
-            <Avatar
-              size="2xl"
-              source={{
-                uri: data?.recipe?.image,
-              }}
-              roundedTop="md"
-              left={2}
-              bg="transparent"
-            ></Avatar>
-            <Text
-              fontSize={18}
-              top={6}
-              w={200}
-              noOfLines={2}
-              style={styles.label}
-            >
-              {data?.recipe?.label}
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <Box px={4} py={2} rounded="lg" my={0}>
+        <View flexDirection="row" top={2}>
+          <Avatar
+            size="xl"
+            mr={3}
+            bg="#000"
+            source={{
+              uri: data?.order?.image,
+            }}
+          ></Avatar>
+          <Text
+            color="primary.50"
+            w={140}
+            fontWeight="bold"
+            noOfLines={2}
+            marginTop={4}
+            fontSize={20}
+          >
+            {" "}
+            {data?.order?.foodName}
+          </Text>
+          <Button
+            // onPress={modalHandler}
+            variant="outline"
+            marginLeft="auto"
+            size="sm"
+            height={9}
+            pl={6}
+            pr={5}
+            borderColor="primary.50"
+            color="primary.50"
+            _pressed={{ bgColor: "gray.50" }}
+          >
+            <Text color="primary.50" fontFamily="NunitoSans-Regular">
+              {"Track"}
             </Text>
-          </Box>
-
-          <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={18} color="#000" fontWeight="bold">
-              Total Items:{" "}
-            </Text>
-            <Text fontSize={18} style={styles.rate}>
-              {data?.quantity}
-            </Text>
-          </Box>
-          <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={18} color="#000" fontWeight="bold">
-              Order total:
-            </Text>
-            <Text fontSize={18} style={styles.rate}>
-              ₹ {nf.format(data?.rate)}
-            </Text>
-          </Box>
-          <Divider bgColor="#fff" />
-        </VStack>
+          </Button>
+        </View>
+        <Divider my={4} bg="gray.50" />
       </Box>
 
-      <FormControl mt={4}>
-        {users
-          .filter((user) => user?.role === "delivery")
-          .map((userData, index) => (
-            <Select
-              key={index}
-              minWidth={200}
-              accessibilityLabel="Assign Delivery Boy"
-              placeholder="Assign Delivery Boy"
-              isDisabled={
-                data?.tracking === Out_of_Delivery ||
-                (data?.tracking === Delivered && true)
-              }
-              color={
-                data?.tracking === Out_of_Delivery ? "default.50" : "primary.50"
-              }
-              _selectedItem={{
-                bg: "primary.50",
-                endIcon: <CheckIcon size={5} />,
-              }}
-              mt={1}
-              ml={5}
-              mr={5}
-              selectedValue={formik.values.delivery_boy || data?.delivery_boy}
-              onValueChange={formik.handleChange("delivery_boy")}
-            >
-              <Select.Item
-                label={userData?.name}
-                value={userData?.name}
-                bg="default.50"
-              />
-            </Select>
-          ))}
-      </FormControl>
+      {data?.tracking === Processing && (
+        <Box px={4} rounded="lg">
+          <Text color="primary.50" fontWeight="bold">
+            {`Assign Delivery Boy:`}
+          </Text>
+          <FormControl mt={2}>
+            {users
+              .filter((user) => user?.role === "delivery")
+              .map((userData, index) => (
+                <Select
+                  key={index}
+                  minWidth={200}
+                  accessibilityLabel="Assign Delivery Boy"
+                  placeholder="Assign Delivery Boy"
+                  isDisabled={
+                    data?.tracking === Out_of_Delivery ||
+                    (data?.tracking === Delivered && true)
+                  }
+                  color={
+                    data?.tracking === Out_of_Delivery
+                      ? "default.50"
+                      : "primary.50"
+                  }
+                  _selectedItem={{
+                    bg: "primary.50",
+                    endIcon: <CheckIcon size={5} />,
+                  }}
+                  mt={1}
+                  selectedValue={formik.values.delivery_boy}
+                  onValueChange={formik.handleChange("delivery_boy")}
+                >
+                  <Select.Item
+                    label={userData?.name}
+                    value={userData?.name}
+                    bg="default.50"
+                  />
+                </Select>
+              ))}
+          </FormControl>
+          <Button
+            size="md"
+            width={300}
+            mt={5}
+            bg={"#000"}
+            colorScheme="secondary"
+            shadow={2}
+            borderRadius={10}
+            marginRight="auto"
+            marginLeft="auto"
+            onPress={formik.handleSubmit}
+          >
+            <Text style={styles.buttonText}>Submit</Text>
+          </Button>
+          <Divider my={2} bg="gray.50" />
+        </Box>
+      )}
+      {data?.tracking === Dispatch && (
+        <Box px={4} rounded="lg">
+          <Text color="primary.50" fontWeight="bold">
+            {`Delivery Man:`}
+          </Text>
+          <Text color="gray.100" fontFamily="NunitoSans-Regular" my={1}>
+            {`${data?.delivery_boy}`}
+          </Text>
+          <Divider my={2} bg="gray.50" />
+        </Box>
+      )}
 
-      <Button
-        size="md"
-        width={300}
-        mt={8}
-        bg={"#000"}
-        colorScheme="secondary"
-        shadow={2}
-        borderRadius={10}
-        disabled={
-          data?.tracking === Out_of_Delivery ||
-          (data?.tracking === Delivered && true)
-        }
-        marginLeft={6}
-        marginRight="auto"
-        marginLeft="auto"
-        onPress={formik.handleSubmit}
-      >
-        <Text style={styles.buttonText}>Submit</Text>
-      </Button>
-    </View>
+      <Box px={4} py={1} rounded="lg">
+        <Text color="primary.50" fontWeight="bold">
+          {`Delivery Address:`}
+        </Text>
+
+        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={1}>
+          {data?.location?.address1}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.address2}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.city}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.pinCode}
+        </Text>
+
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4} py={1} rounded="lg">
+        <HStack>
+          <Text color="primary.50" fontWeight="bold">
+            {`Item Name`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Quantity`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Price`}
+          </Text>
+        </HStack>
+
+        <HStack my={1}>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            style={{ width: 80 }}
+          >
+            {data?.order?.foodName}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.quantity}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.price}
+          </Text>
+        </HStack>
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4}>
+        <HStack>
+          <Text color="primary.50" fontWeight="bold">
+            {`Product ID`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Category`}
+          </Text>
+        </HStack>
+
+        <HStack my={2}>
+          <Text color="gray.100" fontFamily="NunitoSans-Regular">
+            {data?.order?._id}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.category}
+          </Text>
+        </HStack>
+        <Divider my={2} bg="gray.50" />
+        <Text color="primary.50" fontWeight="bold" my={1}>
+          {`Description:`}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.order?.description}
+        </Text>
+
+        <Divider my={2} bg="gray.50" />
+      </Box>
+    </ScrollView>
   );
 };
 

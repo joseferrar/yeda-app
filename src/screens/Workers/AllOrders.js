@@ -5,6 +5,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { AllOrderAction } from "../../actions/OrderAction";
 import { Loading } from "../../components/Spinner/Spinner";
+import { Cancelled } from "../../utils/Tracking";
+
 const AllOrders = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
@@ -75,7 +77,13 @@ const AllOrders = (props) => {
                 <Text left={3} noOfLines={1} bold color="primary.50">
                   No of Items: {item?.order?.quantity}
                 </Text>
-                <Badge colorScheme="gray.500" ml={1} rounded="xl">
+                <Badge
+                  bg={
+                    item?.tracking === Cancelled ? "danger.100" : "primary.50"
+                  }
+                  ml={1}
+                  rounded="xl"
+                >
                   <Text fontWeight="bold">{item?.tracking}</Text>
                 </Badge>
               </Stack>

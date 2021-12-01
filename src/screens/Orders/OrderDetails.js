@@ -72,11 +72,11 @@ const OrderDetails = (props) => {
     },
   ];
 
-  const cancelledOrder = () => {
+  const cancelledOrder = async () => {
     var cancelled = {
       tracking: Cancelled,
     };
-    dispatch(UpdateOrderAction(id, cancelled));
+    await dispatch(UpdateOrderAction(id, cancelled));
     showToast("Order Cancelled !!!");
   };
 
