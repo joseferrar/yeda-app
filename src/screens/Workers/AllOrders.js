@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { View, TouchableOpacity, ScrollView, Button } from "react-native";
 import { Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,6 +11,16 @@ const AllOrders = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
   const { loading, order } = useSelector((state) => state.order);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: "All Orders",
+      headerStyle: {
+        backgroundColor: "#EDC126",
+      },
+      headerLeft: () => null,
+    });
+  }, [navigation]);
 
   useEffect(() => {
     dispatch(AllOrderAction());
