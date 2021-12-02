@@ -5,7 +5,7 @@ export const Time = (value) => {
   return time;
 };
 
-export const Date = (value) => {
+export const DateFormet = (value) => {
   var date = moment(value).format("MMMM Do YY");
   return date;
 };

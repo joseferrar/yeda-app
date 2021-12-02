@@ -13,16 +13,19 @@ const cardItem = [
     id: 1,
     name: "All Orders",
     route: "AllOrders",
+    color: "secondary.200",
   },
   {
     id: 2,
     name: "Today Orders",
     route: "TodayOrders",
+    color: "success.100",
   },
   {
     id: 3,
     name: "Delivery boys",
     route: "Deliveryboys",
+    color: "secondary.100",
   },
 ];
 
@@ -42,12 +45,13 @@ const WorkerCard = (props) => {
               w="180px"
               h="120px"
               size={16}
-              bg="primary.100"
+              bg={item.color}
               rounded="md"
               _text={{
                 color: "white",
               }}
               shadow={3}
+              borderRadius={6}
             >
               <Box
                 _text={{

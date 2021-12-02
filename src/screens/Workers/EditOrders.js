@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
   View,
@@ -37,9 +37,20 @@ const EditOrders = (props) => {
   const dispatch = useDispatch();
   const { navigation } = props;
   const { data, id } = props.route.params;
-  const nf = new Intl.NumberFormat();
   console.log("data", data);
   console.log("id", id);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: `Order ID - ${id}`,
+      headerStyle: {
+        backgroundColor: "#EDC126",
+      },
+      headerTitleStyle: {
+        fontSize: 16,
+      },
+    });
+  }, [navigation]);
 
   useEffect(() => {
     dispatch(GetUsersAction());
