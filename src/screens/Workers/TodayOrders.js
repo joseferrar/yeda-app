@@ -5,7 +5,13 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { AllOrderAction } from "../../actions/OrderAction";
 import { Loading } from "../../components/Spinner/Spinner";
-import { Cancelled } from "../../utils/Tracking";
+import {
+  Cancelled,
+  Delivered,
+  Out_of_Delivery,
+  Dispatch,
+  Processing,
+} from "../../utils/Tracking";
 import { DateFormet } from "../../utils/DateFormet";
 
 const TodayOrders = (props) => {
@@ -96,9 +102,12 @@ const TodayOrders = (props) => {
                     </Text>
                     <Badge
                       bg={
-                        item?.tracking === Cancelled
-                          ? "danger.100"
-                          : "primary.50"
+                        (item?.tracking === Cancelled && "danger.100") ||
+                        (item?.tracking === Delivered && "success.100") ||
+                        (item?.tracking === Out_of_Delivery &&
+                          "secondary.200") ||
+                        (item?.tracking === Dispatch && "info.100") ||
+                        (item?.tracking === Processing && "primary.50")
                       }
                       ml={1}
                       rounded="xl"

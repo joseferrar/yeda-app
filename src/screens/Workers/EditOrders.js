@@ -196,7 +196,10 @@ const EditOrders = (props) => {
           {`Delivery Address:`}
         </Text>
 
-        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={1}>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={0.5}>
+          {data?.location?.fullName}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
           {data?.location?.address1}
         </Text>
         <Text color="gray.100" fontFamily="NunitoSans-Regular">

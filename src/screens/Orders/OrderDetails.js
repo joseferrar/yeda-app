@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
   View,
@@ -13,7 +13,7 @@ import {
   Divider,
 } from "native-base";
 import { useDispatch } from "react-redux";
-import { Time, Date } from "../../utils/DateFormet";
+import { Time, DateFormet } from "../../utils/DateFormet";
 import {
   Processing,
   Dispatch,
@@ -32,6 +32,18 @@ const OrderDetails = (props) => {
   const { data, id, createdAt, updatedAt } = props.route.params;
   console.log("data", data);
   console.log("id", id);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: `Order ID - ${id}`,
+      headerStyle: {
+        backgroundColor: "#EDC126",
+      },
+      headerTitleStyle: {
+        fontSize: 16,
+      },
+    });
+  }, [navigation]);
 
   const timeline1 = [
     {
@@ -129,7 +141,10 @@ const OrderDetails = (props) => {
           marginLeft="auto"
           marginTop={-8}
           size="sm"
-          disabled={data?.tracking === Cancelled && true}
+          disabled={
+            data?.tracking === Cancelled ||
+            (data?.tracking === Delivered && true)
+          }
           borderColor="danger.100"
           _pressed={{ bgColor: "gray.50" }}
           onPress={cancelledOrder}
@@ -146,9 +161,7 @@ const OrderDetails = (props) => {
           {`Order id - ${id}`}
         </Text>
         <Text color="gray.100" fontFamily="NunitoSans-Regular" my={1}>
-          {`Time: ${data?.tracking === Processing && Time(createdAt)}, ${
-            data?.tracking === Processing && Date(createdAt)
-          }`}
+          {`Time: ${Time(createdAt)}, ${DateFormet(createdAt)}`}
         </Text>
         <Divider my={2} bg="gray.50" />
       </Box>
@@ -158,7 +171,10 @@ const OrderDetails = (props) => {
           {`Delivery Address:`}
         </Text>
 
-        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={1}>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={0.5}>
+          {data?.location?.fullName}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
           {data?.location?.address1}
         </Text>
         <Text color="gray.100" fontFamily="NunitoSans-Regular">
