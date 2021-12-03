@@ -27,10 +27,9 @@ const AllProduct = (props) => {
     navigation.setOptions({
       headerTitle: "Yeda Products",
       headerStyle: {
-        backgroundColor: "#E03B8B",
+        backgroundColor: "#EDC126",
       },
       headerLeft: () => null,
-      headerTintColor: "#fff",
     });
   }, [navigation]);
 
@@ -48,7 +47,7 @@ const AllProduct = (props) => {
             <TouchableOpacity
               activeOpacity={0.9}
               // onPress={() => {
-              //   navigation.navigate("UsersDetails", {
+              //   navigation.navigate("Details", {
               //     data: item,
               //   });
               // }}

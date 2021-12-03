@@ -129,38 +129,36 @@ const EditOrders = (props) => {
             {`Assign Delivery Boy:`}
           </Text>
           <FormControl mt={2}>
-            {users
-              .filter((user) => user?.role === "delivery")
-              .map((userData, index) => (
-                <Select
-                  key={index}
-                  minWidth={200}
-                  accessibilityLabel="Assign Delivery Boy"
-                  placeholder="Assign Delivery Boy"
-                  isDisabled={
-                    data?.tracking === Out_of_Delivery ||
-                    (data?.tracking === Delivered && true)
-                  }
-                  color={
-                    data?.tracking === Out_of_Delivery
-                      ? "default.50"
-                      : "primary.50"
-                  }
-                  _selectedItem={{
-                    bg: "primary.50",
-                    endIcon: <CheckIcon size={5} />,
-                  }}
-                  mt={1}
-                  selectedValue={formik.values.delivery_boy}
-                  onValueChange={formik.handleChange("delivery_boy")}
-                >
+            <Select
+              minWidth={200}
+              accessibilityLabel="Assign Delivery Boy"
+              placeholder="Assign Delivery Boy"
+              isDisabled={
+                data?.tracking === Out_of_Delivery ||
+                (data?.tracking === Delivered && true)
+              }
+              color={
+                data?.tracking === Out_of_Delivery ? "default.50" : "primary.50"
+              }
+              _selectedItem={{
+                bg: "primary.50",
+                endIcon: <CheckIcon size={5} />,
+              }}
+              mt={1}
+              selectedValue={formik.values.delivery_boy}
+              onValueChange={formik.handleChange("delivery_boy")}
+            >
+              {users
+                .filter((user) => user?.role === "delivery")
+                .map((userData, index) => (
                   <Select.Item
+                    key={index}
                     label={userData?.name}
                     value={userData?.name}
                     bg="default.50"
                   />
-                </Select>
-              ))}
+                ))}
+            </Select>
           </FormControl>
           <Button
             size="md"

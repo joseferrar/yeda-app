@@ -23,8 +23,8 @@ const cardItem = [
   },
   {
     id: 3,
-    name: "Delivery boys",
-    route: "Deliveryboys",
+    name: "Delivery Boys",
+    route: "DeliveryBoys",
     color: "secondary.100",
   },
 ];

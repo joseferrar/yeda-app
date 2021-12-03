@@ -266,7 +266,7 @@ const OrderDetails = (props) => {
 
         <Divider my={2} bg="gray.50" />
       </Box>
-      <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} />
+      {/* <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} /> */}
     </ScrollView>
   );
 };

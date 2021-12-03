@@ -23,6 +23,7 @@ import { Loading } from "../Spinner/Spinner";
 import AllProduct from "../../screens/Admin/Products/AllProduct";
 import CreateProduct from "../../screens/Admin/Products/CreateProduct";
 import TodayOrders from "../../screens/Workers/TodayOrders";
+import DeliveryBoys from "../../screens/Workers/DeliveryBoys";
 
 const Stack = createStackNavigator();
 
@@ -83,6 +84,7 @@ export default function MainNavbar() {
         <Stack.Screen name="AllOrders" component={AllOrders} />
         <Stack.Screen name="TodayOrders" component={TodayOrders} />
         <Stack.Screen name="EditOrders" component={EditOrders} />
+        <Stack.Screen name="DeliveryBoys" component={DeliveryBoys} />
 
         {/* Delivery */}
         <Stack.Screen name="Delivery" component={Delivery} />
