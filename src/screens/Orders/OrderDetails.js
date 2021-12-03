@@ -82,6 +82,11 @@ const OrderDetails = (props) => {
       title: data?.tracking === Delivered && Delivered,
       description: data?.tracking === Delivered && Time(data?.deliveredTime),
     },
+    {
+      time: data?.tracking === Cancelled && Time(updatedAt),
+      title: data?.tracking === Cancelled && Cancelled,
+      description: data?.tracking === Cancelled && Time(updatedAt),
+    },
   ];
 
   const cancelledOrder = async () => {
@@ -261,7 +266,7 @@ const OrderDetails = (props) => {
 
         <Divider my={2} bg="gray.50" />
       </Box>
-      {/* <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} /> */}
+      <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} />
     </ScrollView>
   );
 };

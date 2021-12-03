@@ -22,8 +22,8 @@ const TimelineModal = (props) => {
               style={styles.list}
               timeStyle={{
                 textAlign: "center",
-                backgroundColor: "#ff9797",
-                color: "white",
+                // backgroundColor: "#ff9797",
+                color: "#000",
                 width: 70,
                 borderRadius: 8,
                 left: 2,
