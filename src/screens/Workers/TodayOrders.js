@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack, Badge } from "native-base";
+import { TouchableOpacity, ScrollView, Button } from "react-native";
+import { View, Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { AllOrderAction } from "../../actions/OrderAction";
@@ -38,7 +38,7 @@ const TodayOrders = (props) => {
   console.log("....Order", order);
 
   return (
-    <View>
+    <View flex={1} bg="#fff">
       {loading && Loading()}
       <ScrollView>
         {order?.map(
@@ -98,7 +98,7 @@ const TodayOrders = (props) => {
                       {item?.order?.price}
                     </Text>
                     <Text left={3} noOfLines={1} bold color="primary.50">
-                      No of Items: {item?.order?.quantity}
+                      {item?.order?.quantity}
                     </Text>
                     <Badge
                       bg={

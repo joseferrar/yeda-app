@@ -24,7 +24,6 @@ import {
   GetOrderAction,
   AllOrderAction,
 } from "../../actions/OrderAction";
-import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
 import {
   Processing,
   Dispatch,
@@ -71,11 +70,8 @@ const EditOrders = (props) => {
         delivery_boy: Data.delivery_boy,
         dispatchTime: new Date(),
       };
-      await dispatch(ShowSpinner());
       await dispatch(UpdateOrderAction(id, orders));
-      await dispatch(GetOrderAction());
       await dispatch(AllOrderAction());
-      await dispatch(HideSpinner());
       navigation.goBack();
     },
   });
@@ -177,7 +173,8 @@ const EditOrders = (props) => {
           <Divider my={2} bg="gray.50" />
         </Box>
       )}
-      {data?.tracking === Dispatch && (
+
+      {data?.tracking !== Processing  && (
         <Box px={4} rounded="lg">
           <Text color="primary.50" fontWeight="bold">
             {`Delivery Man:`}

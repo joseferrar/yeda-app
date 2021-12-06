@@ -101,7 +101,7 @@ const Delivery = (props) => {
                       {item?.order?.price}
                     </Text>
                     <Text left={3} noOfLines={1} bold color="primary.50">
-                      No of Items: {item?.order?.quantity}
+                     {item?.order?.quantity}
                     </Text>
                     <Badge
                       bg={

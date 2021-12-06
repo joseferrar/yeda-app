@@ -83,7 +83,7 @@ const MyOrder = (props) => {
                     {item?.order?.price}
                   </Text>
                   <Text left={3} noOfLines={1} bold color="primary.50">
-                    Quantity: {item?.order?.quantity}
+                    {item?.order?.quantity}
                   </Text>
 
                   <Badge

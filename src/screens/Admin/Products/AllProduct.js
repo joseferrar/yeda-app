@@ -46,11 +46,11 @@ const AllProduct = (props) => {
           <View>
             <TouchableOpacity
               activeOpacity={0.9}
-              // onPress={() => {
-              //   navigation.navigate("Details", {
-              //     data: item,
-              //   });
-              // }}
+              onPress={() => {
+                navigation.navigate("Details", {
+                  data: item,
+                });
+              }}
             >
               <Box
                 px={2}

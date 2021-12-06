@@ -5,12 +5,18 @@ import { Icon, Text, Box, Stack, Button, Badge, ScrollView } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { showToast } from "../../components/Toast/toast";
 import { AddCartAction, GetCartAction } from "../../actions/CartAction";
+import { UserAction } from "../../actions/AuthAction";
 
 const Details = (props) => {
   const { navigation } = props;
   const { data } = props.route.params;
   const { cart } = useSelector((state) => state.cart);
+  const { auth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(UserAction());
+  }, []);
 
   const addcart = async () => {
     await dispatch(AddCartAction(data));
@@ -25,34 +31,55 @@ const Details = (props) => {
       headerTitle: <Text color="#000">{data?.foodName}</Text>,
       headerTintColor: "#000",
       headerRight: () => (
-        <View style={{ flexDirection: "row" }}>
-          <Ionicons
-            name="cart-outline"
-            size={32}
-            color="#000"
-            style={{ marginRight: 30 }}
-            onPress={() => navigation.navigate("Cart")}
-          />
-          <Badge
-            colorScheme="dark"
-            style={{
-              position: "absolute",
-              top: -2,
-              right: 20,
-              borderRadius: 15,
-              backgroundColor: "#E21717",
-            }}
-          >
-            <Text
-              color="#fff"
-              fontWeight="bold"
-              fontSize={12}
-              textAlign="center"
-            >
-              {cart?.length}
-            </Text>
-          </Badge>
-        </View>
+        <>
+          {auth?.role == "admin" ? (
+            <View style={{ flexDirection: "row" }}>
+              <Ionicons
+                name="pencil-sharp"
+                size={32}
+                color="#000"
+                style={{ marginRight: 12 }}
+                // onPress={() => navigation.navigate("Cart")}
+              />
+              <Ionicons
+                name="trash-sharp"
+                size={32}
+                color="#000"
+                style={{ marginRight: 12 }}
+                // onPress={() => navigation.navigate("Cart")}
+              />
+            </View>
+          ) : (
+            <View>
+              <Ionicons
+                name="cart-outline"
+                size={32}
+                color="#000"
+                style={{ marginRight: 30 }}
+                onPress={() => navigation.navigate("Cart")}
+              />
+              <Badge
+                colorScheme="dark"
+                style={{
+                  position: "absolute",
+                  top: -2,
+                  right: 20,
+                  borderRadius: 15,
+                  backgroundColor: "#E21717",
+                }}
+              >
+                <Text
+                  color="#fff"
+                  fontWeight="bold"
+                  fontSize={12}
+                  textAlign="center"
+                >
+                  {cart?.length}
+                </Text>
+              </Badge>
+            </View>
+          )}
+        </>
       ),
     });
   }, [navigation]);

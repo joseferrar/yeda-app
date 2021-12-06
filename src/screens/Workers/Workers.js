@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from "react";
-import { View } from "react-native";
+import { View } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../actions/AuthAction";
@@ -28,7 +28,7 @@ const Workers = (props) => {
   }, [navigation]);
 
   return (
-    <View flex={1}>
+    <View flex={1} bg="#fff">
       <WorkerCard navigation={navigation} />
     </View>
   );
