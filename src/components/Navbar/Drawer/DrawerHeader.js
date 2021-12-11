@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Shop/Products";
 import Profile from "../../../screens/Profile/Profile";
-import Favorite from "../../../screens/Favorite/Favorite";
+import AllCategory from "../../../screens/AllCategory/AllCategory";
 import Cart from "../../../screens/Cart/Cart";
 import CartDetails from "../../../screens/Cart/CartDetails";
 import MyOrder from "../../../screens/Orders/MyOrder";
@@ -13,7 +13,7 @@ import { Feather } from "@expo/vector-icons";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
-const FavoriteStack = createStackNavigator();
+const AllCategoryStack = createStackNavigator();
 const CartStack = createStackNavigator();
 const OrderStack = createStackNavigator();
 
@@ -86,13 +86,13 @@ export const ProfileScreen = ({ navigation }) => (
   </ProfileStack.Navigator>
 );
 
-export const FavoriteStackScreen = ({ navigation }) => (
-  <FavoriteStack.Navigator>
-    <FavoriteStack.Screen
-      name="Favorite"
-      component={Favorite}
+export const AllCategoryStackScreen = ({ navigation }) => (
+  <AllCategoryStack.Navigator>
+    <AllCategoryStack.Screen
+      name="All Category"
+      component={AllCategory}
       options={{
-        headerTitle: () => <Text style={styles.title}>Favorite</Text>,
+        headerTitle: () => <Text style={styles.title}>All Category</Text>,
         headerLeft: () => (
           <Ionicons
             name="menu-outline"
@@ -120,7 +120,7 @@ export const FavoriteStackScreen = ({ navigation }) => (
         },
       }}
     />
-  </FavoriteStack.Navigator>
+  </AllCategoryStack.Navigator>
 );
 
 export const CartStackScreen = ({ navigation }) => (

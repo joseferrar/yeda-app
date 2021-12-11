@@ -1,7 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Favorite from "../../../screens/Favorite/Favorite";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Search from "../../../screens/Search/Search";
 import {

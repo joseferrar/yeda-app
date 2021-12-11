@@ -121,7 +121,7 @@ const ProfileForm = (props) => {
         marginRight="auto"
         bg="primary.50"
         source={{
-          uri: picture,
+          uri: profile?.picture,
         }}
       ></Avatar>
 
