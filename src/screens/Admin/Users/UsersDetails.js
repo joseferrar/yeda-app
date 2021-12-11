@@ -62,16 +62,15 @@ const UsersDetails = (props) => {
         </Text>
       ),
       headerStyle: {
-        backgroundColor: "#E03B8B",
+        backgroundColor: "#EDC126",
       },
-      headerTintColor: "#fff",
       headerRight: () => (
         <View style={styles.header}>
           <TouchableOpacity style={styles.button} onPress={ChangeDisabled}>
-            <Ionicons name="pencil-sharp" size={30} color="#fff" />
+            <Ionicons name="pencil-sharp" size={30} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={deleteUser}>
-            <Ionicons name="trash-sharp" size={30} color="#fff" />
+            <Ionicons name="trash-sharp" size={30} />
           </TouchableOpacity>
         </View>
       ),

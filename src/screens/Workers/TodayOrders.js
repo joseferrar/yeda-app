@@ -1,10 +1,10 @@
-import React, { useLayoutEffect, useEffect } from "react";
-import { View, TouchableOpacity, ScrollView } from "react-native";
-import { Avatar, Text, Box, Stack, Badge } from "native-base";
+import React, { useEffect, useLayoutEffect } from "react";
+import { TouchableOpacity, ScrollView, Button } from "react-native";
+import { View, Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { AllOrderAction } from "../../actions/OrderAction";
-import { logout, UserAction } from "../../actions/AuthAction";
+import { Loading } from "../../components/Spinner/Spinner";
 import {
   Cancelled,
   Delivered,
@@ -12,50 +12,47 @@ import {
   Dispatch,
   Processing,
 } from "../../utils/Tracking";
+import { DateFormet } from "../../utils/DateFormet";
 
-const Delivery = (props) => {
+const TodayOrders = (props) => {
   const { navigation } = props;
-  const { auth } = useSelector((state) => state.auth);
-  const { order } = useSelector((state) => state.order);
-
   const dispatch = useDispatch();
+  const { loading, order } = useSelector((state) => state.order);
+  const date = new Date();
+  const todayDate = DateFormet(date);
 
-  useEffect(() => {
-    dispatch(UserAction());
-    dispatch(AllOrderAction());
-  }, []);
-  console.log(order);
   useLayoutEffect(() => {
     navigation.setOptions({
+      headerTitle: "Today Orders",
       headerStyle: {
         backgroundColor: "#EDC126",
       },
-      headerRight: () => (
-        <View style={{ flexDirection: "row" }}>
-          <Ionicons
-            name="log-out-outline"
-            size={32}
-            style={{ marginRight: 25 }}
-            onPress={() => dispatch(logout(navigation))}
-          />
-        </View>
-      ),
+      headerLeft: () => null,
     });
   }, [navigation]);
 
+  useEffect(() => {
+    dispatch(AllOrderAction());
+  }, []);
+
+  console.log("....Order", order);
+
   return (
-    <View>
+    <View flex={1} bg="#fff">
+      {loading && Loading()}
       <ScrollView>
-        {order.map(
+        {order?.map(
           (item, index) =>
-            auth?.name === item?.delivery_boy && (
+            todayDate === DateFormet(item?.createdAt) && (
               <TouchableOpacity
                 activeOpacity={10}
                 key={index}
                 onPress={() => {
-                  navigation.navigate("DeliveryDetails", {
+                  navigation.navigate("EditOrders", {
                     data: item,
                     id: item?._id,
+                    createdAt: item?.createdAt,
+                    updatedAt: item?.updatedAt,
                   });
                 }}
               >
@@ -101,7 +98,7 @@ const Delivery = (props) => {
                       {item?.order?.price}
                     </Text>
                     <Text left={3} noOfLines={1} bold color="primary.50">
-                     {item?.order?.quantity}
+                      {item?.order?.quantity}
                     </Text>
                     <Badge
                       bg={
@@ -127,4 +124,4 @@ const Delivery = (props) => {
   );
 };
 
-export default Delivery;
+export default TodayOrders;

@@ -1,114 +1,173 @@
 import React, { useEffect } from "react";
-import { View, TouchableOpacity, ScrollView, Button } from "react-native";
-import { Avatar, Text, Box, Stack, Input } from "native-base";
+import { TouchableOpacity } from "react-native";
+import { Avatar, Text, Box, View, Button, ScrollView } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetCartAction, DeleteCartAction } from "../../actions/CartAction";
-import { Loading } from "../../components/Spinner/Spinner";
+import {
+  GetCartAction,
+  DeleteCartAction,
+  UpdateCartAction,
+} from "../../actions/CartAction";
+
 const Cart = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
-  const { loading, cart } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
+  const Total = cart.reduce((a, c) => a + c.quantity * c.price, 0);
 
   useEffect(() => {
     dispatch(GetCartAction());
   }, []);
 
+  async function increment(item) {
+    await cart.map((i) => {
+      if (item._id == i._id) {
+        const qtyupdate = {
+          ...i,
+          quantity: (i.quantity += 1),
+        };
+        dispatch(UpdateCartAction(i._id, qtyupdate));
+      }
+    });
+  }
+
+  async function decrease(item) {
+    await cart.map((i) => {
+      if (item._id == i._id) {
+        const qtyupdate = {
+          ...i,
+          quantity: (i.quantity -= 1),
+        };
+        if (i.quantity == 0) {
+          dispatch(DeleteCartAction(i._id));
+        }
+        dispatch(UpdateCartAction(i._id, qtyupdate));
+      }
+    });
+  }
+
   return (
-    <View>
-      {/* {cart.map((item) =>
-        item.food.map((item) => <Text>{item?.recipe?.label}</Text>)
-      )} */}
-      {loading && Loading()}
-      <ScrollView>
-        {cart?.map((cartItem) =>
-          cartItem?.food?.map((item, index) => (
-            <TouchableOpacity
-              activeOpacity={10}
-              key={item?.recipe?.label}
-              onPress={() => {
-                navigation.navigate("CartDetails", {
-                  data: item,
-                  id: cartItem?._id,
-                  quantity: cartItem?.no_of_items,
-                });
-              }}
-            >
-              <Box
-                maxWidth="94%"
-                left={3}
-                top={4}
-                flexDirection="row"
-                height={165}
-              >
-                <Avatar
-                  size="2xl"
-                  source={{
-                    uri: item?.recipe?.image,
-                  }}
-                  alt="image base"
-                  roundedTop="md"
-                  top={5}
-                  left={4}
-                  bg="transparent"
-                ></Avatar>
-                <Text
-                  bold
-                  position="absolute"
-                  color="primary.50"
-                  left={7}
-                  top={1.5}
-                  p={1}
-                  // borderRadius={4}
-                  style={{ transform: [{ rotate: "-18deg" }] }}
-                  borderRightRadius={5}
-                  borderTopLeftRadius={10}
-                  borderBottomRadius={15}
-                  m={[4, 4, 8]}
-                  bg="#fff"
-                >
-                  {item?.recipe?.yield}
-                  <Ionicons name={"star"} color="orange" size={16} />
-                </Text>
-
-                <Stack space={1} p={[4, 4, 4]} top={4}>
-                  <Text
-                    left={3}
-                    fontFamily="NunitoSans-Black"
-                    color="primary.50"
-                    fontSize={18}
-                    w={200}
-                    noOfLines={2}
-                    isTruncated={true}
-                  >
-                    {item?.recipe?.label}
-                  </Text>
-
-                  <Text
-                    left={3}
-                    color="gray.500"
-                    isTruncated={true}
-                    fontFamily="NunitoSans-Regular"
-                    fontSize={14}
-                  >
-                    {item?.recipe?.source}
-                  </Text>
-                  <Text left={3} noOfLines={1} bold color="primary.50">
-                    No of Items: {cartItem?.no_of_items}
-                  </Text>
-                </Stack>
-              </Box>
-              {/* <Button
-                title="delete"
-                onPress={() => {
-                  dispatch(DeleteCartAction(cartItem._id));
+    <ScrollView flex={1} bg="#fff">
+      <View flexDirection="row" marginTop={4} marginLeft={6}>
+        <Text color="primary.50" fontSize={24}>
+          {"Total"}
+        </Text>
+        <Text color="primary.50" marginLeft={3} fontSize={16}>
+          {"₽"}
+        </Text>
+        <Text color="primary.50" fontSize={24} fontWeight="bold">
+          {Total.toFixed(2)}
+        </Text>
+      </View>
+      <Button
+      onPress={() => navigation.navigate('AddOrder', {
+        data: cart,
+        total: Total,
+        
+      })}
+        _text={{ fontSize: 20, color: "#fff" }}
+        height={54}
+        w="96%"
+        position="relative"
+        size="xl"
+        left={0}
+        right={0}
+        bottom={0}
+        marginTop={4}
+        marginBottom={8}
+        bgColor="success.100"
+        marginLeft="auto"
+        marginRight="auto"
+      >
+        {`Proceed to checkout (${
+          cart.length === 1 ? cart.length + " item" : cart.length + " items"
+        })`}
+      </Button>
+      {cart &&
+        cart?.map((item, index) => (
+          <TouchableOpacity
+            activeOpacity={10}
+            key={index}
+            onPress={() => {
+              navigation.navigate("Details", {
+                data: item,
+              });
+            }}
+          >
+            <Box maxWidth="94%" flexDirection="row">
+              <Avatar
+                size="lg"
+                source={{
+                  uri: item?.image,
                 }}
-              /> */}
-            </TouchableOpacity>
-          ))
-        )}
-      </ScrollView>
-    </View>
+                alt="image base"
+                left={4}
+                bg="transparent"
+              ></Avatar>
+
+              <Text
+                left={6}
+                fontFamily="NunitoSans-Black"
+                color="primary.50"
+                fontSize={18}
+                w={200}
+                noOfLines={2}
+                isTruncated={true}
+              >
+                {item?.foodName}
+              </Text>
+              <Button
+                _text={{ fontSize: 40, color: "#fff" }}
+                fontWeight="bold"
+                height={34}
+                size="sm"
+                top={2}
+                bgColor="primary.100"
+                right={14}
+                marginTop={-2}
+                onPress={() => decrease(item)}
+              >
+                -
+              </Button>
+              <Text
+                color="primary.50"
+                fontWeight="bold"
+                top={1}
+                right={2}
+                fontSize={16}
+              >
+                {item?.quantity}
+              </Text>
+              <Button
+                _text={{ fontSize: 22, color: "#fff" }}
+                fontWeight="bold"
+                height={34}
+                size="sm"
+                top={2}
+                left={2}
+                bgColor="primary.100"
+                marginLeft="auto"
+                marginTop={-2}
+                onPress={() => increment(item)}
+              >
+                +
+              </Button>
+            </Box>
+            <Text
+              right={20}
+              marginLeft="auto"
+              marginRight="auto"
+              color="primary.50"
+              isTruncated={true}
+              fontFamily="NunitoSans-Regular"
+              fontSize={14}
+              top={-36}
+            >
+              {`₽ ${item?.price}`}
+            </Text>
+          </TouchableOpacity>
+        ))}
+    </ScrollView>
   );
 };
 

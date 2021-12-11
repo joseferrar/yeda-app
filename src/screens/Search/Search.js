@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Avatar, Box, Stack, FlatList, Text } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import SearchBar from "react-native-dynamic-search-bar";
+// import SearchBar from "react-native-dynamic-search-bar";
 import { useSelector, useDispatch } from "react-redux";
 import { SearchAction } from "../../actions/FoodAction";
 
@@ -28,7 +28,7 @@ const Search = (props) => {
   console.log(data);
   return (
     <View style={styles.container}>
-      <SearchBar
+      {/* <SearchBar
         style={{ height: 50 }}
         autoFocus
         placeholder="Search here"
@@ -40,7 +40,7 @@ const Search = (props) => {
           setSearch(search);
         }}
         value={search}
-      />
+      /> */}
       {search === "" ? (
         <Text style={styles.notfound}>No Results Found</Text>
       ) : (

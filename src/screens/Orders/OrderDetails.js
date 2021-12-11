@@ -1,20 +1,49 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { VStack, Box, Divider, Avatar, Text } from "native-base";
-import Timeline from "react-native-timeline-flatlist";
-import { Time } from "../../utils/DateFormet";
+import React, { useState, useLayoutEffect } from "react";
+import { StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Box,
+  Avatar,
+  Flex,
+  Button,
+  Modal,
+  HStack,
+  Divider,
+} from "native-base";
+import { useDispatch } from "react-redux";
+import { Time, DateFormet } from "../../utils/DateFormet";
 import {
   Processing,
   Dispatch,
   Out_of_Delivery,
   Delivered,
+  Cancelled,
 } from "../../utils/Tracking";
+import { showToast } from "../../components/Toast/toast";
+import TimelineModal from "../../components/Modal/TimelineModal";
+import { UpdateOrderAction } from "../../actions/OrderAction";
 
 const OrderDetails = (props) => {
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
   const { navigation } = props;
   const { data, id, createdAt, updatedAt } = props.route.params;
   console.log("data", data);
   console.log("id", id);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: `Order ID - ${id}`,
+      headerStyle: {
+        backgroundColor: "#EDC126",
+      },
+      headerTitleStyle: {
+        fontSize: 16,
+      },
+    });
+  }, [navigation]);
 
   const timeline1 = [
     {
@@ -53,51 +82,192 @@ const OrderDetails = (props) => {
       title: data?.tracking === Delivered && Delivered,
       description: data?.tracking === Delivered && Time(data?.deliveredTime),
     },
+    {
+      time: data?.tracking === Cancelled && Time(updatedAt),
+      title: data?.tracking === Cancelled && Cancelled,
+      description: data?.tracking === Cancelled && Time(updatedAt),
+    },
   ];
 
+  const cancelledOrder = async () => {
+    var cancelled = {
+      tracking: Cancelled,
+    };
+    await dispatch(UpdateOrderAction(id, cancelled));
+    showToast("Order Cancelled !!!");
+  };
+
+  const modalHandler = () => {
+    setOpen(true);
+  };
+
   return (
-    <View style={styles.container}>
-      <Box>
-        <VStack space={2}>
-          <Box px={1} flexDirection="row">
-            <Avatar
-              size="2xl"
-              source={{
-                uri: data?.recipe?.image,
-              }}
-              roundedTop="md"
-              left={2}
-              bg="transparent"
-            ></Avatar>
-            <Text
-              fontSize={18}
-              top={6}
-              w={200}
-              noOfLines={2}
-              style={styles.label}
-            >
-              {data?.recipe?.label}
+    <ScrollView style={styles.container}>
+      <Box px={4} py={2} rounded="lg" my={0}>
+        <View flexDirection="row" top={2}>
+          <Avatar
+            size="xl"
+            mr={3}
+            bg="#000"
+            source={{
+              uri: data?.order?.image,
+            }}
+          ></Avatar>
+          <Text
+            color="primary.50"
+            w={140}
+            fontWeight="bold"
+            noOfLines={2}
+            marginTop={4}
+            fontSize={20}
+          >
+            {" "}
+            {data?.order?.foodName}
+          </Text>
+          <Button
+            onPress={modalHandler}
+            variant="outline"
+            marginLeft="auto"
+            size="sm"
+            height={9}
+            pl={6}
+            pr={5}
+            borderColor="primary.50"
+            color="primary.50"
+            _pressed={{ bgColor: "gray.50" }}
+          >
+            <Text color="primary.50" fontFamily="NunitoSans-Regular">
+              {"Track"}
             </Text>
-          </Box>
-        </VStack>
+          </Button>
+        </View>
+        <Button
+          variant="outline"
+          marginLeft="auto"
+          marginTop={-8}
+          size="sm"
+          disabled={
+            data?.tracking === Cancelled ||
+            (data?.tracking === Delivered && true)
+          }
+          borderColor="danger.100"
+          _pressed={{ bgColor: "gray.50" }}
+          onPress={cancelledOrder}
+        >
+          <Text color="danger.100" fontFamily="NunitoSans-Regular">
+            {"Cancelled"}
+          </Text>
+        </Button>
+        <Divider my={3} bg="gray.50" />
       </Box>
-      <Text fontSize={22} top={6} w={200} noOfLines={2} style={styles.title}>
-        Timeline
-      </Text>
-      <Timeline
-        data={timeline1}
-        style={styles.list}
-        timeStyle={{
-          textAlign: "center",
-          backgroundColor: "#ff9797",
-          color: "white",
-          width: 70,
-          borderRadius: 8,
-          left: 2,
-        }}
-        lineWidth={4}
-      />
-    </View>
+
+      <Box px={4} rounded="lg">
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {`Order id - ${id}`}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={1}>
+          {`Time: ${Time(createdAt)}, ${DateFormet(createdAt)}`}
+        </Text>
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4} py={1} rounded="lg">
+        <Text color="primary.50" fontWeight="bold">
+          {`Delivery Address:`}
+        </Text>
+
+        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={0.5}>
+          {data?.location?.fullName}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.address1}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.address2}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.city}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.pinCode}
+        </Text>
+
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4} py={1} rounded="lg">
+        <HStack>
+          <Text color="primary.50" fontWeight="bold">
+            {`Item Name`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Quantity`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Price`}
+          </Text>
+        </HStack>
+
+        <HStack my={1}>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            style={{ width: 80 }}
+          >
+            {data?.order?.foodName}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.quantity}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.price}
+          </Text>
+        </HStack>
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4}>
+        <HStack>
+          <Text color="primary.50" fontWeight="bold">
+            {`Product ID`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Category`}
+          </Text>
+        </HStack>
+
+        <HStack my={2}>
+          <Text color="gray.100" fontFamily="NunitoSans-Regular">
+            {data?.order?._id}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.category}
+          </Text>
+        </HStack>
+        <Divider my={2} bg="gray.50" />
+        <Text color="primary.50" fontWeight="bold" my={1}>
+          {`Description:`}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.order?.description}
+        </Text>
+
+        <Divider my={2} bg="gray.50" />
+      </Box>
+      {/* <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} /> */}
+    </ScrollView>
   );
 };
 
@@ -106,13 +276,7 @@ export default OrderDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    paddingTop: 20,
     backgroundColor: "white",
-  },
-  list: {
-    flex: 1,
-    marginTop: 40,
   },
   label: {
     color: "#000",

@@ -5,6 +5,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GetOrderAction } from "../../actions/OrderAction";
 import { Loading } from "../../components/Spinner/Spinner";
+import {
+  Cancelled,
+  Delivered,
+  Out_of_Delivery,
+  Dispatch,
+  Processing,
+} from "../../utils/Tracking";
+
 const MyOrder = (props) => {
   const { navigation } = props;
   const dispatch = useDispatch();
@@ -14,21 +22,22 @@ const MyOrder = (props) => {
     dispatch(GetOrderAction());
   }, []);
   console.log("....Order", order);
+
   return (
     <View>
       {loading && Loading()}
       <ScrollView>
-        {order?.map((orderItem) =>
-          orderItem?.order?.map((item, index) => (
+        {order &&
+          order.reverse().map((item, index) => (
             <TouchableOpacity
               activeOpacity={10}
               key={index}
               onPress={() => {
                 navigation.navigate("OrderDetails", {
                   data: item,
-                  id: orderItem?._id,
-                  createdAt: orderItem?.createdAt,
-                  updatedAt: orderItem?.updatedAt,
+                  id: item?._id,
+                  createdAt: item?.createdAt,
+                  updatedAt: item?.updatedAt,
                 });
               }}
             >
@@ -42,7 +51,7 @@ const MyOrder = (props) => {
                 <Avatar
                   size="2xl"
                   source={{
-                    uri: item?.recipe?.image,
+                    uri: item?.order?.image,
                   }}
                   alt="image base"
                   roundedTop="md"
@@ -50,24 +59,6 @@ const MyOrder = (props) => {
                   left={4}
                   bg="transparent"
                 ></Avatar>
-                <Text
-                  bold
-                  position="absolute"
-                  color="primary.50"
-                  left={7}
-                  top={1.5}
-                  p={1}
-                  // borderRadius={4}
-                  style={{ transform: [{ rotate: "-18deg" }] }}
-                  borderRightRadius={5}
-                  borderTopLeftRadius={10}
-                  borderBottomRadius={15}
-                  m={[4, 4, 8]}
-                  bg="#fff"
-                >
-                  {item?.recipe?.yield}
-                  <Ionicons name={"star"} color="orange" size={16} />
-                </Text>
 
                 <Stack space={1} p={[4, 4, 4]} top={4}>
                   <Text
@@ -79,7 +70,7 @@ const MyOrder = (props) => {
                     noOfLines={2}
                     isTruncated={true}
                   >
-                    {item?.recipe?.label}
+                    {item?.order?.foodName}
                   </Text>
 
                   <Text
@@ -89,19 +80,29 @@ const MyOrder = (props) => {
                     fontFamily="NunitoSans-Regular"
                     fontSize={14}
                   >
-                    {item?.recipe?.source}
+                    {item?.order?.price}
                   </Text>
                   <Text left={3} noOfLines={1} bold color="primary.50">
-                    No of Items: {item?.quantity}
+                    {item?.order?.quantity}
                   </Text>
-                  <Badge colorScheme="gray.500" ml={1} rounded="xl">
+
+                  <Badge
+                    bg={
+                      (item?.tracking === Cancelled && "danger.100") ||
+                      (item?.tracking === Delivered && "success.100") ||
+                      (item?.tracking === Out_of_Delivery && "secondary.200") ||
+                      (item?.tracking === Dispatch && "info.100") ||
+                      (item?.tracking === Processing && "primary.50")
+                    }
+                    ml={1}
+                    rounded="xl"
+                  >
                     <Text fontWeight="bold">{item?.tracking}</Text>
                   </Badge>
                 </Stack>
               </Box>
             </TouchableOpacity>
-          ))
-        )}
+          ))}
       </ScrollView>
     </View>
   );

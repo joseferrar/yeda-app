@@ -14,11 +14,11 @@ const DrawerNavbar = () => {
   const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator
-      initialRouteName="dashboard"
+      initialRouteName="Shop"
       drawerContent={(props) => <DrawerItem {...props} />}
     >
-      {/* <Drawer.Screen name="dashboard" component={TabNavbar} /> */}
-      <Drawer.Screen name="Shop" component={ShopStackScreen} />
+      <Drawer.Screen name="Shop" component={TabNavbar} />
+      {/* <Drawer.Screen name="Shop" component={ShopStackScreen} /> */}
       <Drawer.Screen name="Profile" component={ProfileScreen} />
       <Drawer.Screen name="Favorite" component={FavoriteStackScreen} />
       <Drawer.Screen name="Cart" component={CartStackScreen} />

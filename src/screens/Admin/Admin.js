@@ -13,15 +13,13 @@ const Admin = (props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#E03B8B",
+        backgroundColor: "#EDC126",
       },
-      headerTintColor: "#fff",
       headerRight: () => (
         <View style={{ flexDirection: "row" }}>
           <Ionicons
             name="log-out-outline"
             size={32}
-            color="#fff"
             style={{ marginRight: 30 }}
             onPress={() => dispatch(logout(navigation))}
           />

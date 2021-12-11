@@ -14,6 +14,12 @@ export const theme = extendTheme({
     success: {
       100: "#3DBE29",
     },
+    info: {
+      100: "rgb(40, 199, 172)",
+    },
+    danger: {
+      100: "rgb(220,20,60)",
+    },
     default: {
       50: "#fff",
     },
@@ -24,11 +30,12 @@ export const theme = extendTheme({
     },
     gray: {
       700: "rgb(255, 255, 255)",
+      100: "rgb(105,105,105)",
       50: "rgb(207, 209, 208)",
     },
     Black: {
       200: "#3DBE29",
-    }
+    },
     // Redefinig only one shade, rest of the color will remain same.
   },
   config: {

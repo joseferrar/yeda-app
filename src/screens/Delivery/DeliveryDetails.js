@@ -1,12 +1,16 @@
-import React, { useEffect } from "react";
-import { StyleSheet, View, ScrollView } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { StyleSheet } from "react-native";
 import {
-  VStack,
-  Box,
-  Divider,
-  Avatar,
+  View,
   Text,
+  ScrollView,
+  Box,
+  Avatar,
+  Flex,
   Button,
+  Modal,
+  HStack,
+  Divider,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,38 +20,47 @@ import {
   AllOrderAction,
 } from "../../actions/OrderAction";
 import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
-import { Dispatch, Delivered, Out_of_Delivery } from "../../utils/Tracking";
+import {
+  Cancelled,
+  Delivered,
+  Out_of_Delivery,
+  Processing,
+  Dispatch,
+} from "../../utils/Tracking";
 
 const DeliveryDetails = (props) => {
   const dispatch = useDispatch();
   const { navigation } = props;
   const { data, id } = props.route.params;
-  const nf = new Intl.NumberFormat();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: `Order ID - ${id}`,
+      headerTitleStyle: {
+        fontSize: 16,
+      },
+      headerStyle: {
+        backgroundColor: "#EDC126",
+      },
+    });
+  }, [navigation]);
 
   const BuyProduct = async () => {
     const orders = {
-      ...data,
       tracking: Out_of_Delivery,
-      dispatchTime: data?.dispatchTime,
       outTime: new Date(),
     };
-    await dispatch(ShowSpinner());
-    await dispatch(UpdateOrderAction(id, { order: orders }));
-    await dispatch(GetOrderAction());
+    await dispatch(UpdateOrderAction(id, orders));
     await dispatch(AllOrderAction());
-    await dispatch(HideSpinner());
     navigation.goBack();
   };
   const DeliveredBtn = async () => {
     const orders = {
-      ...data,
       tracking: Delivered,
-      dispatchTime: data?.dispatchTime,
-      outTime: data?.outTime,
       deliveredTime: new Date(),
     };
     await dispatch(ShowSpinner());
-    await dispatch(UpdateOrderAction(id, { order: orders }));
+    await dispatch(UpdateOrderAction(id, orders));
     await dispatch(GetOrderAction());
     await dispatch(AllOrderAction());
     await dispatch(HideSpinner());
@@ -55,174 +68,162 @@ const DeliveryDetails = (props) => {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "#fff", }}>
-      <Box>
-        <VStack space={3}>
-          <Box px={5} flexDirection="row" top={2}>
-            <Avatar
-              size="2xl"
-              source={{
-                uri: data?.recipe?.image,
-              }}
-              roundedTop="md"
-              left={2}
-              bg="transparent"
-            ></Avatar>
-            <Text
-              fontSize={18}
-              top={6}
-              w={200}
-              noOfLines={2}
-              style={styles.label}
+    <ScrollView style={styles.container}>
+      <Box px={4} py={2} rounded="lg" my={0}>
+        <View flexDirection="row" top={2}>
+          <Avatar
+            size="xl"
+            mr={3}
+            bg="#000"
+            source={{
+              uri: data?.order?.image,
+            }}
+          ></Avatar>
+          <Text
+            color="primary.50"
+            w={140}
+            fontWeight="bold"
+            noOfLines={2}
+            marginTop={4}
+            fontSize={20}
+          >
+            {" "}
+            {data?.order?.foodName}
+          </Text>
+          {data?.tracking === Dispatch ? (
+            <Button
+              onPress={BuyProduct}
+              variant="outline"
+              marginLeft="auto"
+              size="sm"
+              height={9}
+              pl={6}
+              pr={5}
+              borderColor="primary.50"
+              color="primary.50"
+              borderWidth={2}
+              _pressed={{ bgColor: "gray.50" }}
             >
-              {data?.recipe?.label}
+              <Text color="primary.50" fontFamily="NunitoSans-Regular">
+                {"Buy Now"}
+              </Text>
+            </Button>
+          ) : null}
+        </View>
+        {data?.tracking === Out_of_Delivery ? (
+          <Button
+            variant="outline"
+            marginLeft="auto"
+            marginTop={-8}
+            size="sm"
+            borderColor="success.100"
+            borderWidth={2}
+            _pressed={{ bgColor: "success.100" }}
+            onPress={DeliveredBtn}
+          >
+            <Text color="primary.50" fontFamily="NunitoSans-Regular">
+              {"Delivered"}
             </Text>
-          </Box>
-
-          <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={18} color="#000" fontWeight="bold">
-              Total Items:{" "}
-            </Text>
-            <Text fontSize={18} style={styles.rate}>
-              {data?.quantity}
-            </Text>
-          </Box>
-          <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={18} color="#000" fontWeight="bold">
-              Order total:
-            </Text>
-            <Text fontSize={18} style={styles.rate}>
-              ₹ {nf.format(data?.rate)}
-            </Text>
-          </Box>
-          <Divider />
-        </VStack>
+          </Button>
+        ) : null}
+        <Divider my={4} bg="gray.50" />
       </Box>
 
-      <View style={styles.mainCardView}>
-        <View style={{ marginTop: 8 }}>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 8 }}>
-            <Ionicons name={"location"} color="red" size={30} />
-            <Text
-              fontSize={16}
-              style={styles.location}
-            >
-              Your Delivery Address
-            </Text>
-          </Box>
+      <Box px={4} py={1} rounded="lg">
+        <Text color="primary.50" fontWeight="bold">
+          {`Delivery Address:`}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular" my={0.5}>
+          {data?.location?.fullName}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.address1}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.address2}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.city}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.location?.pinCode}
+        </Text>
 
-          <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              Country:{" "}
-            </Text>
-            <Text fontSize={16} w={120} style={styles.rate}>
-              {data?.profile?.country}
-            </Text>
-          </Box>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 8 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              Full Name:{" "}
-            </Text>
-            <Text fontSize={16} w={120} style={styles.rate}>
-              {data?.profile?.fullName}
-            </Text>
-          </Box>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              Phone:{" "}
-            </Text>
-            <Text fontSize={16} w={120} style={styles.rate}>
-              {data?.profile?.phone}
-            </Text>
-          </Box>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              Pin code:{" "}
-            </Text>
-            <Text fontSize={16} w={120} style={styles.rate}>
-              {data?.profile?.pinCode}
-            </Text>
-          </Box>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              Address line 1:{" "}
-            </Text>
-            <Text
-              fontSize={16}
-              style={styles.rate}
-              isTruncated={true}
-              numberOfLines={1}
-              w={120}
-              lineBreakMode="middle"
-              textBreakStrategy="simple"
-            >
-              {data?.profile?.address1}
-            </Text>
-          </Box>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              Address line 2:{" "}
-            </Text>
-            <Text
-              fontSize={16}
-              style={styles.rate}
-              w={120}
-              isTruncated={true}
-              numberOfLines={1}
-            >
-              {data?.profile?.address2}
-            </Text>
-          </Box>
-          <Box px={4} style={{ flexDirection: "row", marginTop: 10 }}>
-            <Text fontSize={16} color="#000" fontWeight="bold">
-              City:{" "}
-            </Text>
-            <Text
-              fontSize={16}
-              style={styles.rate}
-              w={120}
-              isTruncated={true}
-              noOfLines={1}
-            >
-              {data?.profile?.city}
-            </Text>
-          </Box>
-        </View>
-      </View>
-      {data?.tracking === Dispatch ? (
-        <Button
-          size="md"
-          width={300}
-          mt={8}
-          bg={"#000"}
-          colorScheme="secondary"
-          shadow={2}
-          borderRadius={10}
-          marginLeft={6}
-          marginRight="auto"
-          marginLeft="auto"
-          onPress={BuyProduct}
-        >
-          <Text style={styles.buttonText}>Buy the Product</Text>
-        </Button>
-      ) : null}
-      {data?.tracking === Out_of_Delivery || data?.tracking !== Delivered ? (
-        <Button
-          size="md"
-          width={300}
-          mt={8}
-          bg={"#000"}
-          colorScheme="secondary"
-          shadow={2}
-          borderRadius={10}
-          marginLeft={6}
-          marginRight="auto"
-          marginLeft="auto"
-          onPress={DeliveredBtn}
-        >
-          <Text style={styles.buttonText}>Delivered</Text>
-        </Button>
-      ) : null}
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4} py={1} rounded="lg">
+        <HStack>
+          <Text color="primary.50" fontWeight="bold">
+            {`Item Name`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Quantity`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Price`}
+          </Text>
+        </HStack>
+
+        <HStack my={1}>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            style={{ width: 80 }}
+          >
+            {data?.order?.foodName}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.quantity}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.price}
+          </Text>
+        </HStack>
+        <Divider my={2} bg="gray.50" />
+      </Box>
+
+      <Box px={4}>
+        <HStack>
+          <Text color="primary.50" fontWeight="bold">
+            {`Product ID`}
+          </Text>
+          <Text color="primary.50" fontWeight="bold" marginLeft="auto">
+            {`Category`}
+          </Text>
+        </HStack>
+
+        <HStack my={2}>
+          <Text color="gray.100" fontFamily="NunitoSans-Regular">
+            {data?.order?._id}
+          </Text>
+          <Text
+            color="gray.100"
+            fontFamily="NunitoSans-Regular"
+            marginLeft="auto"
+          >
+            {data?.order?.category}
+          </Text>
+        </HStack>
+        <Divider my={2} bg="gray.50" />
+        <Text color="primary.50" fontWeight="bold" my={1}>
+          {`Description:`}
+        </Text>
+        <Text color="gray.100" fontFamily="NunitoSans-Regular">
+          {data?.order?.description}
+        </Text>
+
+        <Divider my={2} bg="gray.50" />
+      </Box>
+      {/* <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} /> */}
     </ScrollView>
   );
 };
@@ -230,37 +231,18 @@ const DeliveryDetails = (props) => {
 export default DeliveryDetails;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
   label: {
     color: "#000",
     marginLeft: "auto",
     marginBottom: "auto",
     fontFamily: "NunitoSans-Black",
   },
-  mainCardView: {
-    height: 300,
-    backgroundColor: "#fff",
-    borderRadius: 15,
-    shadowColor: "#fff",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 8,
-    elevation: 8,
-
-    paddingLeft: 16,
-    paddingRight: 14,
-    marginTop: 16,
-    marginBottom: 6,
-    marginLeft: 16,
-    marginRight: 16,
-  },
-  rate: {
+  title: {
     color: "#000",
-    marginLeft: "auto",
-    fontFamily: "NunitoSans-Regular",
-  },
-  location: {
-    color: "blue",
-    marginLeft: "auto",
-    marginTop: 1,
+    fontWeight: "bold",
   },
 });

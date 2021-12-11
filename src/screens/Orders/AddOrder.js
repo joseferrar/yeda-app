@@ -12,32 +12,27 @@ const Orders = (props) => {
   const { navigation } = props;
   const profile = useSelector((state) => state.profile.profile);
   const dispatch = useDispatch();
-  const { data, quantity } = props.route.params;
+  const { data, total } = props.route.params;
   const nf = new Intl.NumberFormat();
 
   useEffect(() => {
     dispatch(GetProfileAction());
   }, []);
 
-  const orders = {
-    ...data,
-    quantity: quantity,
-    rate: 1250,
-    profile: profile,
-    tracking: Processing,
+  const addOrder = async () => {
+    await data.map((item) => {
+      const placeOrder = {
+        order: item,
+        location: profile,
+        tracking: Processing,
+      };
+      dispatch(AddOrderAction(placeOrder));
+      navigation.goBack();
+    });
   };
 
-  console.log(orders);
-  const addOrder = async () => {
-    await dispatch(AddOrderAction({ order: orders }));
-    await dispatch(GetOrderAction());
-    navigation.goBack();
-  };
   return (
     <View>
-      {/* <Text>
-        Orders - {orders.quantity} - {orders.recipe.label}
-      </Text> */}
       <Box style={{ backgroundColor: "#fff" }}>
         <VStack space={2}>
           <Box px={4} pt={4} pb={4} bg="#E03B8B">
@@ -45,25 +40,23 @@ const Orders = (props) => {
               Confirm your order:
             </Text>
           </Box>
+
           <Box px={5} flexDirection="row">
-            <Avatar
-              size="2xl"
-              source={{
-                uri: orders?.recipe?.image,
-              }}
-              roundedTop="md"
-              left={2}
-              bg="transparent"
-            ></Avatar>
-            <Text
-              fontSize={18}
-              top={6}
-              w={200}
-              noOfLines={2}
-              style={styles.label}
-            >
-              {orders?.recipe?.label}
-            </Text>
+            <Avatar.Group size="lg" max={5}>
+              {data &&
+                data.map((item, index) => (
+                  <Avatar
+                    size="lg"
+                    key={index}
+                    bg="green.500"
+                    source={{
+                      uri: item?.image,
+                    }}
+                  >
+                    {item?.image}
+                  </Avatar>
+                ))}
+            </Avatar.Group>
           </Box>
 
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
@@ -71,15 +64,27 @@ const Orders = (props) => {
               Total Items:{" "}
             </Text>
             <Text fontSize={18} style={styles.rate}>
-              {orders?.quantity}
+              {data?.length}
             </Text>
+          </Box>
+          <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
+            <Text fontSize={18} color="#000" fontWeight="bold">
+              Total Quantity:{" "}
+            </Text>
+
+            {data &&
+              data.map((item, index) => (
+                <Text fontSize={18} style={styles.rate} key={index}>
+                  {item?.quantity}
+                </Text>
+              ))}
           </Box>
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
             <Text fontSize={18} color="#000" fontWeight="bold">
               Order total:
             </Text>
             <Text fontSize={18} style={styles.rate}>
-              ₹ {nf.format(orders?.rate)}
+              ₹ {`₽ ${total.toFixed(2)}`}
             </Text>
           </Box>
           <Divider />
@@ -92,6 +97,7 @@ const Orders = (props) => {
         width={300}
         mt={8}
         bg={"#000"}
+        disabled={profile === null ? true : false}
         colorScheme="secondary"
         shadow={2}
         borderRadius={10}

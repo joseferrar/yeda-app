@@ -32,7 +32,7 @@ const AdminCard = (props) => {
               </Box>
             </Center>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert("dfds")}>
+          <TouchableOpacity onPress={() => navigation.navigate("AllOrders")}>
             <Center
               w="180px"
               h="120px"
