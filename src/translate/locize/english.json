@@ -1,5 +1,14 @@
 {
   "translation": {
-    "welcome_text": "Hello world"
+    "Yeda": "Yeda",
+    "change_language": "Change Language",
+    "drawer": {
+      "Shop": "Shop",
+      "All Category": "All Category",
+      "Profile": "Profile",
+      "Cart": "Cart",
+      "Orders": "Orders",
+      "Logout": "Logout"
+    }
   }
 }

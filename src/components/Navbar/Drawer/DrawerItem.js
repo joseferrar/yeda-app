@@ -18,18 +18,19 @@ import {
   Icon,
   Select,
 } from "native-base";
+import { t } from "i18next";
 
 const getIcon = (screenName) => {
   switch (screenName) {
-    case "Shop":
+    case t("drawer.Shop"):
       return "pricetags-outline";
-    case "Profile":
+    case t("drawer.Profile"):
       return "person-outline";
-    case "All Category":
+    case t("drawer.All Category"):
       return "grid-outline";
-    case `Cart`:
+    case t("drawer.Cart"):
       return "cart-outline";
-    case "Orders":
+    case t("drawer.Orders"):
       return "briefcase-outline";
     case "Spam":
       return "alert-circle";
@@ -53,7 +54,7 @@ const DrawerItem = (props) => {
   return (
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
-        <VStack divider={<Divider />} space={4} my={2} mx={1}>
+        <VStack divider={<Divider />} space={3} my={2} mx={1}>
           <Box px={6}>
             <Avatar
               size="2xl"
@@ -93,7 +94,7 @@ const DrawerItem = (props) => {
                   <Icon
                     color={index === props.state.index ? "#fff" : "gray.100"}
                     size={6}
-                    as={<Ionicons name={getIcon(name)} />}
+                    as={<Ionicons name={getIcon(t(`drawer.${name}`))} />}
                   />
                   <Text
                     fontFamily="NunitoSans-Regular"
@@ -101,24 +102,23 @@ const DrawerItem = (props) => {
                     fontSize={17}
                     color={index === props.state.index ? "#fff" : "#000"}
                   >
-                    {name}
+                    {t(`drawer.${name}`)}
                   </Text>
                 </HStack>
               </Pressable>
             ))}
           </VStack>
           {/* footer */}
-          <VStack px={5} py={3} marginTop={-4} style={{ marginBottom: 20 }}>
+          <VStack px={5} py={3} marginTop={-2}>
             <Text
               fontFamily="NunitoSans-Regular"
               fontSize={16}
               color="gray.100"
             >
-              {"Change Language"} {t("welcome_text")}
+              {t("change_language")}
             </Text>
             <Picker
               selectedValue={lang}
-              style={{ width: "auto" }}
               onValueChange={(language) => {
                 i18n.changeLanguage(language), setLang(language);
               }}
@@ -126,21 +126,26 @@ const DrawerItem = (props) => {
               <Picker.Item label={"English"} value={"en"} />
               <Picker.Item label={"Russian"} value={"ru"} />
             </Picker>
+        
+          </VStack>
+
+          <VStack px={5} py={3} marginTop={-4} >
             <Button
               size="md"
-              backgroundColor="#8D3DAF"
+              variant={"ghost"}
+              marginRight="auto"
               startIcon={
-                <Ionicons name={"exit-outline"} color="#fff" size={28} />
+                <Ionicons name={"exit-outline"} color="gray" size={28} />
               }
               onPress={() => dispatch(logout(props.navigation))}
             >
               <Text
                 fontWeight={"500"}
-                color="#fff"
-                textTransform="uppercase"
-                fontSize={17}
+                color="secondary.200"
+                fontFamily="NunitoSans-Regular"
+                fontSize={18}
               >
-                Logout
+               {t("drawer.Logout")}
               </Text>
             </Button>
           </VStack>
