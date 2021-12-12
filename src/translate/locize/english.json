@@ -9,6 +9,10 @@
       "Cart": "Cart",
       "Orders": "Orders",
       "Logout": "Logout"
+    },
+    "tab": {
+      "Menu": "Menu",
+      "Search": "Search"
     }
   }
 }
