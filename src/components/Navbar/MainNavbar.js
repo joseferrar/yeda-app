@@ -24,6 +24,8 @@ import AllProduct from "../../screens/Admin/Products/AllProduct";
 import CreateProduct from "../../screens/Admin/Products/CreateProduct";
 import TodayOrders from "../../screens/Workers/TodayOrders";
 import DeliveryBoys from "../../screens/Workers/DeliveryBoys";
+import AllCategory from "../../screens/Admin/Category/AllCategory";
+import CreateCategory from "../../screens/Admin/Category/CreateCategory";
 
 const Stack = createStackNavigator();
 
@@ -78,6 +80,8 @@ export default function MainNavbar() {
         <Stack.Screen name="UsersDetails" component={UsersDetails} />
         <Stack.Screen name="AllProduct" component={AllProduct} />
         <Stack.Screen name="CreateProduct" component={CreateProduct} />
+        <Stack.Screen name="AllCategory" component={AllCategory} />
+        <Stack.Screen name="CreateCategory" component={CreateCategory} />
 
         {/* Workers */}
         <Stack.Screen name="Workers" component={Workers} />

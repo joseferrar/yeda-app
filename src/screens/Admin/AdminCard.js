@@ -57,7 +57,7 @@ const AdminCard = (props) => {
           </TouchableOpacity>
         </HStack>
 
-        <HStack space={4} alignItems="center" top={10}>
+        <HStack space={4} alignItems="center" top={8}>
           <TouchableOpacity onPress={() => navigation.navigate("AllProduct")}>
             <Center
               w="180px"
@@ -81,12 +81,12 @@ const AdminCard = (props) => {
               </Box>
             </Center>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => alert("dfds")}>
+          <TouchableOpacity onPress={() => navigation.navigate("AllCategory")}>
             <Center
               w="180px"
               h="120px"
-              bg="dark.100"
               size={16}
+              bg="dark.100"
               rounded="md"
               _text={{
                 color: "white",
@@ -100,7 +100,7 @@ const AdminCard = (props) => {
                   color: "white",
                 }}
               >
-                Reviews
+                Category
               </Box>
             </Center>
           </TouchableOpacity>
