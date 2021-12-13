@@ -1,0 +1,18 @@
+{
+  "translation": {
+    "Yeda": "еда",
+    "change_language": "Изменить язык",
+    "drawer": {
+      "Shop": "Магазин",
+      "All Category": "Все категории",
+      "Profile": "Профиль",
+      "Cart": "Корзина",
+      "Orders": "Заказы",
+      "Logout": "Выйти"
+    },
+    "tab": {
+      "Menu": "Меню",
+      "Search": "Поиск"
+    }
+  }
+}

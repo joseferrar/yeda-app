@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Favorite from "../../../screens/Favorite/Favorite";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useTranslation } from "react-i18next";
 import Search from "../../../screens/Search/Search";
 import {
   CartStackScreen,
@@ -15,6 +14,7 @@ import { GetCartAction } from "../../../actions/CartAction";
 const Tab = createBottomTabNavigator();
 
 const TabNavbar = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
 
@@ -28,13 +28,13 @@ const TabNavbar = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "Shop") {
+          if (route.name === t("drawer.Shop")) {
             iconName = focused ? "clipboard-outline" : "clipboard-outline";
-          } else if (route.name === "Cart") {
+          } else if (route.name === t("drawer.Cart")) {
             iconName = focused ? "cart-outline" : "cart-outline";
-          } else if (route.name === "Profile") {
+          } else if (route.name === t("drawer.Profile")) {
             iconName = focused ? "person-outline" : "person-outline";
-          } else if (route.name === "Search") {
+          } else if (route.name === t("tab.Search")) {
             iconName = focused ? "search-outline" : "search-outline";
           }
           return <Ionicons name={iconName} size={size} color={color} />;
@@ -55,22 +55,20 @@ const TabNavbar = () => {
       }}
     >
       <Tab.Screen
-        name="Shop"
+        name={t("drawer.Shop")}
         component={ShopStackScreen}
-        options={{ title: "Menu" }}
+        options={{ title: t("tab.Menu") }}
       />
-      <Tab.Screen name="Search" component={Search} />
+      <Tab.Screen name={t("tab.Search")} component={Search} />
       <Tab.Screen
-        name="Cart"
+        name={t("drawer.Cart")}
         component={CartStackScreen}
         options={{ tabBarBadge: cart.length }}
       />
 
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name={t("drawer.Profile")} component={ProfileScreen} />
     </Tab.Navigator>
   );
 };
 
 export default TabNavbar;
-
-const styles = StyleSheet.create({});
