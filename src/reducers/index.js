@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import AdminReducer from "./AdminReducer";
 import AuthReducer from "./AuthReducer";
 import CartReducer from "./CartReducer";
+import CategoryReducer from "./CategoryReducer";
 import CommonReducer from "./CommonReducer";
 import CountReducer from "./CountReducer";
 import FoodReducer from "./FoodReducer";
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
   order: OrderReducer,
   product: ProductReducer,
   common: CommonReducer,
+  category: CategoryReducer,
 });
 
 export default allReducers;

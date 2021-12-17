@@ -5,6 +5,8 @@ import {
   DELETE_USERS,
   GET_PRODUCTS,
   ADD_PRODUCT,
+  GET_CATEGORY,
+  ADD_CATEGORY,
 } from "../constants";
 import {
   GetUsers,
@@ -13,6 +15,8 @@ import {
   DeleteUsers,
   GetProducts,
   AddProduct,
+  GetCategory,
+  AddCategory,
 } from "../services/AdminService";
 import { showToast } from "../components/Toast/toast";
 
@@ -68,6 +72,26 @@ export const AddProductAction = (Data) => async (dispatch) => {
   try {
     const { data } = await AddProduct(Data);
     dispatch({ type: ADD_PRODUCT, payload: data });
+    showToast("Created Successfully !!!");
+  } catch (err) {
+    showToast(err.response.data);
+  }
+};
+
+//Admin Category
+export const GetCategoryAction = () => async (dispatch) => {
+  try {
+    const { data } = await GetCategory();
+    dispatch({ type: GET_CATEGORY, payload: data });
+  } catch (err) {
+    showToast(err.response.data);
+  }
+};
+
+export const AddCategoryAction = (Data) => async (dispatch) => {
+  try {
+    const { data } = await AddCategory(Data);
+    dispatch({ type: ADD_CATEGORY, payload: data });
     showToast("Created Successfully !!!");
   } catch (err) {
     showToast(err.response.data);

@@ -41,3 +41,16 @@ export const AddProduct = async (data) => {
   });
   return api;
 };
+
+//Admin Category
+export const GetCategory = async () => {
+  const api = REACT_URL.get("/getcategory", { headers: await authHeader() });
+  return api;
+};
+
+export const AddCategory = async (data) => {
+  const api = await REACT_URL.post("/addcategory", data, {
+    headers: await authHeader(),
+  });
+  return api;
+};
