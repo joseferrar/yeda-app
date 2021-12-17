@@ -54,3 +54,10 @@ export const AddCategory = async (data) => {
   });
   return api;
 };
+
+export const DeleteCategory = async (id) => {
+  const api = await REACT_URL.delete(`/delcategory/${id}`, {
+    headers: await authHeader(),
+  });
+  return api;
+};

@@ -1,14 +1,24 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useLayoutEffect } from "react";
+import { View, Text } from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 
-const CreateCategory = () => {
+const CreateCategory = (props) => {
+  const { navigation } = props;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerStyle: {
+        backgroundColor: "#EDC126",
+      },
+      headerTitle: "Create Category",
+    });
+  }, [navigation]);
+
   return (
     <View>
-      <Text>CreateCategory</Text>
+      <Text color={"primary.50"}>CreateCategory</Text>
     </View>
   );
 };
 
 export default CreateCategory;
-
-const styles = StyleSheet.create({});

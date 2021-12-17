@@ -7,6 +7,7 @@ import {
   ADD_PRODUCT,
   GET_CATEGORY,
   ADD_CATEGORY,
+  DELETE_CATEGORY
 } from "../constants";
 import {
   GetUsers,
@@ -17,8 +18,10 @@ import {
   AddProduct,
   GetCategory,
   AddCategory,
+  DeleteCategory,
 } from "../services/AdminService";
 import { showToast } from "../components/Toast/toast";
+import { ShowSpinner, HideSpinner } from "./CommonAction";
 
 export const GetUsersAction = () => async (dispatch) => {
   try {
@@ -81,8 +84,10 @@ export const AddProductAction = (Data) => async (dispatch) => {
 //Admin Category
 export const GetCategoryAction = () => async (dispatch) => {
   try {
+    dispatch(ShowSpinner());
     const { data } = await GetCategory();
     dispatch({ type: GET_CATEGORY, payload: data });
+    dispatch(HideSpinner());
   } catch (err) {
     showToast(err.response.data);
   }
@@ -90,10 +95,25 @@ export const GetCategoryAction = () => async (dispatch) => {
 
 export const AddCategoryAction = (Data) => async (dispatch) => {
   try {
+    dispatch(ShowSpinner());
     const { data } = await AddCategory(Data);
     dispatch({ type: ADD_CATEGORY, payload: data });
+    dispatch(GetCategoryAction());
+    dispatch(HideSpinner());
     showToast("Created Successfully !!!");
   } catch (err) {
     showToast(err.response.data);
+  }
+};
+
+export const DeleteCategoryAction = (id) => async (dispatch) => {
+  try {
+    dispatch(ShowSpinner());
+    await DeleteCategory(id);
+    await dispatch({ type: DELETE_CATEGORY, payload: id });
+    dispatch(GetCategoryAction());
+    dispatch(HideSpinner());
+  } catch (error) {
+    console.log(error.message);
   }
 };
