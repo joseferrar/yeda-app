@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
   Input,
@@ -13,19 +13,24 @@ import {
   Button,
   ScrollView,
 } from "native-base";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import {
   AddProductAction,
   GetProductAction,
+  GetCategoryAction,
 } from "../../../actions/AdminAction";
-import { FoodCategory } from "../../../utils/FoodCategories";
 import FormError from "../../../components/ErrorMessage/FormError";
 
 const CreateProduct = (props) => {
   const dispatch = useDispatch();
+  const { category } = useSelector((state) => state.categories);
   const { navigation } = props;
+
+  useEffect(() => {
+    dispatch(GetCategoryAction());
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -126,11 +131,11 @@ const CreateProduct = (props) => {
           }}
           mt={1}
         >
-          {FoodCategory &&
-            FoodCategory.map((a, index) => (
+          {category &&
+            category.map((a, index) => (
               <Select.Item
-                label={a.label}
-                value={a.value}
+                label={a.category}
+                value={a.category}
                 key={index}
                 _pressed={{ bg: "gray.50" }}
                 _text={{ color: "dark.50" }}

@@ -1,8 +1,7 @@
 import { GET_CATEGORY } from "../constants";
 
 const initialState = {
-  loading: true,
-  data: [],
+  category: [],
 };
 
 const CategoryReducer = (state = initialState, action) => {
@@ -10,8 +9,7 @@ const CategoryReducer = (state = initialState, action) => {
     case GET_CATEGORY:
       return {
         ...state,
-        loading: false,
-        data: action.payload,
+        category: action.payload,
       };
     default:
       return state;

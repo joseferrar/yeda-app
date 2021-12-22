@@ -69,7 +69,7 @@ const CategoryModal = (props) => {
                 SUBMIT
               </Button>
               <Button
-              marginRight={1}
+                marginRight={1}
                 onPress={() => setModalVisible(!modalVisible)}
                 colorScheme="rgb(252, 0, 0)"
                 _text={{ color: "#fff" }}

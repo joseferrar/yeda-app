@@ -21,7 +21,7 @@ const AllCategory = (props) => {
   const { navigation } = props;
   const [modalVisible, setModalVisible] = useState(false);
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.category);
+  const { category } = useSelector((state) => state.categories);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -40,19 +40,23 @@ const AllCategory = (props) => {
   return (
     <View bg="#fff" flex={1}>
       <FlatList
-        data={data}
+        data={category}
         renderItem={({ item }) => (
           <Box px={3} rounded="lg" my={1}>
             <View flexDirection="row" top={2}>
               <Avatar
                 size="lg"
                 mr={3}
-                source={{uri: item?.imgUrl}}
+                source={{ uri: item?.imgUrl }}
                 bg="secondary.200"
                 _text={{ color: "white" }}
+              ></Avatar>
+              <Text
+                color="primary.50"
+                fontWeight="bold"
+                fontSize={18}
+                marginTop={4}
               >
-              </Avatar>
-              <Text color="primary.50" fontWeight="bold" fontSize={18} marginTop={4}>
                 {" "}
                 {item?.category}
               </Text>
@@ -65,7 +69,7 @@ const AllCategory = (props) => {
                 onPress={() => dispatch(DeleteCategoryAction(item?._id))}
               />
             </View>
-         
+
             <Divider my={3} bg="gray.50" />
           </Box>
         )}

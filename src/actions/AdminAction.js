@@ -7,7 +7,7 @@ import {
   ADD_PRODUCT,
   GET_CATEGORY,
   ADD_CATEGORY,
-  DELETE_CATEGORY
+  DELETE_CATEGORY,
 } from "../constants";
 import {
   GetUsers,

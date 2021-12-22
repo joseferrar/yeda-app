@@ -22,7 +22,7 @@ const allReducers = combineReducers({
   order: OrderReducer,
   product: ProductReducer,
   common: CommonReducer,
-  category: CategoryReducer,
+  categories: CategoryReducer,
 });
 
 export default allReducers;
