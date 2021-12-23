@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Users/Shop/Products";
 import Profile from "../../../screens/Users/Profile/Profile";
-// import AllCategory from "../../../screens/AllCategory/AllCategory";
+import Categories from "../../../screens/Users/Categories/Categories";
 import Cart from "../../../screens/Users/Cart/Cart";
 import CartDetails from "../../../screens/Users/Cart/CartDetails";
 import MyOrder from "../../../screens/Users/Orders/MyOrder";
@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 
 const ShopStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
-// const AllCategoryStack = createStackNavigator();
+const CategoriesStack = createStackNavigator();
 const CartStack = createStackNavigator();
 const OrderStack = createStackNavigator();
 
@@ -94,37 +94,37 @@ export const ProfileScreen = ({ navigation }) => {
   );
 };
 
-// export const AllCategoryStackScreen = ({ navigation }) => {
-//   const { t } = useTranslation();
-//   return (
-//     <AllCategoryStack.Navigator>
-//       <AllCategoryStack.Screen
-//         name="All Category"
-//         component={AllCategory}
-//         options={{
-//           headerTitle: () => (
-//             <Text style={styles.title}>{t("drawer.All Category")}</Text>
-//           ),
-//           headerLeft: () => (
-//             <Ionicons
-//               name="menu-outline"
-//               size={35}
-//               color="#000"
-//               style={{ marginLeft: 10 }}
-//               lineBreakMode="head"
-//               onPress={() => navigation.openDrawer()}
-//             />
-//           ),
-//           headerTitleAlign: "left",
-//           headerStyle: {
-//             backgroundColor: "#EDC126",
-//             elevation: 0,
-//           },
-//         }}
-//       />
-//     </AllCategoryStack.Navigator>
-//   );
-// };
+export const CategoriesStackScreen = ({ navigation }) => {
+  const { t } = useTranslation();
+  return (
+    <CategoriesStack.Navigator>
+      <CategoriesStack.Screen
+        name="All Category"
+        component={Categories}
+        options={{
+          headerTitle: () => (
+            <Text style={styles.title}>{t("drawer.All Category")}</Text>
+          ),
+          headerLeft: () => (
+            <Ionicons
+              name="menu-outline"
+              size={35}
+              color="#000"
+              style={{ marginLeft: 10 }}
+              lineBreakMode="head"
+              onPress={() => navigation.openDrawer()}
+            />
+          ),
+          headerTitleAlign: "left",
+          headerStyle: {
+            backgroundColor: "#EDC126",
+            elevation: 0,
+          },
+        }}
+      />
+    </CategoriesStack.Navigator>
+  );
+};
 
 export const CartStackScreen = ({ navigation }) => {
   const { t } = useTranslation();
