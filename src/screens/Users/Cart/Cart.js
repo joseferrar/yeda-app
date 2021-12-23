@@ -7,7 +7,7 @@ import {
   GetCartAction,
   DeleteCartAction,
   UpdateCartAction,
-} from "../../actions/CartAction";
+} from "../../../actions/CartAction";
 
 const Cart = (props) => {
   const { navigation } = props;

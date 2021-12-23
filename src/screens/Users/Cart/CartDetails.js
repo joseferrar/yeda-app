@@ -3,12 +3,12 @@ import { ScrollView, View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Icon, Text, Box, Stack, Button, Input } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
-import { showToast } from "../../components/Toast/toast";
+import { showToast } from "../../../components/Toast/toast";
 import {
   UpdateCartAction,
   GetCartAction,
   DeleteCartAction,
-} from "../../actions/CartAction";
+} from "../../../actions/CartAction";
 import { FormikConsumer, useFormik } from "formik";
 import * as yup from "yup";
 

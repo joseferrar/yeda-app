@@ -4,9 +4,9 @@ import { VStack, Box, Divider, Avatar, Text, Button } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import ProfileCard from "../Profile/ProfileCard";
-import { GetProfileAction } from "../../actions/ProfileAction";
-import { Processing } from "../../utils/Tracking";
-import { AddOrderAction, GetOrderAction } from "../../actions/OrderAction";
+import { GetProfileAction } from "../../../actions/ProfileAction";
+import { Processing } from "../../../utils/Tracking";
+import { AddOrderAction, GetOrderAction } from "../../../actions/OrderAction";
 
 const Orders = (props) => {
   const { navigation } = props;

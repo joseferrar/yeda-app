@@ -18,7 +18,7 @@ const DrawerNavbar = () => {
       drawerContent={(props) => <DrawerItem {...props} />}
     >
       <Drawer.Screen name="Shop" component={TabNavbar} />
-      <Drawer.Screen name="All Category" component={AllCategoryStackScreen} />
+      {/* <Drawer.Screen name="All Category" component={AllCategoryStackScreen} /> */}
       {/* <Drawer.Screen name="Shop" component={ShopStackScreen} /> */}
       <Drawer.Screen name="Profile" component={ProfileScreen} />
 

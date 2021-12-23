@@ -3,15 +3,15 @@ import { View, TouchableOpacity, ImageBackground } from "react-native";
 import { Avatar, Text, Box, Stack, FlatList, ScrollView } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetProductAction } from "../../actions/AdminAction";
-import { GetCartAction } from "../../actions/CartAction";
-import { Loading } from "../../components/Spinner/Spinner";
+import { GetProductAction } from "../../../actions/AdminAction";
+import { GetCartAction } from "../../../actions/CartAction";
+import { Loading } from "../../../components/Spinner/Spinner";
 import {
   Starches,
   Meat,
   Fats,
   Vegetables,
-} from "../../components/Cards/FoodCard";
+} from "../../../components/Cards/FoodCard";
 
 const Products = (props) => {
   const { navigation } = props;

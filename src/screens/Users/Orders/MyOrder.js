@@ -3,15 +3,15 @@ import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
-import { GetOrderAction } from "../../actions/OrderAction";
-import { Loading } from "../../components/Spinner/Spinner";
+import { GetOrderAction } from "../../../actions/OrderAction";
+import { Loading } from "../../../components/Spinner/Spinner";
 import {
   Cancelled,
   Delivered,
   Out_of_Delivery,
   Dispatch,
   Processing,
-} from "../../utils/Tracking";
+} from "../../../utils/Tracking";
 
 const MyOrder = (props) => {
   const { navigation } = props;

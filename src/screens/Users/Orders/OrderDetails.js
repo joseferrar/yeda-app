@@ -13,17 +13,17 @@ import {
   Divider,
 } from "native-base";
 import { useDispatch } from "react-redux";
-import { Time, DateFormet } from "../../utils/DateFormet";
+import { Time, DateFormet } from "../../../utils/DateFormet";
 import {
   Processing,
   Dispatch,
   Out_of_Delivery,
   Delivered,
   Cancelled,
-} from "../../utils/Tracking";
-import { showToast } from "../../components/Toast/toast";
-import TimelineModal from "../../components/Modal/TimelineModal";
-import { UpdateOrderAction } from "../../actions/OrderAction";
+} from "../../../utils/Tracking";
+import { showToast } from "../../../components/Toast/toast";
+import TimelineModal from "../../../components/Modal/TimelineModal";
+import { UpdateOrderAction } from "../../../actions/OrderAction";
 
 const OrderDetails = (props) => {
   const dispatch = useDispatch();
