@@ -71,94 +71,106 @@ const LoginPage = (props) => {
       <Text color="primary.50" textAlign="center" fontSize={18} top={-40}>
         Login to continue
       </Text>
-      <FormControl top={-80}>
-        <View my={20}>
+      <View
+        justifyContent="center"
+        marginLeft={4}
+        marginRight={4}
+        alignItems="center"
+      >
+        <FormControl>
           <Input
-            backgroundColor="#e8e6e1"
-            borderWidth={0}
-            borderRadius={15}
-            mx={4}
-            placeholder="Email"
-            height={60}
-            paddingTop={10}
-            color={"#000"}
-            InputLeftElement={
-              <Icon
-                as={<Ionicons name={"mail"} size={16} />}
-                size="md"
-                m={2}
-                color="#000"
-              />
-            }
+            borderWidth={2}
+            borderColor="primary.100"
+            color="primary.50"
+            fontSize={14}
+            borderRadius={12}
+            fontFamily="NunitoSans-Regular"
+            _focus={{ borderColor: "success.100", borderWidth: 2 }}
             value={formik.values.email}
             onChangeText={formik.handleChange("email")}
-            onBlur={formik.handleBlur("email")}
-          />
-          {formik.errors.email && formik.touched.email ? (
-            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
-              {formik.errors.email}
-            </Text>
-          ) : null}
-        </View>
-        <View my={-10}>
-          <Input
-            placeholder="Password"
-            backgroundColor="#e8e6e1"
-            borderWidth={0}
-            borderRadius={15}
-            mx={4}
-            secureTextEntry
-            height={60}
-            paddingTop={10}
-            color={"#000"}
             InputLeftElement={
               <Icon
-                as={<Ionicons name={"lock-closed"} size={16} />}
-                size="md"
-                m={2}
-                color="#000"
+                as={<Ionicons name="mail-outline" />}
+                size={8}
+                ml="2"
+                color="primary.100"
               />
             }
+            InputRightElement={
+              formik.errors.email &&
+              formik.touched.email && (
+                <Icon
+                  onPress={() => alert(formik.errors.email)}
+                  as={<Ionicons name="information-circle-outline" />}
+                  size={6}
+                  mr="2"
+                  color="#D82E2F"
+                />
+              )
+            }
+            placeholder="Email"
+          />
+
+          <Input
+            marginTop={8}
+            borderWidth={2}
+            borderColor="primary.100"
+            color="primary.50"
+            borderRadius={12}
+            fontSize={14}
+            fontFamily="NunitoSans-Regular"
+            _focus={{ borderColor: "success.100", borderWidth: 2 }}
             value={formik.values.password}
             onChangeText={formik.handleChange("password")}
-            onBlur={formik.handleBlur("password")}
+            secureTextEntry
+            InputLeftElement={
+              <Icon
+                as={<Ionicons name="lock-closed-outline" />}
+                size={8}
+                ml="2"
+                color="primary.100"
+              />
+            }
+            InputRightElement={
+              formik.errors.password &&
+              formik.touched.password && (
+                <Icon
+                  onPress={() => alert(formik.errors.password)}
+                  as={<Ionicons name="information-circle-outline" />}
+                  size={6}
+                  mr="2"
+                  color="#D82E2F"
+                />
+              )
+            }
+            placeholder="Password"
           />
-          {formik.errors.password && formik.touched.password ? (
-            <Text color="#E21717" fontSize={14} ml={6} mt={2}>
-              {formik.errors.password}
-            </Text>
-          ) : null}
-        </View>
 
-        <Button
-          onPress={formik.handleSubmit}
-          bg={"secondary.200"}
-          colorScheme="secondary"
-          w={300}
-          height={60}
-          marginLeft="auto"
-          marginRight="auto"
-          my={20}
-          shadow={2}
-          borderRadius={15}
-        >
-          <Text
-            fontSize={20}
-            noOfLines={2}
-            color="#fff"
-            isTruncated={true}
-            textTransform="uppercase"
+          <Button
+            onPress={formik.handleSubmit}
+            marginTop={6}
+            _pressed={{ bg: "info.100" }}
+            bg="secondary.300"
+            marginLeft="auto"
+            marginRight="auto"
+            shadow={2}
+            width={350}
+            borderRadius={8}
+            minHeight={55}
+            my={12}
           >
-            Login
-          </Text>
-        </Button>
-      </FormControl>
-      <View flexDirection="row" marginLeft="auto" marginRight="auto" top={-120}>
-        <Text style={{ color: "#000", marginLeft: 4, fontSize: 16 }}>
+            <Text fontSize={20} color="#fff" fontFamily="NunitoSans-Regular">
+              Login
+            </Text>
+          </Button>
+        </FormControl>
+      </View>
+      <View flexDirection="row" marginLeft="auto" marginRight="auto">
+        <Text style={{ color: "#000", fontSize: 16 }}>
           Create a new account ?
         </Text>
         <Text
-          style={{ color: "#fc036f", marginLeft: 5, fontSize: 16 }}
+          style={{ color: "#fc036f", marginLeft: 5, fontSize: 17 }}
           onPress={() => navigation.navigate("Register")}
         >
           Sign Up
@@ -176,7 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   header: {
-    backgroundColor: "#E07C24",
+    backgroundColor: "rgb(255,99,71)",
     paddingTop: 180,
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
