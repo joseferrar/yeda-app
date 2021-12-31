@@ -17,7 +17,7 @@ import AllOrders from "../../screens/Workers/AllOrders";
 import EditOrders from "../../screens/Workers/EditOrders";
 import Workers from "../../screens/Workers/Workers";
 import Delivery from "../../screens/Delivery/Delivery";
-import DeliveryDetails from "../../screens/Delivery/DeliveryDetails"
+import DeliveryDetails from "../../screens/Delivery/DeliveryDetails";
 import { useSelector, useDispatch } from "react-redux";
 import { Loading } from "../Spinner/Spinner";
 import AllProduct from "../../screens/Admin/Products/AllProduct";
@@ -26,6 +26,7 @@ import TodayOrders from "../../screens/Workers/TodayOrders";
 import DeliveryBoys from "../../screens/Workers/DeliveryBoys";
 import AllCategory from "../../screens/Admin/Category/AllCategory";
 import CreateCategory from "../../screens/Admin/Category/CreateCategory";
+import CategoryDetails from "../../screens/Users/Categories/CategoryDetails";
 
 const Stack = createStackNavigator();
 
@@ -73,6 +74,7 @@ export default function MainNavbar() {
         />
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="AddOrder" component={AddOrder} />
+        <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
 
         {/* Admin */}
         <Stack.Screen name="Admin" component={Admin} />
