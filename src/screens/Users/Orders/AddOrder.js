@@ -3,24 +3,18 @@ import { StyleSheet, View } from "react-native";
 import { VStack, Box, Divider, Avatar, Text, Button } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
-import ProfileCard from "../Profile/ProfileCard";
-import { GetProfileAction } from "../../../actions/ProfileAction";
 import { Processing } from "../../../utils/Tracking";
-import { AddOrderAction, GetOrderAction } from "../../../actions/OrderAction";
+import ProfileCard from "../Profile/ProfileCard";
+import { AddOrderAction } from "../../../actions/OrderAction";
 
-const Orders = (props) => {
+const AddOrder = (props) => {
   const { navigation } = props;
-  const profile = useSelector((state) => state.profile.profile);
+  const {profile} = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const { data, total } = props.route.params;
-  const nf = new Intl.NumberFormat();
 
-  useEffect(() => {
-    dispatch(GetProfileAction());
-  }, []);
-
-  const addOrder = async () => {
-    await data.map((item) => {
+  const confirmOrder = () => {
+    data.map((item) => {
       const placeOrder = {
         order: item,
         location: profile,
@@ -43,19 +37,18 @@ const Orders = (props) => {
 
           <Box px={5} flexDirection="row">
             <Avatar.Group size="lg" max={5}>
-              {data &&
-                data.map((item, index) => (
-                  <Avatar
-                    size="lg"
-                    key={index}
-                    bg="green.500"
-                    source={{
-                      uri: item?.image,
-                    }}
-                  >
-                    {item?.image}
-                  </Avatar>
-                ))}
+              {data.map((item, index) => (
+                <Avatar
+                  size="lg"
+                  key={index}
+                  bg="green.500"
+                  source={{
+                    uri: item?.image,
+                  }}
+                >
+                  {item?.image}
+                </Avatar>
+              ))}
             </Avatar.Group>
           </Box>
 
@@ -72,12 +65,11 @@ const Orders = (props) => {
               Total Quantity:{" "}
             </Text>
 
-            {data &&
-              data.map((item, index) => (
-                <Text fontSize={18} style={styles.rate} key={index}>
-                  {item?.quantity}
-                </Text>
-              ))}
+            {data.map((item, index) => (
+              <Text fontSize={18} style={styles.rate} key={index}>
+                {item?.quantity}
+              </Text>
+            ))}
           </Box>
           <Box px={5} style={{ flexDirection: "row", marginTop: 10 }}>
             <Text fontSize={18} color="#000" fontWeight="bold">
@@ -91,23 +83,20 @@ const Orders = (props) => {
         </VStack>
       </Box>
       <ProfileCard profile={profile} navigation={navigation} />
-
       <Button
         size="md"
         width={300}
         mt={8}
         bg={"#000"}
-        disabled={profile === null ? true : false}
         colorScheme="secondary"
         shadow={2}
         borderRadius={10}
-        marginLeft={6}
         marginRight="auto"
         marginLeft="auto"
         startIcon={
           <Ionicons name={"briefcase-outline"} color="#fff" size={28} />
         }
-        onPress={addOrder}
+        onPress={confirmOrder}
       >
         <Text style={styles.buttonText}>Confirm Your Order</Text>
       </Button>
@@ -115,16 +104,9 @@ const Orders = (props) => {
   );
 };
 
-export default Orders;
+export default AddOrder;
 
 const styles = StyleSheet.create({
-  label: {
-    color: "#000",
-    marginLeft: "auto",
-    marginBottom: "auto",
-
-    fontFamily: "NunitoSans-Black",
-  },
   rate: {
     color: "green",
     marginLeft: "auto",
