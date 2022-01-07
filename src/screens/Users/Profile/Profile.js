@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { GetProfileAction } from "../../actions/ProfileAction";
-import { Loading } from "../../components/Spinner/Spinner";
+import { GetProfileAction } from "../../../actions/ProfileAction";
+import { Loading } from "../../../components/Spinner/Spinner";
 import ProfileForm from "./ProfileForm";
 
 const Profile = (props) => {

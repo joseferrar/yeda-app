@@ -4,7 +4,7 @@ import { Avatar, Box, Stack, FlatList, Text } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 // import SearchBar from "react-native-dynamic-search-bar";
 import { useSelector, useDispatch } from "react-redux";
-import { SearchAction } from "../../actions/FoodAction";
+import { SearchAction } from "../../../actions/FoodAction";
 
 const Search = (props) => {
   const { navigation } = props;

@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTranslation } from "react-i18next";
-import Search from "../../../screens/Search/Search";
+import Search from "../../../screens/Users/Search/Search";
 import {
   CartStackScreen,
   ProfileScreen,

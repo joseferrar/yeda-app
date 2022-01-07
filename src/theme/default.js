@@ -9,6 +9,7 @@ export const theme = extendTheme({
     secondary: {
       100: "#E03B8B",
       200: "#8D3DAF",
+      300: "rgb(255,99,71)"
     },
 
     success: {

@@ -18,12 +18,12 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
-import { Countries } from "../../utils/Countries";
+import { Countries } from "../../../utils/Countries";
 import {
   GetProfileAction,
   CreateProfileAction,
   EditProfileAction,
-} from "../../actions/ProfileAction";
+} from "../../../actions/ProfileAction";
 
 const ProfileForm = (props) => {
   const dispatch = useDispatch();

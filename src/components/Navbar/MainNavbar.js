@@ -6,13 +6,13 @@ import Register from "../../screens/Auth/Register";
 import Protected from "../../screens/Auth/Protected";
 import TabNavbar from "./Tab/TabNavbar";
 import DrawerNavbar from "./Drawer/DrawerNavbar";
-import Search from "../../screens/Search/Search";
+import Search from "../../screens/Users/Search/Search";
 import Details from "../../screens/Details/Details";
-import Cart from "../../screens/Cart/Cart";
+import Cart from "../../screens/Users/Cart/Cart";
 import Admin from "../../screens/Admin/Admin";
 import UsersList from "../../screens/Admin/Users/UsersList";
 import UsersDetails from "../../screens/Admin/Users/UsersDetails";
-import AddOrder from "../../screens/Orders/AddOrder";
+import AddOrder from "../../screens/Users/Orders/AddOrder";
 import AllOrders from "../../screens/Workers/AllOrders";
 import EditOrders from "../../screens/Workers/EditOrders";
 import Workers from "../../screens/Workers/Workers";
@@ -24,6 +24,9 @@ import AllProduct from "../../screens/Admin/Products/AllProduct";
 import CreateProduct from "../../screens/Admin/Products/CreateProduct";
 import TodayOrders from "../../screens/Workers/TodayOrders";
 import DeliveryBoys from "../../screens/Workers/DeliveryBoys";
+import AllCategory from "../../screens/Admin/Category/AllCategory";
+import CreateCategory from "../../screens/Admin/Category/CreateCategory";
+import CategoryDetails from "../../screens/Users/Categories/CategoryDetails";
 
 const Stack = createStackNavigator();
 
@@ -71,6 +74,7 @@ export default function MainNavbar() {
         />
         <Stack.Screen name="Details" component={Details} />
         <Stack.Screen name="AddOrder" component={AddOrder} />
+        <Stack.Screen name="CategoryDetails" component={CategoryDetails} />
 
         {/* Admin */}
         <Stack.Screen name="Admin" component={Admin} />
@@ -78,6 +82,8 @@ export default function MainNavbar() {
         <Stack.Screen name="UsersDetails" component={UsersDetails} />
         <Stack.Screen name="AllProduct" component={AllProduct} />
         <Stack.Screen name="CreateProduct" component={CreateProduct} />
+        <Stack.Screen name="AllCategory" component={AllCategory} />
+        <Stack.Screen name="CreateCategory" component={CreateCategory} />
 
         {/* Workers */}
         <Stack.Screen name="Workers" component={Workers} />

@@ -4,7 +4,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import {
   ShopStackScreen,
   ProfileScreen,
-  AllCategoryStackScreen,
+  CategoriesStackScreen,
   CartStackScreen,
   OrderStackScreen,
 } from "./DrawerHeader";
@@ -18,7 +18,7 @@ const DrawerNavbar = () => {
       drawerContent={(props) => <DrawerItem {...props} />}
     >
       <Drawer.Screen name="Shop" component={TabNavbar} />
-      <Drawer.Screen name="All Category" component={AllCategoryStackScreen} />
+      <Drawer.Screen name="All Category" component={CategoriesStackScreen} />
       {/* <Drawer.Screen name="Shop" component={ShopStackScreen} /> */}
       <Drawer.Screen name="Profile" component={ProfileScreen} />
 
