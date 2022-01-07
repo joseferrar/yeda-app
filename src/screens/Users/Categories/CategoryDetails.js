@@ -31,7 +31,7 @@ const CategoryDetails = (props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: `${category.category} (${category.category.length})`,
+      headerTitle: `${category?.category} (${filterProducts.length})`,
       headerStyle: {
         backgroundColor: "#EDC126",
       },
@@ -56,9 +56,7 @@ const CategoryDetails = (props) => {
             >
               <View
                 style={{
-                  borderRightWidth: 1,
                   width: 200,
-                  marginTop: -10,
                 }}
                 borderColor="gray.100"
               >
@@ -71,8 +69,8 @@ const CategoryDetails = (props) => {
                   marginLeft="auto"
                   marginRight="auto"
                   bg="transparent"
-                  width={130}
-                  height={130}
+                  width={150}
+                  height={150}
                 ></Avatar>
 
                 <Stack p={[4, 4, 4]}>
@@ -95,7 +93,6 @@ const CategoryDetails = (props) => {
                   </Text>
                 </Stack>
               </View>
-              <Divider />
             </TouchableOpacity>
           );
         }}

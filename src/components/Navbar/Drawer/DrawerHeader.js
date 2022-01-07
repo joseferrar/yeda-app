@@ -1,5 +1,6 @@
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Shop from "../../../screens/Users/Shop/Products";
@@ -9,6 +10,7 @@ import Cart from "../../../screens/Users/Cart/Cart";
 import CartDetails from "../../../screens/Users/Cart/CartDetails";
 import MyOrder from "../../../screens/Users/Orders/MyOrder";
 import OrderDetails from "../../../screens/Users/Orders/OrderDetails";
+import { logout } from "../../../actions/AuthAction";
 import { Feather } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
 
@@ -64,6 +66,7 @@ export const ShopStackScreen = ({ navigation }) => {
 
 export const ProfileScreen = ({ navigation }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen
@@ -80,7 +83,7 @@ export const ProfileScreen = ({ navigation }) => {
               color="#000"
               style={{ marginRight: 15 }}
               lineBreakMode="head"
-              onPress={() => navigation.navigate("Search")}
+              onPress={() => dispatch(logout(navigation))}
             />
           ),
           headerTitleAlign: "left",
