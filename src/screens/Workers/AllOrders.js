@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { TouchableOpacity, ScrollView, Button } from "react-native";
+import PropTypes from "prop-types";
+import { TouchableOpacity, ScrollView } from "react-native";
 import { View, Avatar, Text, Box, Stack, Badge } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { AllOrderAction } from "../../actions/OrderAction";
 import { Loading } from "../../components/Spinner/Spinner";
@@ -113,6 +113,10 @@ const AllOrders = (props) => {
       </ScrollView>
     </View>
   );
+};
+
+AllOrders.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default AllOrders;

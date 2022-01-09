@@ -1,11 +1,10 @@
 import React, { useEffect, useLayoutEffect } from "react";
-import { StyleSheet } from "react-native";
+import PropTypes from "prop-types";
 import {
   Input,
   Stack,
   Center,
   Heading,
-  View,
   Text,
   Select,
   CheckIcon,
@@ -190,6 +189,8 @@ const CreateProduct = (props) => {
   );
 };
 
-export default CreateProduct;
+CreateProduct.propTypes = {
+  navigation: PropTypes.object,
+};
 
-const styles = StyleSheet.create({});
+export default CreateProduct;

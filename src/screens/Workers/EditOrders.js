@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
 import {
   View,
@@ -6,10 +7,8 @@ import {
   ScrollView,
   Box,
   Avatar,
-  Flex,
   Button,
   HStack,
-  VStack,
   Divider,
   FormControl,
   Select,
@@ -19,11 +18,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { GetUsersAction } from "../../actions/AdminAction";
-import {
-  UpdateOrderAction,
-  GetOrderAction,
-  AllOrderAction,
-} from "../../actions/OrderAction";
+import { UpdateOrderAction, AllOrderAction } from "../../actions/OrderAction";
 import {
   Processing,
   Dispatch,
@@ -174,7 +169,7 @@ const EditOrders = (props) => {
         </Box>
       )}
 
-      {data?.tracking !== Processing  && (
+      {data?.tracking !== Processing && (
         <Box px={4} rounded="lg">
           <Text color="primary.50" fontWeight="bold">
             {`Delivery Man:`}
@@ -283,6 +278,11 @@ const EditOrders = (props) => {
       </Box>
     </ScrollView>
   );
+};
+
+EditOrders.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default EditOrders;

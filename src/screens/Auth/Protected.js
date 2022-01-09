@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Loading } from "../../components/Spinner/Spinner";
@@ -26,6 +27,10 @@ const Protected = (props) => {
   }, []);
 
   return <View>{Loading()}</View>;
+};
+
+Protected.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Protected;

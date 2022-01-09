@@ -1,15 +1,7 @@
 import React, { useLayoutEffect, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, Dimensions } from "react-native";
-import {
-  Avatar,
-  Text,
-  Box,
-  Stack,
-  FlatList,
-  Divider,
-  Image,
-  View,
-} from "native-base";
+import PropTypes from "prop-types";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Avatar, Text, Stack, FlatList, View } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { GetProductAction } from "../../../actions/AdminAction";
 
@@ -99,6 +91,11 @@ const CategoryDetails = (props) => {
       />
     </View>
   );
+};
+
+CategoryDetails.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default CategoryDetails;

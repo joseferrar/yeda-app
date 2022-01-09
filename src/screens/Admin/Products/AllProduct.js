@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -6,7 +7,6 @@ import {
   Box,
   Avatar,
   Icon,
-  Button,
   Divider,
 } from "native-base";
 import { TouchableOpacity } from "react-native";
@@ -140,5 +140,10 @@ const AllProduct = (props) => {
     </View>
   );
 };
+
+AllProduct.propTypes = {
+  navigation: PropTypes.object,
+};
+
 
 export default AllProduct;

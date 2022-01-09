@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Avatar, Box, Stack, FlatList, Text } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -129,6 +130,10 @@ const Search = (props) => {
       )}
     </View>
   );
+};
+
+Search.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Search;

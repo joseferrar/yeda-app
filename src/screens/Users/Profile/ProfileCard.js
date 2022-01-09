@@ -1,10 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, View } from "react-native";
-import { VStack, Box, Divider, Avatar, Text } from "native-base";
+import { Box, Text } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 
 const ProfileCard = ({ profile, navigation }) => {
-  console.log("Profile", profile);
   return (
     <View>
       <View style={styles.mainCardView}>
@@ -102,6 +102,11 @@ const ProfileCard = ({ profile, navigation }) => {
       </View>
     </View>
   );
+};
+
+ProfileCard.propTypes = {
+  navigation: PropTypes.object,
+  profile: PropTypes.object,
 };
 
 export default ProfileCard;

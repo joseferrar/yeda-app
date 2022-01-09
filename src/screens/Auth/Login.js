@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import React from "react";
+import PropTypes from "prop-types";
 import {
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  ToastAndroid,
   ScrollView,
 } from "react-native";
 import {
@@ -19,9 +16,8 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { LoginAction } from "../../actions/AuthAction";
-import foot_logo from "../../../assets/foot_logo.jpg";
 
 const LoginPage = (props) => {
   const { navigation } = props;
@@ -178,6 +174,10 @@ const LoginPage = (props) => {
       </View>
     </ScrollView>
   );
+};
+
+LoginPage.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default LoginPage;

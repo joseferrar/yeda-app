@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar, Text, Box, Stack, Badge } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GetOrderAction } from "../../../actions/OrderAction";
 import { Loading } from "../../../components/Spinner/Spinner";
@@ -106,6 +106,10 @@ const MyOrder = (props) => {
       </ScrollView>
     </View>
   );
+};
+
+MyOrder.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default MyOrder;

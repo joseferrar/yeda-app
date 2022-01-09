@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
-import { MaterialIcons } from "@expo/vector-icons";
+import React from "react";
+import PropTypes from "prop-types";
 import {
   StyleSheet,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
   ScrollView,
 } from "react-native";
 import {
@@ -212,6 +209,10 @@ const RegisterPage = (props) => {
       </View>
     </ScrollView>
   );
+};
+
+RegisterPage.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default RegisterPage;

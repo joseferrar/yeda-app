@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { TouchableOpacity } from "react-native";
 import { Avatar, Text, Box, View, Button, ScrollView } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import {
   GetCartAction,
@@ -169,6 +169,10 @@ const Cart = (props) => {
         ))}
     </ScrollView>
   );
+};
+
+Cart.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Cart;
