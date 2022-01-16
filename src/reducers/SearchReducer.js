@@ -1,4 +1,4 @@
-import { SEARCH } from "../constants";
+import { SEARCHPRODUCT } from "../constants";
 
 const initialState = {
   loading: true,
@@ -7,7 +7,7 @@ const initialState = {
 
 const SearchReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH:
+    case SEARCHPRODUCT:
       return {
         ...state,
          loading: false,
