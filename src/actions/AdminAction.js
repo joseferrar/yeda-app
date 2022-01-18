@@ -66,8 +66,10 @@ export const DeleteUserAction = (id) => async (dispatch) => {
 //Admin Products
 export const GetProductAction = () => async (dispatch) => {
   try {
+    dispatch(ShowSpinner());
     const { data } = await GetProducts();
     dispatch({ type: GET_PRODUCTS, payload: data });
+    dispatch(HideSpinner());
   } catch (err) {
     showToast(err.response.data);
   }
