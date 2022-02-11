@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import PropTypes from "prop-types";
+import { View } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { GetProfileAction } from "../../../actions/ProfileAction";
 import { Loading } from "../../../components/Spinner/Spinner";
@@ -24,6 +25,8 @@ const Profile = (props) => {
   );
 };
 
-export default Profile;
+Profile.propTypes = {
+  navigation: PropTypes.object,
+};
 
-const styles = StyleSheet.create({});
+export default Profile;

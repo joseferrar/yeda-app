@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { View, TouchableOpacity } from "react-native";
 import { HStack, Stack, Center, Box } from "native-base";
 
@@ -108,6 +109,10 @@ const AdminCard = (props) => {
       </Stack>
     </View>
   );
+};
+
+AdminCard.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default AdminCard;

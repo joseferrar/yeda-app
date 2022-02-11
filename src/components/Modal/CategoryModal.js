@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { Modal, Button, Input, View, Text } from "native-base";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
@@ -82,6 +83,11 @@ const CategoryModal = (props) => {
       </Modal>
     </View>
   );
+};
+
+CategoryModal.propTypes = {
+  modalVisible: PropTypes.bool,
+  setModalVisible: PropTypes.func,
 };
 
 export default CategoryModal;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, View, Picker } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,7 +17,6 @@ import {
   HStack,
   Divider,
   Icon,
-  Select,
 } from "native-base";
 import { t } from "i18next";
 
@@ -86,7 +86,7 @@ const DrawerItem = (props) => {
                 py={3}
                 rounded="md"
                 bg={index === props.state.index ? "#E07C24" : "transparent"}
-                onPress={(event) => {
+                onPress={() => {
                   props.navigation.navigate(name);
                 }}
               >
@@ -154,6 +154,13 @@ const DrawerItem = (props) => {
     </View>
   );
 };
+
+
+DrawerItem.propTypes = {
+  navigation: PropTypes.object,
+  state: PropTypes.object,
+};
+
 
 export default DrawerItem;
 

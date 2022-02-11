@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
@@ -204,6 +205,23 @@ export const OrderStackScreen = ({ navigation }) => {
     </OrderStack.Navigator>
   );
 };
+
+ShopStackScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+ProfileScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+CategoriesStackScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+CartStackScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+OrderStackScreen.propTypes = {
+  navigation: PropTypes.object,
+};
+
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,

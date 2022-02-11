@@ -4,6 +4,7 @@ import {
   EDIT_USERS,
   DELETE_USERS,
   GET_PRODUCTS,
+  SEARCHPRODUCT,
   ADD_PRODUCT,
   GET_CATEGORY,
   ADD_CATEGORY,
@@ -17,6 +18,7 @@ import {
   GetProducts,
   AddProduct,
   GetCategory,
+  SearchProduct,
   AddCategory,
   DeleteCategory,
 } from "../services/AdminService";
@@ -64,8 +66,19 @@ export const DeleteUserAction = (id) => async (dispatch) => {
 //Admin Products
 export const GetProductAction = () => async (dispatch) => {
   try {
+    dispatch(ShowSpinner());
     const { data } = await GetProducts();
     dispatch({ type: GET_PRODUCTS, payload: data });
+    dispatch(HideSpinner());
+  } catch (err) {
+    showToast(err.response.data);
+  }
+};
+
+export const SearchProductAction = (query) => async (dispatch) => {
+  try {
+    const { data } = await SearchProduct(query);
+    dispatch({ type: SEARCHPRODUCT, payload: data });
   } catch (err) {
     showToast(err.response.data);
   }

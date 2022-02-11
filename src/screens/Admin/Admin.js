@@ -1,9 +1,9 @@
 import React, { useLayoutEffect } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import PropTypes from "prop-types";
+import { View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { logout } from "../../actions/AuthAction";
-import { useSelector, useDispatch } from "react-redux";
-import { HStack, Stack, Center, Box, Button } from "native-base";
+import { useDispatch } from "react-redux";
 import AdminCard from "./AdminCard";
 
 const Admin = (props) => {
@@ -35,6 +35,8 @@ const Admin = (props) => {
   );
 };
 
-export default Admin;
+Admin.propTypes = {
+  navigation: PropTypes.object,
+};
 
-const styles = StyleSheet.create({});
+export default Admin;

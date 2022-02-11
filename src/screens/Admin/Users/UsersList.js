@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { TouchableOpacity } from "react-native";
 import {
@@ -113,6 +114,10 @@ const UsersList = (props) => {
       />
     </View>
   );
+};
+
+UsersList.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default UsersList;

@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useEffect } from "react";
+import PropTypes from "prop-types";
 import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Avatar, Text, Box, Stack, Badge } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
@@ -125,6 +126,10 @@ const Delivery = (props) => {
       </ScrollView>
     </View>
   );
+};
+
+Delivery.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Delivery;

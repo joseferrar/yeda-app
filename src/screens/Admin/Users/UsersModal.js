@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {
   Modal,
   Button,
@@ -10,7 +11,7 @@ import {
   Select,
   CheckIcon,
 } from "native-base";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { PostUserAction, GetUsersAction } from "../../../actions/AdminAction";
@@ -18,10 +19,6 @@ import { PostUserAction, GetUsersAction } from "../../../actions/AdminAction";
 const UsersModal = (props) => {
   const dispatch = useDispatch();
   const { modalVisible, setModalVisible } = props;
-
-  // useEffect(() => {
-  //   dispatch(GetUsersAction());
-  // }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -39,7 +36,6 @@ const UsersModal = (props) => {
     }),
     onSubmit: async (data) => {
       await dispatch(PostUserAction(data));
-      // showToast("Created Successfully !!!");
       await dispatch(GetUsersAction());
       setModalVisible(!modalVisible);
     },
@@ -157,6 +153,11 @@ const UsersModal = (props) => {
       </Modal>
     </View>
   );
+};
+
+UsersModal.propTypes = {
+  modalVisible: PropTypes.bool,
+  setModalVisible: PropTypes.func,
 };
 
 export default UsersModal;

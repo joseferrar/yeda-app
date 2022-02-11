@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { View, Text } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
 
 const CreateCategory = (props) => {
   const { navigation } = props;
@@ -19,6 +19,10 @@ const CreateCategory = (props) => {
       <Text color={"primary.50"}>CreateCategory</Text>
     </View>
   );
+};
+
+CreateCategory.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default CreateCategory;

@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import PropTypes from "prop-types";
+import { StyleSheet, ScrollView, Alert } from "react-native";
 import {
-  Box,
   Button,
   Input,
   Avatar,
@@ -15,7 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import { Countries } from "../../../utils/Countries";
@@ -310,6 +310,11 @@ const ProfileForm = (props) => {
       )}
     </ScrollView>
   );
+};
+
+ProfileForm.propTypes = {
+  navigation: PropTypes.object,
+  profile: PropTypes.object,
 };
 
 export default ProfileForm;

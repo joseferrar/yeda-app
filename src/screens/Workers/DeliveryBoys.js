@@ -1,18 +1,15 @@
 import React, { useEffect, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { TouchableOpacity } from "react-native";
 import {
   View,
   Text,
-  FlatList,
   Box,
   Avatar,
   Flex,
-  Fab,
-  Icon,
   Divider,
   ScrollView,
 } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { GetUsersAction } from "../../actions/AdminAction";
 
@@ -86,6 +83,10 @@ const DeliveryBoys = (props) => {
         ))}
     </ScrollView>
   );
+};
+
+DeliveryBoys.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default DeliveryBoys;

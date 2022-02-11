@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useState, useEffect } from "react";
+import React, { useLayoutEffect, useState } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import {
   FormControl,
@@ -9,7 +10,7 @@ import {
   Button,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import {
   DeleteUserAction,
@@ -187,6 +188,11 @@ const UsersDetails = (props) => {
       </View>
     </View>
   );
+};
+
+UsersDetails.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default UsersDetails;

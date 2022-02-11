@@ -1,4 +1,5 @@
 import React, { useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
 import {
   View,
@@ -6,14 +7,11 @@ import {
   ScrollView,
   Box,
   Avatar,
-  Flex,
   Button,
-  Modal,
   HStack,
   Divider,
 } from "native-base";
-import { Ionicons } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   UpdateOrderAction,
   GetOrderAction,
@@ -21,10 +19,8 @@ import {
 } from "../../actions/OrderAction";
 import { ShowSpinner, HideSpinner } from "../../actions/CommonAction";
 import {
-  Cancelled,
   Delivered,
   Out_of_Delivery,
-  Processing,
   Dispatch,
 } from "../../utils/Tracking";
 
@@ -226,6 +222,11 @@ const DeliveryDetails = (props) => {
       {/* <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} /> */}
     </ScrollView>
   );
+};
+
+DeliveryDetails.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default DeliveryDetails;

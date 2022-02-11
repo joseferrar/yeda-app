@@ -1,4 +1,5 @@
 import React, { useState, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
 import {
   View,
@@ -6,9 +7,7 @@ import {
   ScrollView,
   Box,
   Avatar,
-  Flex,
   Button,
-  Modal,
   HStack,
   Divider,
 } from "native-base";
@@ -269,6 +268,11 @@ const OrderDetails = (props) => {
       {/* <TimelineModal timeline1={timeline1} open={open} setOpen={setOpen} /> */}
     </ScrollView>
   );
+};
+
+OrderDetails.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default OrderDetails;

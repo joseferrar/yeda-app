@@ -1,7 +1,8 @@
 import React, { useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { View } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../actions/AuthAction";
 import WorkerCard from "../../components/Cards/WorkerCard";
 
@@ -32,6 +33,10 @@ const Workers = (props) => {
       <WorkerCard navigation={navigation} />
     </View>
   );
+};
+
+Workers.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Workers;

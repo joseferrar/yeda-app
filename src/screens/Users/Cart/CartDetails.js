@@ -1,22 +1,21 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import { ScrollView, View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Icon, Text, Box, Stack, Button, Input } from "native-base";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { showToast } from "../../../components/Toast/toast";
 import {
   UpdateCartAction,
   GetCartAction,
   DeleteCartAction,
 } from "../../../actions/CartAction";
-import { FormikConsumer, useFormik } from "formik";
-import * as yup from "yup";
+import { useFormik } from "formik";
 
 const CartDetails = (props) => {
   const { navigation } = props;
   const { data, id, quantity } = props.route.params;
   const dispatch = useDispatch();
-
 
   const formik = useFormik({
     initialValues: {
@@ -154,9 +153,9 @@ const CartDetails = (props) => {
   );
 };
 
-export default CartDetails;
+CartDetails.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
+};
 
-/* <Button
-        title="cart"
-        onPress={() => dispatch(CartAction({ food: data }))}
-      /> */
+export default CartDetails;

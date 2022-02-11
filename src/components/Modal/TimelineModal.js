@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet } from "react-native";
 import { View, Modal } from "native-base";
 import Timeline from "react-native-timeline-flatlist";
@@ -35,6 +36,12 @@ const TimelineModal = (props) => {
       </Modal>
     </View>
   );
+};
+
+TimelineModal.propTypes = {
+  open: PropTypes.bool,
+  setOpen: PropTypes.func,
+  timeline1: PropTypes.any,
 };
 
 export default TimelineModal;

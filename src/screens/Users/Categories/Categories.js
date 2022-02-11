@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import PropTypes from "prop-types";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Avatar, Text, Stack, FlatList, View } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { GetCategoryAction } from "../../../actions/AdminAction";
@@ -68,6 +69,10 @@ const Categories = (props) => {
       />
     </View>
   );
+};
+
+Categories.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default Categories;

@@ -35,6 +35,13 @@ export const GetProducts = async () => {
   return api;
 };
 
+export const SearchProduct = async (query) => {
+  const api = await REACT_URL.get(`/searchProduct?foodName=${query}`, {
+    headers: await authHeader(),
+  });
+  return api;
+};
+
 export const AddProduct = async (data) => {
   const api = await REACT_URL.post("/createproduct", data, {
     headers: await authHeader(),

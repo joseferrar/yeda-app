@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, View } from "react-native";
 import { VStack, Box, Divider, Avatar, Text, Button } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,7 +10,7 @@ import { AddOrderAction } from "../../../actions/OrderAction";
 
 const AddOrder = (props) => {
   const { navigation } = props;
-  const {profile} = useSelector((state) => state.profile);
+  const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const { data, total } = props.route.params;
 
@@ -102,6 +103,11 @@ const AddOrder = (props) => {
       </Button>
     </View>
   );
+};
+
+AddOrder.propTypes = {
+  navigation: PropTypes.object,
+  route: PropTypes.object,
 };
 
 export default AddOrder;

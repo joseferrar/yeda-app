@@ -1,52 +1,68 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { Avatar, Box, Stack, FlatList, Text } from "native-base";
+import { Avatar, Box, Stack, FlatList, Text, Input, Icon } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
-// import SearchBar from "react-native-dynamic-search-bar";
 import { useSelector, useDispatch } from "react-redux";
-import { SearchAction } from "../../../actions/FoodAction";
+import { SearchProductAction } from "../../../actions/AdminAction";
 
 const Search = (props) => {
   const { navigation } = props;
   const { loading, data } = useSelector((state) => state.search);
-  const [query, setQuery] = useState("");
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(SearchAction());
+    dispatch(SearchProductAction());
   }, []);
 
-  const updateChange = (event) => {
-    event.preventDefault();
-    setQuery(search);
-    // setSearch('') //search clear screen
-    // console.log(search);
-    // navigation.goBack()
+  const clearInput = () => {
+    setSearch("");
   };
-  // console.log(query);
+ 
   console.log(data);
   return (
     <View style={styles.container}>
-      {/* <SearchBar
-        style={{ height: 50 }}
-        autoFocus
-        placeholder="Search here"
-        onSubmitEditing={updateChange}
-        returnKeyType="search"
-        onIconPress={updateChange}
+      <Input
+        color="primary.50"
+        defaultValue="12345"
+        marginLeft={3}
+        marginRight={3}
+        borderWidth={2}
+        borderRadius={12}
+        _focus={{ borderWidth: 2, borderColor: "primary.100" }}
+   
+        placeholder="Search"
+        InputLeftElement={
+          <Icon
+            as={<Ionicons name="search-outline" />}
+            size={7}
+            ml="2"
+            color="primary.50"
+          />
+        }
+        InputRightElement={
+          search !== "" && (
+            <Icon
+              onPress={clearInput}
+              as={<Ionicons name="close-outline" />}
+              size={8}
+              color="primary.100"
+            />
+          )
+        }
         onChangeText={(search) => {
-          dispatch(SearchAction(search));
+          dispatch(SearchProductAction(search));
           setSearch(search);
         }}
         value={search}
-      /> */}
+      />
       {search === "" ? (
-        <Text style={styles.notfound}>No Results Found</Text>
+        <Text style={styles.notfound}>No Results Found.</Text>
       ) : (
         <FlatList
           refreshing={loading}
-          data={data?.hits}
+          data={data}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <TouchableOpacity
@@ -67,7 +83,7 @@ const Search = (props) => {
                 <Avatar
                   size="2xl"
                   source={{
-                    uri: item?.recipe?.image,
+                    uri: item?.image,
                   }}
                   alt="image base"
                   // roundedTop="md"
@@ -77,24 +93,6 @@ const Search = (props) => {
                   borderColor="#fff"
                   borderWidth={6}
                 ></Avatar>
-                <Text
-                  bold
-                  position="absolute"
-                  left={7}
-                  top={1.5}
-                  p={1}
-                  color="primary.50"
-                  // borderRadius={4}
-                  style={{ transform: [{ rotate: "-18deg" }] }}
-                  borderRightRadius={5}
-                  borderTopLeftRadius={10}
-                  borderBottomRadius={15}
-                  m={[4, 4, 8]}
-                  bg="#fff"
-                >
-                  {item?.recipe?.yield}
-                  <Ionicons name={"star"} color="orange" size={16} />
-                </Text>
 
                 <Stack space={1} p={[4, 4, 4]} top={4}>
                   <Text
@@ -106,20 +104,21 @@ const Search = (props) => {
                     noOfLines={2}
                     isTruncated={true}
                   >
-                    {item?.recipe?.label}
+                    {item?.foodName}
                   </Text>
 
                   <Text
                     left={3}
-                    color="gray.400"
+                    color="success.100"
                     isTruncated={true}
                     fontFamily="NunitoSans-Regular"
                     fontSize={14}
+                    bold
                   >
-                    {item.recipe.source}
+                    ₽ {item?.price}
                   </Text>
-                  <Text left={3} noOfLines={1} bold w={75} color="primary.50">
-                    {item?.recipe?.totalWeight}
+                  <Text left={3} noOfLines={1} color="gray.100">
+                    {item?.category}
                   </Text>
                 </Stack>
               </Box>
@@ -131,18 +130,23 @@ const Search = (props) => {
   );
 };
 
+Search.propTypes = {
+  navigation: PropTypes.object,
+};
+
 export default Search;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 40,
+    backgroundColor: "#fff",
   },
   notfound: {
     marginTop: 240,
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 20,
+    fontSize: 18,
     textAlign: "center",
     color: "#000",
   },

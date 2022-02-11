@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
+import PropTypes from "prop-types";
 import {
   View,
   Text,
@@ -99,6 +100,10 @@ const AllCategory = (props) => {
       />
     </View>
   );
+};
+
+AllCategory.propTypes = {
+  navigation: PropTypes.object,
 };
 
 export default AllCategory;
