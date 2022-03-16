@@ -1,6 +1,7 @@
 import * as React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, Text, View } from "react-native";
+import { useColorMode } from "native-base";
+import { Text, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -23,18 +24,29 @@ const OrderStack = createStackNavigator();
 
 export const ShopStackScreen = ({ navigation }) => {
   const { t, i18n } = useTranslation();
+  const { colorMode } = useColorMode();
   return (
     <ShopStack.Navigator>
       <ShopStack.Screen
         name="Shop"
         component={Shop}
         options={{
-          headerTitle: () => <Text style={styles.title}>{t("Yeda")}</Text>,
+          headerTitle: () => (
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "left",
+                color: colorMode === "dark" ? "#000" : "#fff",
+              }}
+            >
+              {t("Yeda")}
+            </Text>
+          ),
           headerLeft: () => (
             <Ionicons
               name="menu-outline"
               size={35}
-              color="#000"
+              color={colorMode === "dark" ? "#000" : "#fff"}
               style={{ marginLeft: 10 }}
               lineBreakMode="head"
               onPress={() => navigation.openDrawer()}
@@ -42,13 +54,19 @@ export const ShopStackScreen = ({ navigation }) => {
           ),
           headerRight: () => (
             <View style={{ flexDirection: "row" }}>
-              <Text color="#000" style={{ marginRight: 25, fontSize: 18 }}>
+              <Text
+                style={{
+                  marginRight: 25,
+                  fontSize: 18,
+                  color: colorMode === "dark" ? "#000" : "#fff",
+                }}
+              >
                 {i18n.language}
               </Text>
               <Ionicons
                 name="notifications-outline"
                 size={28}
-                color="#000"
+                color={colorMode === "dark" ? "#000" : "#fff"}
                 style={{ marginRight: 15 }}
                 lineBreakMode="head"
               />
@@ -56,7 +74,7 @@ export const ShopStackScreen = ({ navigation }) => {
           ),
           headerTitleAlign: "left",
           headerStyle: {
-            backgroundColor: "#EDC126",
+            backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
             elevation: 8,
           },
         }}
@@ -67,6 +85,7 @@ export const ShopStackScreen = ({ navigation }) => {
 
 export const ProfileScreen = ({ navigation }) => {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   return (
     <ProfileStack.Navigator>
@@ -75,13 +94,31 @@ export const ProfileScreen = ({ navigation }) => {
         component={Profile}
         options={{
           headerTitle: () => (
-            <Text style={styles.title}>{t("drawer.Profile")}</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "left",
+                color: colorMode === "dark" ? "#000" : "#fff",
+              }}
+            >
+              {t("drawer.Profile")}
+            </Text>
+          ),
+          headerLeft: () => (
+            <Ionicons
+              name="menu-outline"
+              size={35}
+              color={colorMode === "dark" ? "#000" : "#fff"}
+              style={{ marginLeft: 10 }}
+              lineBreakMode="head"
+              onPress={() => navigation.openDrawer()}
+            />
           ),
           headerRight: () => (
             <Ionicons
               name="log-out-outline"
               size={30}
-              color="#000"
+              color={colorMode === "dark" ? "#000" : "#fff"}
               style={{ marginRight: 15 }}
               lineBreakMode="head"
               onPress={() => dispatch(logout(navigation))}
@@ -89,7 +126,7 @@ export const ProfileScreen = ({ navigation }) => {
           ),
           headerTitleAlign: "left",
           headerStyle: {
-            backgroundColor: "#EDC126",
+            backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
             elevation: 0,
           },
         }}
@@ -100,6 +137,7 @@ export const ProfileScreen = ({ navigation }) => {
 
 export const CategoriesStackScreen = ({ navigation }) => {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
   return (
     <CategoriesStack.Navigator>
       <CategoriesStack.Screen
@@ -107,13 +145,21 @@ export const CategoriesStackScreen = ({ navigation }) => {
         component={Categories}
         options={{
           headerTitle: () => (
-            <Text style={styles.title}>{t("drawer.All Category")}</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "left",
+                color: colorMode === "dark" ? "#000" : "#fff",
+              }}
+            >
+              {t("drawer.All Category")}
+            </Text>
           ),
           headerLeft: () => (
             <Ionicons
               name="menu-outline"
               size={35}
-              color="#000"
+              color={colorMode === "dark" ? "#000" : "#fff"}
               style={{ marginLeft: 10 }}
               lineBreakMode="head"
               onPress={() => navigation.openDrawer()}
@@ -121,7 +167,7 @@ export const CategoriesStackScreen = ({ navigation }) => {
           ),
           headerTitleAlign: "left",
           headerStyle: {
-            backgroundColor: "#EDC126",
+            backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
             elevation: 0,
           },
         }}
@@ -132,6 +178,7 @@ export const CategoriesStackScreen = ({ navigation }) => {
 
 export const CartStackScreen = ({ navigation }) => {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
   return (
     <CartStack.Navigator>
       <CartStack.Screen
@@ -139,13 +186,21 @@ export const CartStackScreen = ({ navigation }) => {
         component={Cart}
         options={{
           headerTitle: () => (
-            <Text style={styles.title}>{t("drawer.Cart")}</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "left",
+                color: colorMode === "dark" ? "#000" : "#fff",
+              }}
+            >
+              {t("drawer.Cart")}
+            </Text>
           ),
           headerLeft: () => (
             <Feather
               name="arrow-left"
               size={24}
-              color="#000"
+              color={colorMode === "dark" ? "#000" : "#fff"}
               style={{ marginLeft: 12 }}
               lineBreakMode="head"
               onPress={() => navigation.goBack()}
@@ -153,7 +208,7 @@ export const CartStackScreen = ({ navigation }) => {
           ),
           headerTitleAlign: "left",
           headerStyle: {
-            backgroundColor: "#EDC126",
+            backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
             elevation: 0,
           },
         }}
@@ -165,6 +220,7 @@ export const CartStackScreen = ({ navigation }) => {
 
 export const OrderStackScreen = ({ navigation }) => {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
   return (
     <OrderStack.Navigator>
       <OrderStack.Screen
@@ -172,13 +228,21 @@ export const OrderStackScreen = ({ navigation }) => {
         component={MyOrder}
         options={{
           headerTitle: () => (
-            <Text style={styles.title}>{t("drawer.Orders")}</Text>
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "left",
+                color: colorMode === "dark" ? "#000" : "#fff",
+              }}
+            >
+              {t("drawer.Orders")}
+            </Text>
           ),
           headerLeft: () => (
             <Ionicons
               name="menu-outline"
               size={35}
-              color="#000"
+              color={colorMode === "dark" ? "#000" : "#fff"}
               style={{ marginLeft: 10 }}
               lineBreakMode="head"
               onPress={() => navigation.openDrawer()}
@@ -186,7 +250,7 @@ export const OrderStackScreen = ({ navigation }) => {
           ),
           headerTitleAlign: "left",
           headerStyle: {
-            backgroundColor: "#EDC126",
+            backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
             elevation: 0,
           },
         }}
@@ -195,9 +259,19 @@ export const OrderStackScreen = ({ navigation }) => {
         name="OrderDetails"
         component={OrderDetails}
         options={{
-          headerTitle: () => <Text style={styles.title}>Order Details</Text>,
+          headerTitle: () => (
+            <Text
+              style={{
+                fontSize: 20,
+                textAlign: "left",
+                color: colorMode === "dark" ? "#000" : "#fff",
+              }}
+            >
+              Order Details
+            </Text>
+          ),
           headerStyle: {
-            backgroundColor: "#EDC126",
+            backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
             elevation: 0,
           },
         }}
@@ -221,11 +295,3 @@ CartStackScreen.propTypes = {
 OrderStackScreen.propTypes = {
   navigation: PropTypes.object,
 };
-
-const styles = StyleSheet.create({
-  title: {
-    fontSize: 20,
-    textAlign: "left",
-    color: "#000",
-  },
-});

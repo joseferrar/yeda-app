@@ -56,7 +56,7 @@ const DrawerItem = (props) => {
     <View style={styles.container}>
       <DrawerContentScrollView
         {...props}
-        style={{ backgroundColor: colorMode === "dark" ? "#fff" : "#000" }}
+        style={{ backgroundColor: colorMode === "dark" ? "#fff" : "#242B2E" }}
       >
         <VStack space={3} my={2} mx={1}>
           <Box px={6}>
