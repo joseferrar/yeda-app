@@ -41,7 +41,6 @@ const getIcon = (screenName) => {
 };
 
 const DrawerItem = (props) => {
-  const [isEnabled, setIsEnabled] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode();
   const [lang, setLang] = useState("en");
   const { t, i18n } = useTranslation();
@@ -49,15 +48,11 @@ const DrawerItem = (props) => {
   const { profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
 
-  const darkMode = () => {
-    toggleColorMode();
-  };
-
   useEffect(() => {
     dispatch(GetProfileAction());
     dispatch(UserAction());
   }, []);
-  console.log(isEnabled);
+
   return (
     <View style={styles.container}>
       <DrawerContentScrollView
