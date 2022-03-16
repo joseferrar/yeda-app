@@ -16,7 +16,6 @@ import {
   Avatar,
   HStack,
   useColorMode,
-  Switch,
   Icon,
 } from "native-base";
 import { t } from "i18next";
