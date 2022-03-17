@@ -1,7 +1,15 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { TouchableOpacity } from "react-native";
-import { Avatar, Text, Box, View, Button, ScrollView } from "native-base";
+import {
+  Avatar,
+  Text,
+  Box,
+  View,
+  Button,
+  ScrollView,
+  useColorMode,
+} from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import {
   GetCartAction,
@@ -10,6 +18,7 @@ import {
 } from "../../../actions/CartAction";
 
 const Cart = (props) => {
+  const { colorMode } = useColorMode();
   const { navigation } = props;
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
@@ -47,24 +56,36 @@ const Cart = (props) => {
   }
 
   return (
-    <ScrollView flex={1} bg="#fff">
+    <ScrollView flex={1} bg={colorMode === "dark" ? "#0000" : "#242B2E"}>
       <View flexDirection="row" marginTop={4} marginLeft={6}>
-        <Text color="primary.50" fontSize={24}>
+        <Text
+          color={colorMode === "dark" ? "primary.50" : "#fff"}
+          fontSize={24}
+        >
           {"Total"}
         </Text>
-        <Text color="primary.50" marginLeft={3} fontSize={16}>
+        <Text
+          color={colorMode === "dark" ? "primary.50" : "#fff"}
+          marginLeft={3}
+          fontSize={16}
+        >
           {"₽"}
         </Text>
-        <Text color="primary.50" fontSize={24} fontWeight="bold">
+        <Text
+          color={colorMode === "dark" ? "primary.50" : "#fff"}
+          fontSize={24}
+          fontWeight="bold"
+        >
           {Total.toFixed(2)}
         </Text>
       </View>
       <Button
-      onPress={() => navigation.navigate('AddOrder', {
-        data: cart,
-        total: Total,
-        
-      })}
+        onPress={() =>
+          navigation.navigate("AddOrder", {
+            data: cart,
+            total: Total,
+          })
+        }
         _text={{ fontSize: 20, color: "#fff" }}
         height={54}
         w="96%"
@@ -108,7 +129,7 @@ const Cart = (props) => {
               <Text
                 left={6}
                 fontFamily="NunitoSans-Black"
-                color="primary.50"
+                color={colorMode === "dark" ? "primary.50" : "#fff"}
                 fontSize={18}
                 w={200}
                 noOfLines={2}
@@ -130,7 +151,7 @@ const Cart = (props) => {
                 -
               </Button>
               <Text
-                color="primary.50"
+                color={colorMode === "dark" ? "primary.50" : "#fff"}
                 fontWeight="bold"
                 top={1}
                 right={2}
@@ -157,7 +178,7 @@ const Cart = (props) => {
               right={20}
               marginLeft="auto"
               marginRight="auto"
-              color="primary.50"
+              color={colorMode === "dark" ? "primary.50" : "#fff"}
               isTruncated={true}
               fontFamily="NunitoSans-Regular"
               fontSize={14}
