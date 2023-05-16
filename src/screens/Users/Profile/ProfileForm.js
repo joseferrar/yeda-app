@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyleSheet, ScrollView, Alert } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import {
+  ScrollView,
   Button,
   Input,
   Avatar,
@@ -10,6 +11,7 @@ import {
   FormControl,
   Select,
   CheckIcon,
+  useColorMode,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useFormik } from "formik";
@@ -26,6 +28,7 @@ import {
 } from "../../../actions/ProfileAction";
 
 const ProfileForm = (props) => {
+  const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   const { profile, navigation } = props;
   const [picture, setpicture] = React.useState(
@@ -102,9 +105,9 @@ const ProfileForm = (props) => {
   });
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView  bg={colorMode === "dark" ? "#0000" : "#242B2E"}>
       <Text
-        color="primary.50"
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
         fontWeight="bold"
         fontSize={22}
         textAlign="center"
@@ -119,7 +122,7 @@ const ProfileForm = (props) => {
         borderColor="#000"
         marginLeft="auto"
         marginRight="auto"
-        bg="primary.50"
+        bg={colorMode === "dark" ? "primary.50" : "#fff"}
         source={{
           uri: profile?.picture,
         }}
@@ -134,19 +137,20 @@ const ProfileForm = (props) => {
         onPress={() => pickerFromGallery()}
         icon={<Ionicons name={"camera-outline"} color="#fff" size={50} />}
       />
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4}>
         Your Country:
       </Text>
       <FormControl mt={4}>
         <Select
           minWidth={200}
-          color="#000"
-          dropdownIcon={<Ionicons name={"chevron-up"} color="#000" size={35} />}
+          borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
+          color={colorMode === "dark" ? "primary.50" : "#fff"}
+          dropdownIcon={<Ionicons name={"chevron-up"} color={colorMode === "dark" ? "#000" : "#fff"} size={35} />}
           dropdownCloseIcon={
-            <Ionicons name={"chevron-down"} color="#000" size={35} />
+            <Ionicons name={"chevron-down"} color={colorMode === "dark" ? "#000" : "#fff"} size={35} />
           }
           _selectedItem={{
-            bg: "primary.50",
+            bg: colorMode === "dark" ? "primary.50" : "#fff",
             endIcon: <CheckIcon size={5} />,
           }}
           mt={-1}
@@ -171,14 +175,15 @@ const ProfileForm = (props) => {
         </Text>
       ) : null}
 
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4} mt={4}>
         Your Full Name:
       </Text>
       <Input
         mt={2}
         mx={4}
+        borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
         _invalid={{ backgroundColor: "#000" }}
-        color="#000"
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
         value={formik.values.fullName}
         onChangeText={formik.handleChange("fullName")}
       />
@@ -187,13 +192,14 @@ const ProfileForm = (props) => {
           {formik.errors.fullName}
         </Text>
       ) : null}
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4} mt={4}>
         Phone Number:
       </Text>
       <Input
         mt={2}
         mx={4}
-        color="#000"
+        borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
         keyboardType="numeric"
         value={formik.values.phone}
         onChangeText={formik.handleChange("phone")}
@@ -204,13 +210,14 @@ const ProfileForm = (props) => {
         </Text>
       ) : null}
 
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4} mt={4}>
         Pin Code:
       </Text>
       <Input
         mt={2}
         mx={4}
-        color="#000"
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
+        borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
         keyboardType="numeric"
         value={formik.values.pinCode}
         onChangeText={formik.handleChange("pinCode")}
@@ -221,13 +228,14 @@ const ProfileForm = (props) => {
         </Text>
       ) : null}
 
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4} mt={4}>
         Address Line 1:
       </Text>
       <Input
         mt={2}
         mx={4}
-        color="#000"
+        borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
         value={formik.values.address1}
         onChangeText={formik.handleChange("address1")}
       />
@@ -237,13 +245,14 @@ const ProfileForm = (props) => {
         </Text>
       ) : null}
 
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4} mt={4}>
         Address Line 2:
       </Text>
       <Input
         mt={2}
         mx={4}
-        color="#000"
+        borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
         value={formik.values.address2}
         onChangeText={formik.handleChange("address2")}
       />
@@ -253,13 +262,14 @@ const ProfileForm = (props) => {
         </Text>
       ) : null}
 
-      <Text color="primary.50" fontWeight="bold" fontSize={16} ml={4} mt={4}>
+      <Text color={colorMode === "dark" ? "primary.50" : "#fff"} fontWeight="bold" fontSize={16} ml={4} mt={4}>
         City:
       </Text>
       <Input
         mt={2}
         mx={4}
-        color="#000"
+        borderColor={colorMode === "dark" ? "primary.50" : "#fff"}
+        color={colorMode === "dark" ? "primary.50" : "#fff"}
         value={formik.values.city}
         onChangeText={formik.handleChange("city")}
       />
@@ -301,6 +311,7 @@ const ProfileForm = (props) => {
           mt={8}
           marginLeft={6}
           marginRight="auto"
+          marginBottom={8}
           backgroundColor="#8D3DAF"
           startIcon={<Ionicons name={"save-outline"} color="#fff" size={28} />}
           onPress={formik.handleSubmit}
@@ -320,9 +331,6 @@ ProfileForm.propTypes = {
 export default ProfileForm;
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1
-  // },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",

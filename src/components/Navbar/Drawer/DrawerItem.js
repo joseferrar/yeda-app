@@ -15,7 +15,7 @@ import {
   Text,
   Avatar,
   HStack,
-  Divider,
+  useColorMode,
   Icon,
 } from "native-base";
 import { t } from "i18next";
@@ -40,6 +40,7 @@ const getIcon = (screenName) => {
 };
 
 const DrawerItem = (props) => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const [lang, setLang] = useState("en");
   const { t, i18n } = useTranslation();
   const { auth } = useSelector((state) => state.auth);
@@ -53,26 +54,47 @@ const DrawerItem = (props) => {
 
   return (
     <View style={styles.container}>
-      <DrawerContentScrollView {...props}>
-        <VStack divider={<Divider />} space={3} my={2} mx={1}>
+      <DrawerContentScrollView
+        {...props}
+        style={{ backgroundColor: colorMode === "dark" ? "#fff" : "#242B2E" }}
+      >
+        <VStack space={3} my={2} mx={1}>
           <Box px={6}>
-            <Avatar
-              size="2xl"
-              borderColor="#000"
-              bg="#000"
-              source={{
-                uri: profile?.picture,
-              }}
+            <View flexDirection="row">
+              <Avatar
+                size="2xl"
+                borderColor="#000"
+                bg="#000"
+                source={{
+                  uri: profile?.picture,
+                }}
+              >
+                <Avatar.Badge bg={"green.500"} borderColor="default.50" />
+              </Avatar>
+              <Icon
+                onPress={toggleColorMode}
+                color={colorMode === "dark" ? "primary.50" : "#fff"}
+                size={8}
+                marginLeft="auto"
+                as={
+                  <Ionicons
+                    name={colorMode === "dark" ? "moon-outline" : "sunny"}
+                  />
+                }
+              />
+            </View>
+            <Text
+              fontWeight="bold"
+              fontSize={16}
+              color={colorMode === "dark" ? "#000" : "#fff"}
+              marginTop={4}
             >
-              <Avatar.Badge bg={"green.500"} borderColor="default.50" />
-            </Avatar>
-            <Text fontWeight="bold" fontSize={16} color="dark.50" marginTop={4}>
               {auth?.name}
             </Text>
             <Text
               fontFamily="NunitoSans-Regular"
               fontSize={16}
-              color="gray.100"
+              color={colorMode === "dark" ? "gray.100" : "#fff"}
               marginTop={2}
             >
               {auth?.email}
@@ -92,7 +114,13 @@ const DrawerItem = (props) => {
               >
                 <HStack space={3} alignItems="center">
                   <Icon
-                    color={index === props.state.index ? "#fff" : "gray.100"}
+                    color={
+                      index === props.state.index
+                        ? "#fff"
+                        : "gray.100" && colorMode === "dark"
+                        ? "gray.100"
+                        : "#fff"
+                    }
                     size={6}
                     as={<Ionicons name={getIcon(t(`drawer.${name}`))} />}
                   />
@@ -100,7 +128,13 @@ const DrawerItem = (props) => {
                     fontFamily="NunitoSans-Regular"
                     fontWeight={"500"}
                     fontSize={17}
-                    color={index === props.state.index ? "#fff" : "#000"}
+                    color={
+                      index === props.state.index
+                        ? "#fff"
+                        : "#000" && colorMode === "dark"
+                        ? "gray.100"
+                        : "#fff"
+                    }
                   >
                     {t(`drawer.${name}`)}
                   </Text>
@@ -109,11 +143,11 @@ const DrawerItem = (props) => {
             ))}
           </VStack>
           {/* footer */}
-          <VStack px={5} py={3} marginTop={-2}>
+          <VStack px={5} py={3}>
             <Text
               fontFamily="NunitoSans-Regular"
               fontSize={16}
-              color="gray.100"
+              color={colorMode === "dark" ? "gray.100" : "#fff"}
             >
               {t("change_language")}
             </Text>
@@ -126,26 +160,29 @@ const DrawerItem = (props) => {
               <Picker.Item label={"English"} value={"en"} />
               <Picker.Item label={"Russian"} value={"ru"} />
             </Picker>
-        
           </VStack>
 
-          <VStack px={5} py={3} marginTop={-4} >
+          <VStack px={2} py={2} marginTop={-4} marginBottom={20}>
             <Button
               size="md"
               variant={"ghost"}
               marginRight="auto"
               startIcon={
-                <Ionicons name={"exit-outline"} color="gray" size={28} />
+                <Ionicons
+                  name={"exit-outline"}
+                  color={colorMode === "dark" ? "#000" : "#fff"}
+                  size={30}
+                />
               }
               onPress={() => dispatch(logout(props.navigation))}
             >
               <Text
                 fontWeight={"500"}
-                color="secondary.200"
+                color={colorMode === "dark" ? "primary.50" : "#fff"}
                 fontFamily="NunitoSans-Regular"
-                fontSize={18}
+                fontSize={17}
               >
-               {t("drawer.Logout")}
+                {t("drawer.Logout")}
               </Text>
             </Button>
           </VStack>
@@ -155,12 +192,10 @@ const DrawerItem = (props) => {
   );
 };
 
-
 DrawerItem.propTypes = {
   navigation: PropTypes.object,
   state: PropTypes.object,
 };
-
 
 export default DrawerItem;
 

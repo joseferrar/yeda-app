@@ -1,4 +1,5 @@
 import React from "react";
+import { useColorMode } from "native-base";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTranslation } from "react-i18next";
@@ -15,6 +16,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavbar = () => {
   const { t } = useTranslation();
+  const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
 
@@ -47,7 +49,7 @@ const TabNavbar = () => {
           color: "#fff",
         },
         style: {
-          backgroundColor: "#000",
+          backgroundColor: colorMode === "dark" ? "#000" : "#242B2E",
           elevation: 6,
           borderTopWidth: 0,
           height: 56,

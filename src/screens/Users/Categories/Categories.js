@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { Avatar, Text, Stack, FlatList, View } from "native-base";
+import { Avatar, Text, Stack, FlatList, View, useColorMode } from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { GetCategoryAction } from "../../../actions/AdminAction";
 
 const Categories = (props) => {
+  const { colorMode } = useColorMode();
   const { navigation } = props;
   const { category } = useSelector((state) => state.categories);
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const Categories = (props) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View flex={1} bg={colorMode === "dark" ? "#fff" : "#242B2E"}>
       <FlatList
         columnWrapperStyle={styles.row}
         showsVerticalScrollIndicator
@@ -32,7 +33,7 @@ const Categories = (props) => {
           >
             <View
               ml={4}
-              backgroundColor={"#f0f0f2"}
+              backgroundColor={ colorMode === "dark" ? "#f0f0f2" : "#000"  }
               style={{
                 width: 160,
                 margin: 10,
@@ -56,7 +57,7 @@ const Categories = (props) => {
                 <Text
                   textAlign="center"
                   fontFamily="NunitoSans-Black"
-                  color="primary.50"
+                  color={colorMode === "dark" ? "primary.50" : "#fff"}
                   fontSize={16}
                   textTransform={"capitalize"}
                 >
@@ -82,11 +83,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start",
     margin: 5,
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    backgroundColor: "white",
   },
   imageThumbnail: {
     justifyContent: "center",

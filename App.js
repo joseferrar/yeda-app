@@ -24,7 +24,7 @@ export default function App() {
         <NativeBaseProvider theme={theme}>
           <Provider store={store}>
             <View style={styles.container}>
-              <StatusBar style="dark" />
+              <StatusBar style="inverted" />
               <MainNavbar />
             </View>
           </Provider>

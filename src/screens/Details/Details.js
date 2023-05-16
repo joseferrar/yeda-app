@@ -2,12 +2,22 @@ import React, { useEffect, useLayoutEffect } from "react";
 import PropTypes from "prop-types";
 import { View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { Icon, Text, Box, Stack, Button, Badge, ScrollView } from "native-base";
+import {
+  Icon,
+  Text,
+  Box,
+  Stack,
+  Button,
+  Badge,
+  ScrollView,
+  useColorMode,
+} from "native-base";
 import { useSelector, useDispatch } from "react-redux";
 import { AddCartAction, GetCartAction } from "../../actions/CartAction";
 import { UserAction } from "../../actions/AuthAction";
 
 const Details = (props) => {
+  const { colorMode } = useColorMode();
   const { navigation } = props;
   const { data } = props.route.params;
   const { cart } = useSelector((state) => state.cart);
@@ -26,10 +36,14 @@ const Details = (props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerStyle: {
-        backgroundColor: "#EDC126",
+        backgroundColor: colorMode === "dark" ? "#EDC126" : "#242B2E",
       },
-      headerTitle: <Text color="#000">{data?.foodName}</Text>,
-      headerTintColor: "#000",
+      headerTitle: (
+        <Text color={colorMode === "dark" ? "primary.50" : "#fff"}>
+          {data?.foodName}
+        </Text>
+      ),
+      headerTintColor: colorMode === "dark" ? "#000" : "#fff",
       headerRight: () => (
         <>
           {auth?.role == "admin" ? (
@@ -37,14 +51,14 @@ const Details = (props) => {
               <Ionicons
                 name="pencil-sharp"
                 size={32}
-                color="#000"
+                color={colorMode === "dark" ? "#000" : "#fff"}
                 style={{ marginRight: 12 }}
                 // onPress={() => navigation.navigate("Cart")}
               />
               <Ionicons
                 name="trash-sharp"
                 size={32}
-                color="#000"
+                color={colorMode === "dark" ? "#000" : "#fff"}
                 style={{ marginRight: 12 }}
                 // onPress={() => navigation.navigate("Cart")}
               />
@@ -54,7 +68,7 @@ const Details = (props) => {
               <Ionicons
                 name="cart-outline"
                 size={32}
-                color="#000"
+                color={colorMode === "dark" ? "#000" : "#fff"}
                 style={{ marginRight: 30 }}
                 onPress={() => navigation.navigate("Cart")}
               />
@@ -85,7 +99,7 @@ const Details = (props) => {
   }, [navigation]);
 
   return (
-    <ScrollView flex={1}>
+    <ScrollView flex={1} bg={colorMode === "dark" ? "#0000" : "#242B2E"}>
       <Image
         resizeMode="cover"
         source={{ uri: data?.image }}
@@ -96,7 +110,7 @@ const Details = (props) => {
           <Text
             left={3}
             fontFamily="NunitoSans-Black"
-            color="primary.50"
+            color={colorMode === "dark" ? "primary.50" : "#fff"}
             fontSize={22}
             noOfLines={2}
             isTruncated={true}
@@ -105,7 +119,7 @@ const Details = (props) => {
           </Text>
           <Text
             left={3}
-            color="gray.500"
+            color={colorMode === "dark" ? "gray.500" : "#fff"}
             fontFamily="NunitoSans-Regular"
             fontSize={18}
           >
@@ -116,7 +130,7 @@ const Details = (props) => {
           </Text>
           <Text
             left={3}
-            color="gray.500"
+            color={colorMode === "dark" ? "gray.500" : "#fff"}
             fontFamily="NunitoSans-Regular"
             fontSize={16}
           >

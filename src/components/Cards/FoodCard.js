@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { TouchableOpacity } from "react-native";
 import { Avatar, Text, Stack, View } from "native-base";
 
-const FoodCard = ({ item, navigation }) => (
+const FoodCard = ({ item, navigation, colorMode }) => (
   <TouchableOpacity
     activeOpacity={0.9}
     onPress={() => {
@@ -16,8 +16,9 @@ const FoodCard = ({ item, navigation }) => (
       style={{
         height: 200,
         width: 180,
-        backgroundColor: "#fff",
+        backgroundColor: colorMode === "dark" ? "#fff" : "#0D0D0D",
         margin: 8,
+        marginTop: 20,
         shadowColor: "#7F5DF0",
         shadowOffset: {
           width: 0,
@@ -36,7 +37,6 @@ const FoodCard = ({ item, navigation }) => (
         top={3}
         left={6}
         bg="transparent"
-        borderColor="#fff"
         width={130}
         height={130}
       ></Avatar>
@@ -45,7 +45,7 @@ const FoodCard = ({ item, navigation }) => (
         <Text
           textAlign="center"
           fontFamily="NunitoSans-Black"
-          color="primary.50"
+          color={colorMode === "dark" ? "primary.50" : "#fff"}
           fontSize={16}
           w={140}
           noOfLines={1}
@@ -57,7 +57,7 @@ const FoodCard = ({ item, navigation }) => (
         <Text
           noOfLines={1}
           textAlign="center"
-          left={5}
+          marginLeft={8}
           bold
           fontSize={14}
           w={75}
@@ -73,6 +73,7 @@ const FoodCard = ({ item, navigation }) => (
 FoodCard.propTypes = {
   navigation: PropTypes.object,
   item: PropTypes.object,
+  colorMode: PropTypes.string,
 };
 
 export { FoodCard };
